@@ -33,7 +33,7 @@ Normalmente se utiliza AJAX también acompañado de frameworks como Vue y React 
 A continuación, muestro un ejemplo básico de uso de AJAX en Javascript.
 El siguiente código realiza una solicitud GET asíncrona a la ruta "https://api.example.com/data", espera a que la solicitud se complete, analiza la respuesta JSON del servidor y la muestra en la consola del navegador:
 
-![Codigo](img/1.jpg)
+![Codigo](img/1.png)
 
 
 ## Current State 
