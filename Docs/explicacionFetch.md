@@ -26,3 +26,15 @@ La carga asíncrona con `fetch()` en JavaScript se refiere a la capacidad de rea
 - **Encabezados:** Metadatos adicionales que se mandan a la API para ayudar al servidor a comprender qué tipo de solicitud se está mandando, por ejemplo, “content-type” (tipo de contenido).
 - **Manejo de errores:** Deberás tener en cuenta cómo manejarás los errores que puedan surgir durante las solicitudes de fetch().
 - **Promesas y asincronía:** Dado que fetch() trabaja con promesas, necesitarás entender cómo trabajar con ellas para manejar las respuestas de las solicitudes de manera asíncrona.
+
+
+### Que son las promesas?
+
+Las promesas en JavaScript son como contratos para el futuro. Cuando realizas una tarea que lleva tiempo, como cargar una imagen o solicitar datos a un servidor, JavaScript crea una “promesa” que representa la finalización futura de esa tarea.
+
+Elementos de una promesa:
+1. **Creacion de la promesa:** Cuando inicias una tarea asíncrona, creas una promesa. Esta promesa es un objeto que representa la tarea en curso.
+2. **Espera:** Mientras la tarea está en progreso, la promesa está en un estado “pendiente”. Tu código puede continuar ejecutándose mientras espera que la promesa se resuelva.
+3.  **Resolución:** Cuando la tarea se completa, la promesa se “resuelve” con un valor (si la tarea fue exitosa) o se “rechaza” con un error (si algo salió mal).
+4. **Manejo de la resolución:** Puedes configurar funciones de devolución de llamada (callbacks) para manejar el valor de resolución o el error utilizando los métodos .then() (para el éxito) y .catch() (para los errores).
+5. **Encadenamiento:** Puedes encadenar promesas para realizar varias tareas asíncronas en orden. El valor de resolución de una promesa puede ser utilizado por la siguiente promesa en la cadena.
