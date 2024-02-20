@@ -38,3 +38,9 @@ Elementos de una promesa:
 3.  **Resolución:** Cuando la tarea se completa, la promesa se “resuelve” con un valor (si la tarea fue exitosa) o se “rechaza” con un error (si algo salió mal).
 4. **Manejo de la resolución:** Puedes configurar funciones de devolución de llamada (callbacks) para manejar el valor de resolución o el error utilizando los métodos .then() (para el éxito) y .catch() (para los errores).
 5. **Encadenamiento:** Puedes encadenar promesas para realizar varias tareas asíncronas en orden. El valor de resolución de una promesa puede ser utilizado por la siguiente promesa en la cadena.
+
+Aqui tenemos un ejemplo de un `fetch()` sencillo:
+![fetch simple](image.png)
+
+Aqui tenemos un ejemplo de un `fetch()` con encadenamiento:
+![fetch encadenado](image-1.png)
