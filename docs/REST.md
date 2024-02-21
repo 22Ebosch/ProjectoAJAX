@@ -1,204 +1,316 @@
-# Javascript AJAX: REST
+# TECNOLOGIA REST
 
-- [REST](#rest) 
+- [REST](#REST) 
 
-- [Javascript - AJAX](#javascript---ajax) 
+- [Endpoints y CRUD](#Endpoints-y-CRUD)
 
-- [Cómo hacer una solicitud con AJAX](#cómo-hacer-una-solicitud-con-ajax) 
+- [Header HTTP](#Header-HTTP)
 
-- [Cómo hacer una solicitud con "fetch"](#cómo-hacer-una-solicitud-con-fetch) 
+- [Body HTTP](#Body-HTTP)
 
-- [Configurar entorno y BBDD](#configurar-entorno-y-bbdd) 
+- [Métodos HTTP](#Métodos-HTTP)
 
-- [Implementación de CRUD](#implementación-de-crud) 
- 
-- [Conexión con BBDD](#conexión-con-bbdd) 
+- [Respuesta HTTP](#Respuesta-HTTP)
 
-- [Propuesta de ejercicio](#propuesta-de-ejercicio) 
+- [Cómo hacer una solicitud con Node](#Solicitud-con-Node.js-`axios`) 
+
+- [Cómo hacer una solicitud con "fetch"](#Solicitud-con-`fetch`) 
+
+- [Propuesta de ejercicio](#Ejercicio-práctico) 
 
 ## REST  
 
 REST (Representational State Transfer) es un estilo arquitectónico para definir servicios web que sean simples, escalables y eficientes. En el contexto de la web, REST utiliza URIs (Identificadores de Recursos Uniformes) para identificar recursos y el protocolo HTTP para realizar llamadas sobre esos recursos(GET, POST, PUT y DELETE,principalmente). Esto permite una comunicación cliente-servidor donde el cliente puede solicitar y manipular datos al servidor de manera uniforme. 
 
 
-Por ejemplo, en una API de lista de tareas, podríamos tener los siguientes identificadores, normalmente llamados **endpoints**:
+Resumiendo, REST sería la tecnología con la que vamos a desarrollar las APIs que estén preparadas para recibir las solicitudes que necesitemos.
 
-- `/tareas`: Endpoint para obtener todas las tareas o agregar una nueva tarea.
-- `/tareas/{id}`: Endpoint para obtener, actualizar o eliminar una tarea específica, donde `{id}` es el identificador único de la tarea.
-- `/usuarios`: Endpoint para obtener información sobre usuarios registrados o agregar un nuevo usuario.
+## Endpoints y CRUD
+
+En una API de lista de tareas, los **endpoints** son identificadores que representan diferentes recursos y operaciones que se pueden realizar en la API. Estos también involucran el **CRUD** (_Create Read Update Delete_), que son las operaciones básicas para gestionar los datos de los recursos. Aquí hay algunos ejemplos comunes de endpoints en una API de lista de tareas:
+
+
+- `/tareas/{id}` (PUT / DELETE): Endpoint para obtener, actualizar o eliminar una tarea específica, donde `{id}` es el identificador único de la tarea.
 
 Los endpoints son la interfaz principal a través de la cual los clientes interactúan con una API REST, y proporcionan una forma estructurada y uniforme de acceder y manipular recursos en el servidor.
 
-Resumiendo, REST sería la tecnología con la que vamos a dessarrollar las APIs que estén preparadas para recibir las solicitudes que necesitemos.
+#### LEER (_GET_)
 
-## Javascript - AJAX 
+ `/tareas`: Endpoint para obtener todas las tareas.
 
-JavaScript y AJAX (JavaScript asíncrono y XML) están estrechamente relacionados con REST en el desarrollo de aplicaciones web. JavaScript es un lenguaje de programación que se ejecuta en el navegador del cliente, lo que le permite interactuar con los recursos en un servidor a través de solicitudes HTTP.
+![Read](img/4.png)
 
+#### CREAR (_POST_)
 
-AJAX no es un lenguaje de programación, es una técnica que utiliza JavaScript para realizar solicitudes HTTP asíncronas desde el navegador hacia el servidor sin necesidad de recargar la página completa. Esto permite que las aplicaciones web actualicen dinámicamente el contenido sin interrumpir la experiencia del usuario, ya que cuando hacemos una solicitud esperamos una respuesta, y esta respuesta puede tardar en llegar. Si no hacemos que nuestro código sea asíncrono, bloquearíamos durante todo ese rato nuestra página, ya que no permitiríamos más de un hilo de ejecución y no podría continuar leyendo nuestro código hasta recibir la respuesta que espera.
-
-Normalmente se utiliza AJAX también acompañado de frameworks como Vue y React para aprovechar el dinamismo que le da la asincronía a la página, y permitiéndonos por ejemplo con estos dos frameworks que usan componentes, hacer que cada componente de la página cargue independientemente del otro.
-
-## Cómo hacer una solicitud con AJAX 
-A continuación, muestro un ejemplo básico de uso de AJAX en Javascript.
-El siguiente código realiza una solicitud GET asíncrona a la ruta "https://api.example.com/data", espera a que la solicitud se complete, analiza la respuesta JSON del servidor y la muestra en la consola del navegador:
-
-![Codigo](img/1.png)
-
-**var request = new XMLHttpRequest();**
-Esto crea una nueva instancia de XMLHttpRequest, que es el objeto principal utilizado para hacer solicitudes HTTP desde el navegador.
-
-**request.open("GET", "https://api.example.com/data", true);**
-Aquí se configura la solicitud. El primer parámetro es el método HTTP que se utilizará, en este caso el método "GET". El segundo parámetro es la URL a la que se enviará la solicitud. El tercer parámetro indica si la solicitud es asíncrona o no. Si es true, la solicitud es asíncrona; si es false, la solicitud es síncrona. En la mayoría de los casos, se prefiere que las solicitudes sean asíncronas para evitar bloquear la interfaz de usuario mientras se espera la respuesta del servidor.
-
-**request.onreadystatechange = function() { ... }**
-Esta línea establece una función que se llamará cada vez que cambie el estado de la solicitud. El objeto XMLHttpRequest pasa por varios estados durante el ciclo de vida de la solicitud, y esta función se ejecutará cuando cambie el estado.
-
-**if (request.readyState === 4 && request.status === 200) { ... }**
-En esta línea, se verifica si la solicitud se ha completado correctamente (estado 4) y si el código de estado HTTP es 200, lo que significa que la solicitud ha sido exitosa.
-
-**var response = JSON.parse(request.responseText);**
-Aquí, se analiza la respuesta del servidor, que normalmente es un texto plano. La función JSON.parse() convierte este texto en un objeto JavaScript.
-
-**console.log(response);**
-Se imprime la respuesta en la consola del navegador.
-
-## Cómo hacer una solicitud con "fetch" 
-
-Este es un ejemplo de código JavaScript que utiliza la función fetch para realizar una solicitud GET RESTful. 
-
-![Fetch](img/2.png)
-
-**fetch('https://api.example.com/data')**
-
-*fetch()* es una función que se utiliza para realizar solicitudes HTTP. Coge un argumento, que es la URL a la que se realizará la solicitud. En este caso, se está realizando una solicitud GET a la URL *'https://api.example.com/data'*.
-
-  **.then(response => response.json())**
-  
-*.then()* se utiliza para encadenar una acción que se realizará después de que se complete la solicitud. En este caso, se proporciona una función flecha que toma la respuesta de la solicitud como argumento. Dentro de esta función, se llama al método *json()* en la respuesta para parsear la respuesta como JSON. Esto devuelve una promesa que se resuelve con los datos JSON de la respuesta.
-
-  **.then(data => console.log(data))**
-  
-Se encadena otro *.then()*, que toma los datos parseados como JSON como argumento y simplemente los imprime en la consola del navegador utilizando *console.log()*.
-
-  **.catch(error => console.error('Error:', error));**
-  
-*.catch()* se utiliza para manejar cualquier error que ocurra durante la solicitud o el procesamiento de la respuesta. Si ocurre un error, se ejecutará la función de flecha proporcionada, que toma el error como argumento y lo imprime en la consola utilizando
-**console.error().**
-
-Entonces, en resumen, este código realiza una solicitud GET a la URL proporcionada, parsea la respuesta como JSON y la imprime en la consola del navegador. Además, maneja cualquier error que pueda ocurrir durante el proceso de solicitud o procesamiento de la respuesta.
-
-## Configurar entorno y BBDD 
-
-Ahora necesitaremos configurar algún servidor web local, por ejemplo Apache, que es el más usado generalmente. 
-
-También necesitarás una base de datos con la que conectar y hacer tus pruebas (ya sea una BBDD en PostreSQL,MySQL,MongoDB...). Por ejemplo, puedes utilizar las que se proponen en este proyecto, que son de dominio público:
-
-(Sakila - Videoclub,
-Nordwind - importación de alimentos,
-Chinook - Tienda digital de música,
-AdventureWorks). 
-
-También podemos probar directamente en Postman(aplicación con su versión web, para hacer pruebas de conexión) sin necesidad de crear una base de datos. En Postman configuraremos los endpoints a los que queremos acceder, y podemos probar con un body que contenga, por ejemplo, un objeto JSON.
-
-
-## Implementación de CRUD
-
-En este punto, el siguiente paso es crear nuestras funciones JavaScript para realizar las siguientes operaciones CRUD.
-A continuación te muestro como, a partir de un objeto JSON que simulará un objeto de nuestra base de datos, podemos realizar las diferentes operaciones que existen en el CRUD.
-
-- CREAR
+ `/tareas/{id}`: Endpoint para agregar una nueva tarea.
 
 ![Create](img/3.png)
 
-Creamos una instancia de **XMLHttpRequest** para manejar la solicitud HTTP.
-
-Configuramos la solicitud con el método **open()**, especificando que es una solicitud POST a la URL 'https://api.example.com/users'.
-
-Indicamos que el encabezado **'Content-Type'** de la solicitud será *'application/json'*, y con esto le estamos diciendo que el cuerpo de la solicitud está en formato JSON.
-
-Definimos una función de devolución de llamada que se ejecutará cuando cambie el estado de la solicitud. En este caso, la función se activará cuando el estado sea 4 (la solicitud se ha completado) y el código de estado HTTP sea 201 (la creación del usuario se ha realizado con éxito).
-
-Se envía la solicitud al servidor utilizando el método **send()**, pasando el objeto *newUser* convertido a JSON como cuerpo de la solicitud.
-
-- LEER
-![Read](img/4.png)
-
-Realizamos una solicitud GET a la URL 'https://api.example.com/users' para obtener un array de usuarios. 
-
-Creamos una instancia de XMLHttpRequest llamada **request** para manejar la solicitud HTTP.
-
-Configuramos la solicitud con la función **open()**, especificando que es una solicitud GET a la URL que le estamos especificando.
-
-Creamos una función que devuelve una llamada (**onreadystatechange**) que se ejecutará cada vez que cambie el estado de la solicitud. En este caso, la función se activará cuando el estado sea 4 (la solicitud se ha completado) y el código de estado HTTP sea 200 (la solicitud se ha realizado correctamente).
-
-
-Si todo ha ido bien, podremos obtener la respuesta del servidor utilizando JSON.parse() para convertir el texto JSON en un objeto JavaScript.
-
-Los datos de usuario se pueden mostrar en la consola del navegador utilizando console.log().
-
-Enviamos la solicitud al servidor utilizando el método **send()**.
-
-- MODIFICAR
+#### MODIFICAR (_PUT_/_FETCH_)
 
 ![Update](img/5.png)
 
-Creamos el objeto **updatedUser** que contiene datos del usuario.
+ `/tareas/{id}`: Endpoint para modificar total o parcialmente una tarea.
 
-Creamos una instancia de XMLHttpRequest llamada **request** para manejar la solicitud HTTP.
-
-Configuramos la solicitud con el método **open()**, indicando que es una solicitud PUT a la URL proporcionada, que incluye el ID del usuario en la URL.
-
-Marcamos el encabezado 'Content-Type' de la solicitud como *'application/json'*, porque el cuerpo de la solicitud está en formato JSON.
-
-Creamos una función que devuelve una llamada (**onreadystatechange**) que se ejecutará cada vez que cambie el estado de la solicitud.
-
-Comprobamos de nuevo si el estado es 4 y el código de estado es 200.
-
-Obtenemos la respuesta del servidor utilizando **JSON.parse()** para convertir el texto JSON en un objeto JavaScript.
-
-Enviamos la solicitud al servidor utilizando el método **send()**, pasando el objeto **updatedUser**
-convertido a JSON como cuerpo de la solicitud.
-
-Ahora, ya podemos mostrar en consola los usuarios.
-
-
-- ELIMINAR
+#### ELIMINAR (_DELETE_)
 
 ![Delete](img/6.png)
 
-Definimos la variable **userId** que especifica el ID del usuario que se va a eliminar.
+ `/tareas/{id}`: Endpoint para eliminar una tarea.
 
-Creamos una instancia de XMLHttpRequest llamada **request** para manejar la solicitud HTTP.
+## Header HTTP
+Son componentes que se intercambian cliente y servidor. Proporcionan información sobre los datos que están recibiendo o enviando.
+#### Solicitud
+Se envian por parte del cliente al servidor
+- **Accept** - Indica el formato de respuesta que recibirá _aplication/json_
+- **Content-Type** - Indica el formato de los datos que está enviando el cliente _aplication/json_
+- **Authorization** - Sirve para enviar las credenciales de autentificación del servidor.
+#### Respuesta
+Se envian por parte del servidor al cliente
+- **Status** - Indica el estado de la solicitud
+- **Content-Type** - Indica el formato de los datos que se le estan enviando al cliente _aplication/json_
 
-Configuramos la solicitud con el método **open()**, especificando que es una solicitud DELETE a la URL proporcionada, que incluye el ID del usuario en la URL.
+## Body HTTP
+El cuerpo (body) de una solicitud HTTP contiene datos adicionales enviados al servidor, como parámetros de formulario o carga útil de JSON.
 
-En este caso, no especificaremos ningún encabezado en esta solicitud DELETE, ya que no se está enviando ningún cuerpo de solicitud.
+#### form-data
+En este formato, los datos se envían como pares clave-valor, similar a cómo se envían los datos de un formulario HTML. Es útil para enviar archivos binarios junto con otros datos de formulario.
 
-Enviamos la solicitud al servidor utilizando el método **send()** sin pasar ningún dato en el cuerpo de la solicitud.
- 
-## Conexión con BBDD
+```plaintext
+Nombre: Juan
+Email: juan@example.com
+Archivo: [archivo adjunto]
+```
 
-Por último, a continuación te muestro un ejemplo de como se haría una conexión con una base de datos real, sobre la cual puedes hacer cualquier tipo de solicitud CRUD. Por ejemplo, en este caso, vamos a realizar una conexión con una BBDD(MongoDB) desde Node.js y utilizando la biblioteca *Mongoose* de MongoDB:
+#### x-www-form-urlencoded
+En este formato, los datos se envían como una cadena de consulta codificada en URL, donde los valores están codificados en formato clave=valor y separados por "&". Es útil para enviar datos de formulario simples.
 
-![BBDD](img/7.png)
+```plaintext
+nombre=Juan&email=juan%40example.com
+```
 
-Importamos **mongoose**.
+#### raw
+En este formato, los datos se envían en su forma bruta, sin ningún tipo de codificación adicional. Se puede usar para enviar datos en formato JSON, XML u otros formatos de carga útil personalizados. Es útil cuando se necesita control total sobre el formato de los datos enviados.
 
-Utilizamos **mongoose.connect()** para conectar a la base de datos MongoDB. La URL *'mongodb://localhost/my_database'* es la ruta donde se ubica la base de datos llamada *'my_database'* en el servidor local.
+```json
+{
+  "nombre": "Juan",
+  "email": "juan@example.com"
+}
 
-Definimos el modelo de datos **User** utilizando **mongoose.model()**. 
+```
 
-Creamos un nuevo objeto **User** llamado **newUser** con un nombre y correo electrónico.
+## Métodos HTTP
 
-Llamamos a la función **save()** en **newUser** para guardar el nuevo usuario en la base de datos, la cual devuelve una promesa que se resuelve cuando la operación de guardado se completa con éxito.
+- **GET**: Recupera una información para el cliente.
+```bash
+GET /api/users
+```
 
-Utilizamos **.then()** para registrar un mensaje en la consola indicando que el usuario ha sido creado después de que la promesa se resuelva exitosamente.
+```bash
+GET /api/users/{id}
+```
+- **POST**: Crea un recurso dentro del servidor. (Agrega un registro en) (Agregar un registre a la base de dades)
+
+```bash
+POST /api/users
+Content-Type: application/json
+
+{
+  "nombre": "Example",
+  "email": "ejemplo@example.com",
+  "edad": 30
+}
+```
+- **PUT**: Actualiza un recurso ya existente dentro del servidor.
+```bash
+POST /api/users/{id}
+Content-Type: application/json
+
+{
+  "nombre": "Example",
+  "email": "ejemplo@example.com",
+  "edad": 30
+}
+```
+- **PATCH**: Actualiza un campo sin tener que rreemplazarlo entero
+
+```bash
+PATCH /api/users/{id}
+Content-Type: application/json
+
+{
+  "nombre": "Example v2",
+}
+  ```
+- **DELETE**: Elimina un recurs.
+```bash
+DELETE /api/users/{id}
+```
+
+## Respuesta HTTP
+Son las respuestas que da la pagina para informar sobre el resultado de la operación:
+
+- **200** - OK
+- **201** - Created
+- **204** - No Content
+- **400** - Bad Request
+- **401** - Unauthorized
+- **403** - Forbidden
+- **404** - Not Found
+- **500** - Internal Server Error
 
 
-## Propuesta de ejercicio
+## Solicitud con Node.js `axios`
 
-Crea una pequeña API con vehiculos, cada uno tendrá las siguientes caracteristicas: matricula, año de fabricacion, modelo, color(con los valores que tu quieras) y añade unos cuantos objetos JSON que simularán una lista de vehículos almacenados en una base de datos.
+#### GET:
+```javascript
+const axios = require('axios');
 
-A continuación, con los conocimientos adquiridos después de leer esta documentación, crea un vehículo nuevo, imprime el primer vehículo de la lista y modifica la matrícula del segundo vehículo de la lista.
+axios.get('https://api.example.com/users')
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });
+```
+
+#### POST:
+```javascript
+const axios = require('axios');
+
+axios.post('https://api.example.com/users', {
+    name: 'John Doe',
+    email: 'john@example.com',
+    age: 30
+  })
+  .then(response => {
+    console.log('User created:', response.data);
+  })
+  .catch(error => {
+    console.error('Error creating user:', error);
+  });
+```
+
+#### PUT:
+```javascript
+const axios = require('axios');
+
+axios.put('https://api.example.com/users/123', {
+    name: 'John Doe',
+    email: 'john@example.com',
+    age: 35
+  })
+  .then(response => {
+    console.log('User updated:', response.data);
+  })
+  .catch(error => {
+    console.error('Error updating user:', error);
+  });
+```
+
+#### DELETE:
+```javascript
+const axios = require('axios');
+
+axios.delete('https://api.example.com/users/123')
+  .then(response => {
+    console.log('User deleted:', response.data);
+  })
+  .catch(error => {
+    console.error('Error deleting user:', error);
+  });
+```
+
+
+## Solicitud con `fetch`: 
+
+#### GET:
+```javascript
+fetch('https://api.example.com/users')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error fetching data:', error));
+```
+
+#### POST:
+```javascript
+fetch('https://api.example.com/users', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: 'John Doe',
+      email: 'john@example.com',
+      age: 30
+    })
+  })
+  .then(response => response.json())
+  .then(data => console.log('User created:', data))
+  .catch(error => console.error('Error creating user:', error));
+```
+
+#### PUT:
+```javascript
+fetch('https://api.example.com/users/123', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: 'John Doe',
+      email: 'john@example.com',
+      age: 35
+    })
+  })
+  .then(response => response.json())
+  .then(data => console.log('User updated:', data))
+  .catch(error => console.error('Error updating user:', error));
+```
+
+#### DELETE:
+```javascript
+fetch('https://api.example.com/users/123', {
+    method: 'DELETE'
+  })
+  .then(response => console.log('User deleted:', response.status === 204 ? 'Successful' : 'Failed'))
+  .catch(error => console.error('Error deleting user:', error));
+```
+
+# Ejercicio práctico
+
+## Objetivo
+Familiarizarse con las solicitudes HTTP GET, POST, PUT i DELETE utilizando Node.js i la función `fetch()`.
+## Enunciado
+
+1. Obtener usuarios (GET):
+	1.1 Haz la consulta necesaria para conseguir todos los _posts_
+		- Imprime por consola el estado de la consulta y si devuelve alguna cosa
+	
+	1.2 Haz la consulta necesaria para conseguir el _post_ con _ID_ 1
+		- Imprime por consola el estado de la consulta y si devuelve alguna cosa.
+
+2. Agregar usuario (POST):
+	- Crea un nuevo _post_: 
+		- _userId_ = 1
+		- _title_ = "Nombre y apellido" 
+		- _body_ = "Esto es un post de prueba"
+	- Imprime por consola el estado de la consulta y si devuelve alguna cosa.
+	
+3. Actualitzar usuario (PUT):
+	-  Actualiza los datos del _post_ con _ID_ 1: 
+		- _title_ = "Apellido y Nombre" 
+		- _body_ = "Este es un post actualizado"
+	- Imprime por consola el estado de la consulta y si devuelve alguna cosa.
+
+4. Eliminar usuario (DELETE):
+	- Elimina el usuario con _ID_ 1
+	- Imprime por consola el estado de la consulta y si devuelve alguna cosa.
+
+## Eines
+- **Aplicaciones**: Para poder realizar este ejercicio se tendrá que hacer uso de de uno de los plugins mencionados anteriormente, o de sus respectivas aplicaciones.
+
+- **API**: la API necesaria para poder hacer los ejercicios es la siguiente:
+	https://jsonplaceholder.typicode.com/posts/
