@@ -17,6 +17,9 @@ En JavaScript, `fetch()` es una función incorporada que se utiliza para realiza
 
 La carga asíncrona con `fetch()` en JavaScript se refiere a la capacidad de realizar solicitudes de red y obtener recursos sin bloquear la ejecución del resto del código. Esto significa que puedes solicitar datos y seguir ejecutando otras tareas mientras esperas la respuesta. Fetch es una API moderna y flexible proporcionada por los navegadores web para realizar solicitudes HTTP y manipular respuestas.
 
+Aqui tenemos un ejemplo de un `fetch()` sencillo:
+![fetch simple](image.png)
+
 ## Elementos necesarios para desarrollar un mantenimiento completo (CRUD) de la BBDD
 
 - **Servidor Backend:** Un servidor backend que proporcione una API RESTful para realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en la base de datos.
@@ -39,8 +42,7 @@ Elementos de una promesa:
 4. **Manejo de la resolución:** Puedes configurar funciones de devolución de llamada (callbacks) para manejar el valor de resolución o el error utilizando los métodos .then() (para el éxito) y .catch() (para los errores).
 5. **Encadenamiento:** Puedes encadenar promesas para realizar varias tareas asíncronas en orden. El valor de resolución de una promesa puede ser utilizado por la siguiente promesa en la cadena.
 
-Aqui tenemos un ejemplo de un `fetch()` sencillo:
-![fetch simple](image.png)
+
 
 Aqui tenemos un ejemplo de un `fetch()` con encadenamiento:
 ![fetch encadenado](image-1.png)
