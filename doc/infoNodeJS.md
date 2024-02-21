@@ -67,6 +67,7 @@ Permite definir rutas para manejar diferentes tipos de solicitudes HTTP (GET, PO
 ## Instalación EXPRESS
 Para la instalacion de EXPREES debemos tener en cuenta que es necesario usar la linea de comandos.
 En linea de comandos debemos ubicarnos el el directorio donde va a estar nuestro futuro proyecto, despues debemos ejecutar los siguientes comandos que instalaran los paquetes y las dependencias de EXPRESS en dicho proyecto.
+
 ![comando cmd](img/express5.png)
 Una vez hecho esto el siguiente paso será crear un archivo tipo JavaScript donde empezar a crear codigo.
 
@@ -74,22 +75,28 @@ Una vez hecho esto el siguiente paso será crear un archivo tipo JavaScript dond
 
 ### Hola mundo Node:
 Documento tipo JavaScript.
+
 ![archivo.js](img/holaMundo.png)
 Se usa la linea de comandos para ejecutar el codigo anterior.
+
 ![comando cmd](img/holaMundoCMD.png)
 
 ### Empezar proyecto en Express:
 Comenzamos con el "require" del propio Express.
+
 ![comando cmd](img/express1.png)
 Obtenemos como respuesta una variable, que nosotros hemos llamado "app" (convención usada en la mayoría de las veces), mediante la cual podemos configurar la aplicación haciendo uso del API de Express.
+
 ![comando cmd](img/express2.png)
 
 ### Metodo listen:
 El método listen recibe el puerto donde el servidor debe comunicarse con el exterior. El resto de los parámetros son opcionales. En este caso estamos enviando tambien una función callback, que se ejecutará cuando el servidor esté listo, escuchando en el puerto indicado.
+
 ![comando cmd](img/express3.png)
 
 ### Creacion de rutas:
 Como primer parámetro del método get() debemos indicar el patrón de la ruta que queremos recibir. En este caso hemos colocado "/", que equivale a la ruta raíz del servidor. Como segundo parámetro colocamos la función que se ejecutará cuando se reciba una solicitud con tal patrón.
+
 ![comando cmd](img/express4.png)
 La función encargada de resolver la solicitud recibe dos parámetros que nosotros hemos nombrado "req" y "res" (también por convención). No son más que la "request" de la solicitud HTTP y la "response" que enviaremos al cliente.
 
