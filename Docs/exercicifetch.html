@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio API Fetch</title>
-    <!-- Importamos los estilos de Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body {
@@ -59,13 +58,15 @@
                     // Iteramos sobre cada usuario en los datos
                     // Por cada objeto creamos un usuario
                     data.forEach(user => {
-                        output += `
-                            <div class="card rounded shadow-lg m-4 p-4 bg-white w-64">
-                                <h3 class="text-green-500">${user.name}</h3>
-                                <p class="text-gray-500">${user.email}</p>
-                                <p class="text-gray-500">${user.phone}</p>
-                            </div>
-                        `;
+                        if (user.name.toLowerCase().includes('le')){
+                            output += `
+                                <div class="card rounded shadow-lg m-4 p-4 bg-white w-64">
+                                    <h3 class="text-green-500">${user.name}</h3>
+                                    <p class="text-gray-500">${user.email}</p>
+                                    <p class="text-gray-500">${user.phone}</p>
+                                </div>
+                            `;
+                        }
                     });
                     document.getElementById('output').innerHTML = output;
                 })
