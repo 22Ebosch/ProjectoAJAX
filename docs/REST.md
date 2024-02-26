@@ -12,9 +12,11 @@
 
 - [Respuesta HTTP](#Respuesta-HTTP)
 
-- [Cómo hacer una solicitud con Node](#Solicitud-con-Node.js-`axios`) 
+- [Herramientas](#herramientas) 
 
-- [Cómo hacer una solicitud con "fetch"](#Solicitud-con-`fetch`) 
+  - [Postman](#postman) 
+  - [Rest Client](#rest-client) 
+
 
 - [Propuesta de ejercicio](#Ejercicio-práctico) 
 
@@ -27,47 +29,75 @@ Resumiendo, REST sería la tecnología con la que vamos a desarrollar las APIs q
 
 ## Endpoints y CRUD
 
-En una API de lista de tareas, los **endpoints** son identificadores que representan diferentes recursos y operaciones que se pueden realizar en la API. Estos también involucran el **CRUD** (_Create Read Update Delete_), que son las operaciones básicas para gestionar los datos de los recursos. Aquí hay algunos ejemplos comunes de endpoints en una API de lista de tareas:
-
-
-- `/tareas/{id}` (PUT / DELETE): Endpoint para obtener, actualizar o eliminar una tarea específica, donde `{id}` es el identificador único de la tarea.
+En una API de lista de tareas, los **endpoints** son identificadores que representan diferentes recursos y operaciones que se pueden realizar en la API. Estos también involucran el **CRUD** (_Create Read Update Delete_), que son las operaciones básicas para gestionar los datos de los recursos. 
 
 Los endpoints son la interfaz principal a través de la cual los clientes interactúan con una API REST, y proporcionan una forma estructurada y uniforme de acceder y manipular recursos en el servidor.
 
+Aquí se puede ver un ejemplo de cada uno de ellos
+
 #### LEER (_GET_)
 
- `/tareas`: Endpoint para obtener todas las tareas.
+ `https://jsonplaceholder.typicode.com/posts`: Endpoint para obtener todos los _posts_.
 
-![Read](img/4.png)
+ `https://jsonplaceholder.typicode.com/posts/{id}`: Endpoint para obtener un _post_ en específico.
 
 #### CREAR (_POST_)
 
- `/tareas/{id}`: Endpoint para agregar una nueva tarea.
+ `https://jsonplaceholder.typicode.com/posts`: Endpoint para agregar un nuevo _post_.
 
-![Create](img/3.png)
+ Body:
+ ```json
+ {
+    "userId": 3,
+    "title": "Example",
+    "body": "this is an example"
+}
+ ```
 
 #### MODIFICAR (_PUT_/_FETCH_)
 
-![Update](img/5.png)
+ `https://jsonplaceholder.typicode.com/posts/{id}`: Endpoint para modificar total o parcialmente un _post_.
 
- `/tareas/{id}`: Endpoint para modificar total o parcialmente una tarea.
+ Body (_PUT_):
+ ```json
+ {
+   "userId": 3,
+    "title": "Example",
+    "body": "this is an example"
+}
+ ```
+
+ Body (_PATCH_):
+ ```json
+ {
+   "title": "Example",
+}
+ ```
+
+> En caso de _PUT_ será necessario especificar el valor de todos los campos, aunque estos no varien
+> En caso de _PATCH_ **NO** será necessario especificar el valor de todos los campos, solo aquellos a modificar
 
 #### ELIMINAR (_DELETE_)
 
-![Delete](img/6.png)
-
- `/tareas/{id}`: Endpoint para eliminar una tarea.
+ `https://jsonplaceholder.typicode.com/posts/{id}`: Endpoint para eliminar un _post_.
 
 ## Header HTTP
 Son componentes que se intercambian cliente y servidor. Proporcionan información sobre los datos que están recibiendo o enviando.
+
 #### Solicitud
 Se envian por parte del cliente al servidor
+
 - **Accept** - Indica el formato de respuesta que recibirá _aplication/json_
+
 - **Content-Type** - Indica el formato de los datos que está enviando el cliente _aplication/json_
+
 - **Authorization** - Sirve para enviar las credenciales de autentificación del servidor.
+
 #### Respuesta
 Se envian por parte del servidor al cliente
+
 - **Status** - Indica el estado de la solicitud
+
 - **Content-Type** - Indica el formato de los datos que se le estan enviando al cliente _aplication/json_
 
 ## Body HTTP
@@ -160,156 +190,72 @@ Son las respuestas que da la pagina para informar sobre el resultado de la opera
 - **404** - Not Found
 - **500** - Internal Server Error
 
+# Herramientas
+ Las siguientes herramientas nos van a servir para comprobar el correcto funcionamiento de nuestras APIs o Endpoints. Desde ellas podremos hacer todos los tipos de solicitudes, explicados anteriormente, junto con algunas otras funciones.
 
-## Solicitud con Node.js `axios`
+| Extensió|Descripció|Ventatges|Desventatges|
+|-|-|-|-|
+| Postman | Es una herramienta para probar y desarrollar APIs. La extensión permiete acceder a las funciones principales desde el editor. | - Permite crear y enviar solicitudes HTTP. <br>- Facilita la definición y organización de colecciones de solicitudes. <br>- Permite escribir y ejecutar pruebas automatizadas por APIs. | - Requiere conocimeintos previos sobre el uso de Postman. <br>- Puede tener una curba de aprendizaje inicial. |
+| REST Client    | Es una extensión que permite enviar solicitudes HTTP y ver la respuesta directamente en el editor, por medio de un archivo de texto. | - Permite definir y ejecutar solicitudes HTTP directamente des de un archivo. <br>- Facilita la documentación y prueba de APIs cerca del codigo fuente. | - Puede ser menos intuitivo para usuarios nuevos en escritura de archivos de texto estructurado. <br>- No ofrece tantas caracteristicas como avanzadas como Postman. |
 
-#### GET:
-```javascript
-const axios = require('axios');
+  ## Postman
 
-axios.get('https://api.example.com/users')
-  .then(response => {
-    console.log(response.data);
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-  });
-```
+Aplicación y extensión de _Visual Studio Code_
+  
 
-#### POST:
-```javascript
-const axios = require('axios');
+Uso práctico:
 
-axios.post('https://api.example.com/users', {
-    name: 'John Doe',
-    email: 'john@example.com',
-    age: 30
-  })
-  .then(response => {
-    console.log('User created:', response.data);
-  })
-  .catch(error => {
-    console.error('Error creating user:', error);
-  });
-```
+- Instalar Postman o hacerte una cuenta en la versión web, puedes crear una nueva solicitud HTTP (GET, POST, PUT, DELETE, etc.) y definir los parámetros, encabezados y cuerpo de la solicitud.
 
-#### PUT:
-```javascript
-const axios = require('axios');
+- Enviar la solicitud y recibir la respuesta directamente en la interfaz de Postman, lo que te permite ver el resultado y analizar los datos.
 
-axios.put('https://api.example.com/users/123', {
-    name: 'John Doe',
-    email: 'john@example.com',
-    age: 35
-  })
-  .then(response => {
-    console.log('User updated:', response.data);
-  })
-  .catch(error => {
-    console.error('Error updating user:', error);
-  });
-```
+- Organizar tus solicitudes en colecciones, compartir colecciones con otros usuarios y colaborar en el desarrollo de APIs.
 
-#### DELETE:
-```javascript
-const axios = require('axios');
+  ## Rest Client
 
-axios.delete('https://api.example.com/users/123')
-  .then(response => {
-    console.log('User deleted:', response.data);
-  })
-  .catch(error => {
-    console.error('Error deleting user:', error);
-  });
-```
+Extensión de _Visual Studio Code_
+  
 
+Uso práctico:
 
-## Solicitud con `fetch`: 
+- Instalar la extensión REST Client en VSCode, puedes crear un archivo con extensión *.http* o *.rest*.
 
-#### GET:
-```javascript
-fetch('https://api.example.com/users')
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error('Error fetching data:', error));
-```
-
-#### POST:
-```javascript
-fetch('https://api.example.com/users', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name: 'John Doe',
-      email: 'john@example.com',
-      age: 30
-    })
-  })
-  .then(response => response.json())
-  .then(data => console.log('User created:', data))
-  .catch(error => console.error('Error creating user:', error));
-```
-
-#### PUT:
-```javascript
-fetch('https://api.example.com/users/123', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name: 'John Doe',
-      email: 'john@example.com',
-      age: 35
-    })
-  })
-  .then(response => response.json())
-  .then(data => console.log('User updated:', data))
-  .catch(error => console.error('Error updating user:', error));
-```
-
-#### DELETE:
-```javascript
-fetch('https://api.example.com/users/123', {
-    method: 'DELETE'
-  })
-  .then(response => console.log('User deleted:', response.status === 204 ? 'Successful' : 'Failed'))
-  .catch(error => console.error('Error deleting user:', error));
-```
+- En el archivo con esa extensión, puedes escribir tus solicitudes HTTP utilizando una sintaxis específica, como por ejemplo: GET https://api.example.com.
+Luego, puedes enviar la solicitud desde el propio archivo, y la respuesta se mostrará directamente en el editor.
 
 # Ejercicio práctico
 
 ## Objetivo
-Familiarizarse con las solicitudes HTTP GET, POST, PUT i DELETE utilizando Node.js i la función `fetch()`.
+Familiarizarse con las solicitudes HTTP GET, POST, PUT i DELETE.
+
 ## Enunciado
 
-1. Obtener usuarios (GET):
+1. Obtener posts (GET):
+
 	1.1 Haz la consulta necesaria para conseguir todos los _posts_
 		- Imprime por consola el estado de la consulta y si devuelve alguna cosa
 	
 	1.2 Haz la consulta necesaria para conseguir el _post_ con _ID_ 1
 		- Imprime por consola el estado de la consulta y si devuelve alguna cosa.
 
-2. Agregar usuario (POST):
+2. Agregar post (POST):
 	- Crea un nuevo _post_: 
 		- _userId_ = 1
 		- _title_ = "Nombre y apellido" 
 		- _body_ = "Esto es un post de prueba"
 	- Imprime por consola el estado de la consulta y si devuelve alguna cosa.
 	
-3. Actualitzar usuario (PUT):
+3. Actualitzar post (PUT):
 	-  Actualiza los datos del _post_ con _ID_ 1: 
 		- _title_ = "Apellido y Nombre" 
 		- _body_ = "Este es un post actualizado"
 	- Imprime por consola el estado de la consulta y si devuelve alguna cosa.
 
-4. Eliminar usuario (DELETE):
+4. Eliminar post (DELETE):
 	- Elimina el usuario con _ID_ 1
 	- Imprime por consola el estado de la consulta y si devuelve alguna cosa.
 
-## Eines
+## Herramientas
 - **Aplicaciones**: Para poder realizar este ejercicio se tendrá que hacer uso de de uno de los plugins mencionados anteriormente, o de sus respectivas aplicaciones.
 
 - **API**: la API necesaria para poder hacer los ejercicios es la siguiente:
