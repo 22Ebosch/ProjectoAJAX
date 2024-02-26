@@ -17,9 +17,9 @@ Fetch se diseñó para reemplazar las antiguas APIs de XMLHttpRequest (XHR), ofr
 El propósito de Fetch es mejorar la eficiencia y la facilidad de uso en la comunicación entre el cliente y el servidor en aplicaciones web y aplicaciones basadas en JavaScript, ofreciendo una interfaz más moderna y flexible para manejar solicitudes y respuestas HTTP.
 
 
- # 2.CRUD
+# 2.CRUD
 
-Crear (Create)
+### Crear (Create)
 ````JAVASCRIPT
 // Definición de la URL de la API
 const url = 'https://api.example.com/usuarios';
@@ -45,7 +45,7 @@ fetch(url, {
 // Manejo de errores
 .catch(error => console.error('Error al crear usuario:', error)); // Imprimir errores en la consola
 ````
-Leer (Read)
+### Leer (Read)
 ````JAVASCRIPT
 const url = 'https://api.example.com/usuarios';
 
@@ -55,7 +55,7 @@ fetch(url)
 .catch(error => console.error('Error al obtener usuarios:', error));
 ````
 
-Actualizar (Update)
+### Actualizar (Update)
 ````JAVASCRIPT
 
 const usuarioId = 123;
@@ -79,7 +79,7 @@ fetch(url, {
 .catch(error => console.error('Error al actualizar usuario:', error));
 ````
 
-Eliminar (Delete)
+### Eliminar (Delete)
 ````JAVASCRIPT
 
 const usuarioId = 123;
@@ -99,7 +99,6 @@ fetch(url, {
 ````
 
 # 3.HEADERS
-
 
 Las cabeceras de los fetch son parte de las solicitudes HTTP que un cliente (como un navegador web) envía a un servidor para obtener recursos, como páginas web o archivos. Estas cabeceras son metadatos que proporcionan información adicional sobre la solicitud o el recurso solicitado. 
 
