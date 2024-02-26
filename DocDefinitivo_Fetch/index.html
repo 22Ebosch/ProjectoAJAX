@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub User Info</title>
+</head>
+
+<body>
+
+    <div class="content">
+
+        <h1>GitHub User Info</h1>
+        <input type="text" id="usernameInput" placeholder="Enter GitHub username">
+        <button onclick="fetchUserInfo()">Get Info</button>
+
+        <div id="userInfo"></div>
+    </div>
+
+
+    <script>
+        function fetchUserInfo() {
+            const username = document.getElementById('usernameInput').value;
+
+            fetch(`https://api.github.com/users/${username}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const userInfoDiv = document.getElementById('userInfo');
+                    userInfoDiv.innerHTML = `
+                        <h2>${data.login}</h2>
+                        <img src="${data.avatar_url}" alt="Avatar" style="width: 100px; height: 100px;">
+                        <p>Public Repositories: ${data.public_repos}</p>
+                    `;
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        }
+    </script>
+</body>
+
+</html>
