@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercici REST</title>
+</head>
+
+<body>
+    <button id="btn-load">cargar</button>
+    <form id="post-form">
+        <label for="title">Título:</label><br>
+        <input type="text" id="title" name="title"><br>
+        <label for="content">Contenido:</label><br>
+        <textarea id="content" name="content"></textarea><br><br>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+<script>
+    document.getElementById("btn-load").addEventListener("click", function () {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+            let info = this.responseText;
+            let array = JSON.parse(info);
+            for (let inf of array) {
+                if (inf.userID == 1) {
+                    console.log(inf);
+                }
+            }
+        }
+        xhttp.open("GET", 'https://jsonplaceholder.typicode.com/posts', true);
+        xhttp.send();
+        //----------------------------------------------------------------
+        const title = document.getElementById("title").value;
+        const content = document.getElementById("content").value;
+
+        const xhttp2 = new XMLHttpRequest();
+        xhttp2.onload = function () {
+            console.log("Nuevo post añadido:", this.responseText);
+        };
+        xhttp2.open("POST", 'https://jsonplaceholder.typicode.com/posts', true);
+        xhttp2.setRequestHeader("Content-type", "application/json");
+        xhttp2.send(JSON.stringify({
+            title: 'Harold Clavijo',
+            body: 'Esto es un post de prueba',
+            userId: 1 
+        }));
+    });
+</script>
+
+</html>
