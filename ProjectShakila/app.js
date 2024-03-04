@@ -10,7 +10,12 @@ app.listen(PORT,()=>{
 });
 app.disable('x-powered-by');
 app.get('/', (req, res) => {
-    res.send('hola');
+    client.query('SELECT * FROM customer where customer_id = 8')
+    .then((result => res.json(result.rows)))
+    .catch(error => {
+        console.error('Error executing query', error);
+        res.status(500).send('Error executing query');
+    });
 });
 let dbConnection = fs.readFileSync('dbConnection.json');
 const client = new Client(JSON.parse(dbConnection));
