@@ -1,5 +1,6 @@
 //import express from 'express';
 const express = require('express');
+const fs = require('fs');
 const app = express();
 const PORT = 3306;
 const {Client} = require('pg'); 
@@ -11,14 +12,8 @@ app.disable('x-powered-by');
 app.get('/', (req, res) => {
     res.send('hola');
 });
-
-const client = new Client({
-    host:'localhost',
-    user:'postgres',
-    port:'5433',
-    password:'Alubbdd',
-    database:'sakila'
-});
+let dbConnection = fs.readFileSync('dbConnection.json');
+const client = new Client(JSON.parse(dbConnection));
 
 client.connect()
     .then(() => console.log('Connected to PostgreSQL'))
