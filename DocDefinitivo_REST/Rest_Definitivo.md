@@ -18,7 +18,7 @@
   - [Rest Client](#rest-client) 
 
 
-- [Propuesta de ejercicio](#Ejercicio-práctico) 
+- [Propuesta de ejercicio](#Ejercicio-práctico)
 
 ## REST  
 
