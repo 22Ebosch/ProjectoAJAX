@@ -5,6 +5,9 @@ const app = express();
 const PORT = 3306;
 const {Client} = require('pg'); 
 
+// app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views')); // La carpeta donde se encuentran tus vistas
+
 app.listen(PORT,()=>{
     console.log('listening on port' + PORT);
 });
