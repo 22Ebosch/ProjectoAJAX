@@ -7,9 +7,12 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="description" content="Bhumlu Bootstrap admin template made using Bootstrap 4, it has tons of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
-    <meta name="keywords" content="Bhumlu, bootstrap admin template, bootstrap admin panel, bootstrap 4 admin template, admin template">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="description"
+        content="Bhumlu Bootstrap admin template made using Bootstrap 4, it has tons of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+    <meta name="keywords"
+        content="Bhumlu, bootstrap admin template, bootstrap admin panel, bootstrap 4 admin template, admin template">
     <meta name="author" content="Srthemesvilla" />
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
 
@@ -32,7 +35,43 @@
     <!-- Libs -->
     <link rel="stylesheet" href="assets/libs/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/libs/flot/flot.css">
+    
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <!-- MagnificPopUp -->
+    <script src="Plugins/jquery.magnific-popup.js"></script>
+    <link rel="stylesheet" href="Plugins/magnific-popup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+
+    <!-- JavaScript de Magnific Popup -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
+    <style>
+        figure {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+            margin: 0;
+        }
+
+        figure div {
+            display: flex;
+            align-items: center;
+            width: 20%;
+            height: 500px;
+            background-color: #1d1d1d;
+            border: 5px solid white;
+            margin: 5px;
+        }
+
+        figure img {
+            width: 100%;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -206,7 +245,10 @@
             <!-- [ Layout container ] Start -->
             <div class="layout-container">
                 <!-- [ Layout navbar ( Header ) ] Start -->
-                <nav class="layout-navbar navbar navbar-expand-lg align-items-lg-center bg-white container-p-x" id="layout-navbar">
+                <nav class="layout-navbar navbar navbar-expand-lg align-items-lg-center bg-white container-p-x"
+                    id="layout-navbar">
+
+
 
                     <!-- Brand demo (see assets/css/demo/demo.css) -->
                     <a href="index.html" class="navbar-brand app-brand demo d-lg-none py-0 mr-4">
@@ -223,7 +265,8 @@
                         </a>
                     </div>
 
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#layout-navbar-collapse">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#layout-navbar-collapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
@@ -253,8 +296,11 @@
                                         4 New Notifications
                                     </div>
                                     <div class="list-group list-group-flush">
-                                        <a href="javascript:" class="list-group-item list-group-item-action media d-flex align-items-center">
-                                            <div class="ui-icon ui-icon-sm feather icon-home bg-secondary border-0 text-white"></div>
+                                        <a href="javascript:"
+                                            class="list-group-item list-group-item-action media d-flex align-items-center">
+                                            <div
+                                                class="ui-icon ui-icon-sm feather icon-home bg-secondary border-0 text-white">
+                                            </div>
                                             <div class="media-body line-height-condenced ml-3">
                                                 <div class="text-dark">Login from 192.168.1.1</div>
                                                 <div class="text-light small mt-1">
@@ -264,19 +310,27 @@
                                             </div>
                                         </a>
 
-                                        <a href="javascript:" class="list-group-item list-group-item-action media d-flex align-items-center">
-                                            <div class="ui-icon ui-icon-sm feather icon-user-plus bg-info border-0 text-white"></div>
+                                        <a href="javascript:"
+                                            class="list-group-item list-group-item-action media d-flex align-items-center">
+                                            <div
+                                                class="ui-icon ui-icon-sm feather icon-user-plus bg-info border-0 text-white">
+                                            </div>
                                             <div class="media-body line-height-condenced ml-3">
                                                 <div class="text-dark">You have
-                                                    <strong>4</strong> new followers</div>
+                                                    <strong>4</strong> new followers
+                                                </div>
                                                 <div class="text-light small mt-1">
-                                                    Phasellus nunc nisl, posuere cursus pretium nec, dictum vehicula tellus.
+                                                    Phasellus nunc nisl, posuere cursus pretium nec, dictum vehicula
+                                                    tellus.
                                                 </div>
                                             </div>
                                         </a>
 
-                                        <a href="javascript:" class="list-group-item list-group-item-action media d-flex align-items-center">
-                                            <div class="ui-icon ui-icon-sm feather icon-power bg-danger border-0 text-white"></div>
+                                        <a href="javascript:"
+                                            class="list-group-item list-group-item-action media d-flex align-items-center">
+                                            <div
+                                                class="ui-icon ui-icon-sm feather icon-power bg-danger border-0 text-white">
+                                            </div>
                                             <div class="media-body line-height-condenced ml-3">
                                                 <div class="text-dark">Server restarted</div>
                                                 <div class="text-light small mt-1">
@@ -285,8 +339,11 @@
                                             </div>
                                         </a>
 
-                                        <a href="javascript:" class="list-group-item list-group-item-action media d-flex align-items-center">
-                                            <div class="ui-icon ui-icon-sm feather icon-alert-triangle bg-warning border-0 text-dark"></div>
+                                        <a href="javascript:"
+                                            class="list-group-item list-group-item-action media d-flex align-items-center">
+                                            <div
+                                                class="ui-icon ui-icon-sm feather icon-alert-triangle bg-warning border-0 text-dark">
+                                            </div>
                                             <div class="media-body line-height-condenced ml-3">
                                                 <div class="text-dark">99% server load</div>
                                                 <div class="text-light small mt-1">
@@ -298,7 +355,8 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <a href="javascript:" class="d-block text-center text-light small p-2 my-1">Show all notifications</a>
+                                    <a href="javascript:" class="d-block text-center text-light small p-2 my-1">Show all
+                                        notifications</a>
                                 </div>
                             </div>
 
@@ -313,40 +371,52 @@
                                         4 New Messages
                                     </div>
                                     <div class="list-group list-group-flush">
-                                        <a href="javascript:" class="list-group-item list-group-item-action media d-flex align-items-center">
-                                            <img src="assets/img/avatars/6-small.png" class="d-block ui-w-40 rounded-circle" alt>
+                                        <a href="javascript:"
+                                            class="list-group-item list-group-item-action media d-flex align-items-center">
+                                            <img src="assets/img/avatars/6-small.png"
+                                                class="d-block ui-w-40 rounded-circle" alt>
                                             <div class="media-body ml-3">
-                                                <div class="text-dark line-height-condenced">Lorem ipsum dolor consectetuer elit.</div>
+                                                <div class="text-dark line-height-condenced">Lorem ipsum dolor
+                                                    consectetuer elit.</div>
                                                 <div class="text-light small mt-1">
                                                     Josephin Doe &nbsp;·&nbsp; 58m ago
                                                 </div>
                                             </div>
                                         </a>
 
-                                        <a href="javascript:" class="list-group-item list-group-item-action media d-flex align-items-center">
-                                            <img src="assets/img/avatars/4-small.png" class="d-block ui-w-40 rounded-circle" alt>
+                                        <a href="javascript:"
+                                            class="list-group-item list-group-item-action media d-flex align-items-center">
+                                            <img src="assets/img/avatars/4-small.png"
+                                                class="d-block ui-w-40 rounded-circle" alt>
                                             <div class="media-body ml-3">
-                                                <div class="text-dark line-height-condenced">Lorem ipsum dolor sit amet, consectetuer.</div>
+                                                <div class="text-dark line-height-condenced">Lorem ipsum dolor sit amet,
+                                                    consectetuer.</div>
                                                 <div class="text-light small mt-1">
                                                     Lary Doe &nbsp;·&nbsp; 1h ago
                                                 </div>
                                             </div>
                                         </a>
 
-                                        <a href="javascript:" class="list-group-item list-group-item-action media d-flex align-items-center">
-                                            <img src="assets/img/avatars/5-small.png" class="d-block ui-w-40 rounded-circle" alt>
+                                        <a href="javascript:"
+                                            class="list-group-item list-group-item-action media d-flex align-items-center">
+                                            <img src="assets/img/avatars/5-small.png"
+                                                class="d-block ui-w-40 rounded-circle" alt>
                                             <div class="media-body ml-3">
-                                                <div class="text-dark line-height-condenced">Lorem ipsum dolor sit amet elit.</div>
+                                                <div class="text-dark line-height-condenced">Lorem ipsum dolor sit amet
+                                                    elit.</div>
                                                 <div class="text-light small mt-1">
                                                     Alice &nbsp;·&nbsp; 2h ago
                                                 </div>
                                             </div>
                                         </a>
 
-                                        <a href="javascript:" class="list-group-item list-group-item-action media d-flex align-items-center">
-                                            <img src="assets/img/avatars/11-small.png" class="d-block ui-w-40 rounded-circle" alt>
+                                        <a href="javascript:"
+                                            class="list-group-item list-group-item-action media d-flex align-items-center">
+                                            <img src="assets/img/avatars/11-small.png"
+                                                class="d-block ui-w-40 rounded-circle" alt>
                                             <div class="media-body ml-3">
-                                                <div class="text-dark line-height-condenced">Lorem ipsum dolor sit amet consectetuer amet elit dolor sit.</div>
+                                                <div class="text-dark line-height-condenced">Lorem ipsum dolor sit amet
+                                                    consectetuer amet elit dolor sit.</div>
                                                 <div class="text-light small mt-1">
                                                     Suzen &nbsp;·&nbsp; 5h ago
                                                 </div>
@@ -354,12 +424,15 @@
                                         </a>
                                     </div>
 
-                                    <a href="javascript:" class="d-block text-center text-light small p-2 my-1">Show all messages</a>
+                                    <a href="javascript:" class="d-block text-center text-light small p-2 my-1">Show all
+                                        messages</a>
                                 </div>
                             </div>
 
                             <!-- Divider -->
-                            <div class="nav-item d-none d-lg-block text-big font-weight-light line-height-1 opacity-25 mr-3 ml-1">|</div>
+                            <div
+                                class="nav-item d-none d-lg-block text-big font-weight-light line-height-1 opacity-25 mr-3 ml-1">
+                                |</div>
                             <div class="demo-navbar-user nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                                     <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
@@ -389,6 +462,11 @@
 
                     <!-- [ content ] Start -->
                     <div class="container-fluid flex-grow-1 container-p-y">
+                        <!-- cosas -->
+                        <figure class="peliculas">
+
+                        </figure>
+                        <!-- cosas -->
                         <h4 class="font-weight-bold py-3 mb-0">Dashboard</h4>
                         <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
                             <ol class="breadcrumb">
@@ -405,8 +483,14 @@
                                         <h6 class="card-header-title mb-0">Statistics</h6>
                                         <div class="card-header-elements ml-auto">
                                             <label class="text m-0">
-                                                <span class="text-light text-tiny font-weight-semibold align-middle">SHOW STATS</span>
-                                                <span class="switcher switcher-sm d-inline-block align-middle mr-0 ml-2"><input type="checkbox" class="switcher-input" checked><span class="switcher-indicator"><span class="switcher-yes"></span><span
+                                                <span
+                                                    class="text-light text-tiny font-weight-semibold align-middle">SHOW
+                                                    STATS</span>
+                                                <span
+                                                    class="switcher switcher-sm d-inline-block align-middle mr-0 ml-2"><input
+                                                        type="checkbox" class="switcher-input" checked><span
+                                                        class="switcher-indicator"><span
+                                                            class="switcher-yes"></span><span
                                                             class="switcher-no"></span></span></span>
                                             </label>
                                         </div>
@@ -428,7 +512,8 @@
                                                         <div class="text-large">985</div>
                                                     </div>
                                                 </div>
-                                                <div id="ecom-chart-3" class="mt-3 chart-shadow-primary" style="height:40px"></div>
+                                                <div id="ecom-chart-3" class="mt-3 chart-shadow-primary"
+                                                    style="height:40px"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -442,7 +527,8 @@
                                                         <div class="text-large">2362</div>
                                                     </div>
                                                 </div>
-                                                <div id="order-chart-1" class="mt-3 chart-shadow" style="height:40px"></div>
+                                                <div id="order-chart-1" class="mt-3 chart-shadow" style="height:40px">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -452,7 +538,8 @@
                                                 <div class="d-flex col-sm-6 col-md-4 col-lg-6 align-items-center">
                                                     <div class="card-body media align-items-center text-dark">
                                                         <i class="lnr lnr-diamond display-4 d-block text-primary"></i>
-                                                        <span class="media-body d-block ml-3"><span class="text-big mr-1 text-primary">$1584.78</span>
+                                                        <span class="media-body d-block ml-3"><span
+                                                                class="text-big mr-1 text-primary">$1584.78</span>
                                                             <br>
                                                             <small class="text-muted">Earned this month</small>
                                                         </span>
@@ -461,7 +548,10 @@
                                                 <div class="d-flex col-sm-6 col-md-4 col-lg-6 align-items-center">
                                                     <div class="card-body media align-items-center text-dark">
                                                         <i class="lnr lnr-clock display-4 d-block text-primary"></i>
-                                                        <span class="media-body d-block ml-3"><span class="text-big"><span class="mr-1 text-primary">152</span>Working Hours</span>
+                                                        <span class="media-body d-block ml-3"><span
+                                                                class="text-big"><span
+                                                                    class="mr-1 text-primary">152</span>Working
+                                                                Hours</span>
                                                             <br>
                                                             <small class="text-muted">Spent this month</small>
                                                         </span>
@@ -470,7 +560,9 @@
                                                 <div class="d-flex col-sm-6 col-md-4 col-lg-6 align-items-center">
                                                     <div class="card-body media align-items-center text-dark">
                                                         <i class="lnr lnr-hourglass display-4 d-block text-primary"></i>
-                                                        <span class="media-body d-block ml-3"><span class="text-big"><span class="mr-1 text-primary">54</span> Tasks</span>
+                                                        <span class="media-body d-block ml-3"><span
+                                                                class="text-big"><span
+                                                                    class="mr-1 text-primary">54</span> Tasks</span>
                                                             <br>
                                                             <small class="text-muted">Completed this month</small>
                                                         </span>
@@ -479,7 +571,9 @@
                                                 <div class="d-flex col-sm-6 col-md-4 col-lg-6 align-items-center">
                                                     <div class="card-body media align-items-center text-dark">
                                                         <i class="lnr lnr-license display-4 d-block text-primary"></i>
-                                                        <span class="media-body d-block ml-3"><span class="text-big"><span class="mr-1 text-primary">6</span> Projects</span>
+                                                        <span class="media-body d-block ml-3"><span
+                                                                class="text-big"><span
+                                                                    class="mr-1 text-primary">6</span> Projects</span>
                                                             <br>
                                                             <small class="text-muted">Done this month</small>
                                                         </span>
@@ -504,8 +598,11 @@
                                                         <i class="lnr lnr-earth text-primary display-4"></i>
                                                     </div>
                                                     <div class="col">
-                                                        <h6 class="mb-0 text-muted">Total <span class="text-primary">Subscription</span></h6>
-                                                        <h4 class="mt-3 mb-0">7652<i class="ion ion-md-arrow-round-down ml-3 text-danger"></i></h4>
+                                                        <h6 class="mb-0 text-muted">Total <span
+                                                                class="text-primary">Subscription</span></h6>
+                                                        <h4 class="mt-3 mb-0">7652<i
+                                                                class="ion ion-md-arrow-round-down ml-3 text-danger"></i>
+                                                        </h4>
                                                     </div>
                                                 </div>
                                                 <p class="mb-0 text-muted">48% From Last 24 Hours</p>
@@ -518,8 +615,11 @@
                                                         <i class="lnr lnr-cart text-primary display-4"></i>
                                                     </div>
                                                     <div class="col">
-                                                        <h6 class="mb-0 text-muted"><span class="text-primary">Order</span> Status</h6>
-                                                        <h4 class="mt-3 mb-0">6325<i class="ion ion-md-arrow-round-up ml-3 text-success"></i></h4>
+                                                        <h6 class="mb-0 text-muted"><span
+                                                                class="text-primary">Order</span> Status</h6>
+                                                        <h4 class="mt-3 mb-0">6325<i
+                                                                class="ion ion-md-arrow-round-up ml-3 text-success"></i>
+                                                        </h4>
                                                     </div>
                                                 </div>
                                                 <p class="mb-0 text-muted">36% From Last 6 Months</p>
@@ -532,8 +632,11 @@
                                                         <i class="lnr lnr-users text-primary display-4"></i>
                                                     </div>
                                                     <div class="col">
-                                                        <h6 class="mb-0 text-muted">Unique <span class="text-primary">Visitors</span></h6>
-                                                        <h4 class="mt-3 mb-0">652<i class="ion ion-md-arrow-round-down ml-3 text-danger"></i></h4>
+                                                        <h6 class="mb-0 text-muted">Unique <span
+                                                                class="text-primary">Visitors</span></h6>
+                                                        <h4 class="mt-3 mb-0">652<i
+                                                                class="ion ion-md-arrow-round-down ml-3 text-danger"></i>
+                                                        </h4>
                                                     </div>
                                                 </div>
                                                 <p class="mb-0 text-muted">36% From Last 6 Months</p>
@@ -546,8 +649,11 @@
                                                         <i class="lnr lnr-magic-wand text-primary display-4"></i>
                                                     </div>
                                                     <div class="col">
-                                                        <h6 class="mb-0 text-muted">Monthly <span class="text-primary">Earnings</span></h6>
-                                                        <h4 class="mt-3 mb-0">5963<i class="ion ion-md-arrow-round-up ml-3 text-success"></i></h4>
+                                                        <h6 class="mb-0 text-muted">Monthly <span
+                                                                class="text-primary">Earnings</span></h6>
+                                                        <h4 class="mt-3 mb-0">5963<i
+                                                                class="ion ion-md-arrow-round-up ml-3 text-success"></i>
+                                                        </h4>
                                                     </div>
                                                 </div>
                                                 <p class="mb-0 text-muted">36% From Last 6 Months</p>
@@ -566,7 +672,8 @@
                                     <div class="card-header with-elements">
                                         <h6 class="card-header-title mb-0">Tasks</h6>
                                         <div class="card-header-elements ml-auto">
-                                            <button type="button" class="btn btn-default btn-xs md-btn-flat">Show more</button>
+                                            <button type="button" class="btn btn-default btn-xs md-btn-flat">Show
+                                                more</button>
                                         </div>
                                     </div>
                                     <div style="height: 310px" id="tasks-inner">
@@ -576,7 +683,9 @@
                                                 <label class="ui-todo-item custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input">
                                                     <span class="custom-control-label">Buy products</span>
-                                                    <span class="ui-todo-badge badge badge-outline-default font-weight-normal ml-2">58 mins left</span>
+                                                    <span
+                                                        class="ui-todo-badge badge badge-outline-default font-weight-normal ml-2">58
+                                                        mins left</span>
                                                 </label>
                                                 <label class="ui-todo-item custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input">
@@ -585,7 +694,9 @@
                                                 <label class="ui-todo-item custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input">
                                                     <span class="custom-control-label">Write blog post</span>
-                                                    <span class="ui-todo-badge badge badge-outline-default font-weight-normal ml-2">20 hours left</span>
+                                                    <span
+                                                        class="ui-todo-badge badge badge-outline-default font-weight-normal ml-2">20
+                                                        hours left</span>
                                                 </label>
                                                 <label class="ui-todo-item custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input" checked>
@@ -629,10 +740,12 @@
                                         <div class="card-header-elements ml-auto p-0">
                                             <ul class="nav nav-tabs">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active" data-toggle="tab" href="#sale-stats">Sale stats</a>
+                                                    <a class="nav-link active" data-toggle="tab" href="#sale-stats">Sale
+                                                        stats</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#latest-sales">Latest sales</a>
+                                                    <a class="nav-link" data-toggle="tab" href="#latest-sales">Latest
+                                                        sales</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -646,8 +759,10 @@
                                                             <tr>
                                                                 <th>
                                                                     <label class="custom-control custom-checkbox mb-0">
-                                                                        <input type="checkbox" class="custom-control-input">
-                                                                        <span class="custom-control-label"><strong>Due</strong></span>
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input">
+                                                                        <span
+                                                                            class="custom-control-label"><strong>Due</strong></span>
                                                                     </label>
                                                                 </th>
                                                                 <th>User</th>
@@ -658,13 +773,17 @@
                                                             <tr>
                                                                 <td>
                                                                     <label class="custom-control custom-checkbox mb-0">
-                                                                        <input type="checkbox" class="custom-control-input">
-                                                                        <span class="custom-control-label"><strong>12</strong><br><span>hour</span></span>
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input">
+                                                                        <span
+                                                                            class="custom-control-label"><strong>12</strong><br><span>hour</span></span>
                                                                     </label>
                                                                 </td>
                                                                 <td>
                                                                     <div class="media mb-0">
-                                                                        <img src="assets/img/avatars/3-small.png" class="d-block ui-w-40 rounded-circle" alt="">
+                                                                        <img src="assets/img/avatars/3-small.png"
+                                                                            class="d-block ui-w-40 rounded-circle"
+                                                                            alt="">
                                                                         <div class="media-body align-self-center ml-3">
                                                                             <h6 class="mb-0">John Deo</h6>
                                                                         </div>
@@ -672,21 +791,28 @@
                                                                 </td>
                                                                 <td>
                                                                     <div class="d-inline-block align-middle">
-                                                                        <h6 class="mb-1">[#1183] Workaround for OS X selects printing bug</h6>
-                                                                        <p class="text-muted mb-0">Chrome fixed the bug several versions ago, thus rendering this...</p>
+                                                                        <h6 class="mb-1">[#1183] Workaround for OS X
+                                                                            selects printing bug</h6>
+                                                                        <p class="text-muted mb-0">Chrome fixed the bug
+                                                                            several versions ago, thus rendering this...
+                                                                        </p>
                                                                     </div>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>
                                                                     <label class="custom-control custom-checkbox mb-0">
-                                                                        <input type="checkbox" class="custom-control-input">
-                                                                        <span class="custom-control-label"><strong>16</strong><br><span>hour</span></span>
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input">
+                                                                        <span
+                                                                            class="custom-control-label"><strong>16</strong><br><span>hour</span></span>
                                                                     </label>
                                                                 </td>
                                                                 <td>
                                                                     <div class="media mb-0">
-                                                                        <img src="assets/img/avatars/1-small.png" class="d-block ui-w-40 rounded-circle" alt="">
+                                                                        <img src="assets/img/avatars/1-small.png"
+                                                                            class="d-block ui-w-40 rounded-circle"
+                                                                            alt="">
                                                                         <div class="media-body align-self-center ml-3">
                                                                             <h6 class="mb-0">Jems Win</h6>
                                                                         </div>
@@ -694,21 +820,28 @@
                                                                 </td>
                                                                 <td>
                                                                     <div class="d-inline-block align-middle">
-                                                                        <h6 class="mb-1">[#1249] Vertically center carousel controls</h6>
-                                                                        <p class="text-muted mb-0">Try any carousel control and reduce the screen width below...</p>
+                                                                        <h6 class="mb-1">[#1249] Vertically center
+                                                                            carousel controls</h6>
+                                                                        <p class="text-muted mb-0">Try any carousel
+                                                                            control and reduce the screen width below...
+                                                                        </p>
                                                                     </div>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>
                                                                     <label class="custom-control custom-checkbox mb-0">
-                                                                        <input type="checkbox" class="custom-control-input">
-                                                                        <span class="custom-control-label"><strong>40</strong><br><span>hour</span></span>
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input">
+                                                                        <span
+                                                                            class="custom-control-label"><strong>40</strong><br><span>hour</span></span>
                                                                     </label>
                                                                 </td>
                                                                 <td>
                                                                     <div class="media mb-0">
-                                                                        <img src="assets/img/avatars/1-small.png" class="d-block ui-w-40 rounded-circle" alt="">
+                                                                        <img src="assets/img/avatars/1-small.png"
+                                                                            class="d-block ui-w-40 rounded-circle"
+                                                                            alt="">
                                                                         <div class="media-body align-self-center ml-3">
                                                                             <h6 class="mb-0">Jems Wiliiam</h6>
                                                                         </div>
@@ -716,21 +849,28 @@
                                                                 </td>
                                                                 <td>
                                                                     <div class="d-inline-block align-middle">
-                                                                        <h6 class="mb-1">[#1254] Inaccurate small pagination height</h6>
-                                                                        <p class="text-muted mb-0">The height of pagination elements is not consistent with...</p>
+                                                                        <h6 class="mb-1">[#1254] Inaccurate small
+                                                                            pagination height</h6>
+                                                                        <p class="text-muted mb-0">The height of
+                                                                            pagination elements is not consistent
+                                                                            with...</p>
                                                                     </div>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>
                                                                     <label class="custom-control custom-checkbox mb-0">
-                                                                        <input type="checkbox" class="custom-control-input">
-                                                                        <span class="custom-control-label"><strong>12</strong><br><span>hour</span></span>
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input">
+                                                                        <span
+                                                                            class="custom-control-label"><strong>12</strong><br><span>hour</span></span>
                                                                     </label>
                                                                 </td>
                                                                 <td>
                                                                     <div class="media mb-0">
-                                                                        <img src="assets/img/avatars/3-small.png" class="d-block ui-w-40 rounded-circle" alt="">
+                                                                        <img src="assets/img/avatars/3-small.png"
+                                                                            class="d-block ui-w-40 rounded-circle"
+                                                                            alt="">
                                                                         <div class="media-body align-self-center ml-3">
                                                                             <h6 class="mb-0">John Deo</h6>
                                                                         </div>
@@ -738,21 +878,28 @@
                                                                 </td>
                                                                 <td>
                                                                     <div class="d-inline-block align-middle">
-                                                                        <h6 class="mb-1">[#1183] Workaround for OS X selects printing bug</h6>
-                                                                        <p class="text-muted mb-0">Chrome fixed the bug several versions ago, thus rendering this...</p>
+                                                                        <h6 class="mb-1">[#1183] Workaround for OS X
+                                                                            selects printing bug</h6>
+                                                                        <p class="text-muted mb-0">Chrome fixed the bug
+                                                                            several versions ago, thus rendering this...
+                                                                        </p>
                                                                     </div>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>
                                                                     <label class="custom-control custom-checkbox mb-0">
-                                                                        <input type="checkbox" class="custom-control-input">
-                                                                        <span class="custom-control-label"><strong>12</strong><br><span>hour</span></span>
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input">
+                                                                        <span
+                                                                            class="custom-control-label"><strong>12</strong><br><span>hour</span></span>
                                                                     </label>
                                                                 </td>
                                                                 <td>
                                                                     <div class="media mb-0">
-                                                                        <img src="assets/img/avatars/3-small.png" class="d-block ui-w-40 rounded-circle" alt="">
+                                                                        <img src="assets/img/avatars/3-small.png"
+                                                                            class="d-block ui-w-40 rounded-circle"
+                                                                            alt="">
                                                                         <div class="media-body align-self-center ml-3">
                                                                             <h6 class="mb-0">John Deo</h6>
                                                                         </div>
@@ -760,21 +907,28 @@
                                                                 </td>
                                                                 <td>
                                                                     <div class="d-inline-block align-middle">
-                                                                        <h6 class="mb-1">[#1183] Workaround for OS X selects printing bug</h6>
-                                                                        <p class="text-muted mb-0">Chrome fixed the bug several versions ago, thus rendering this...</p>
+                                                                        <h6 class="mb-1">[#1183] Workaround for OS X
+                                                                            selects printing bug</h6>
+                                                                        <p class="text-muted mb-0">Chrome fixed the bug
+                                                                            several versions ago, thus rendering this...
+                                                                        </p>
                                                                     </div>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>
                                                                     <label class="custom-control custom-checkbox mb-0">
-                                                                        <input type="checkbox" class="custom-control-input">
-                                                                        <span class="custom-control-label"><strong>16</strong><br><span>hour</span></span>
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input">
+                                                                        <span
+                                                                            class="custom-control-label"><strong>16</strong><br><span>hour</span></span>
                                                                     </label>
                                                                 </td>
                                                                 <td>
                                                                     <div class="media mb-0">
-                                                                        <img src="assets/img/avatars/1-small.png" class="d-block ui-w-40 rounded-circle" alt="">
+                                                                        <img src="assets/img/avatars/1-small.png"
+                                                                            class="d-block ui-w-40 rounded-circle"
+                                                                            alt="">
                                                                         <div class="media-body align-self-center ml-3">
                                                                             <h6 class="mb-0">Jems Win</h6>
                                                                         </div>
@@ -782,21 +936,28 @@
                                                                 </td>
                                                                 <td>
                                                                     <div class="d-inline-block align-middle">
-                                                                        <h6 class="mb-1">[#1249] Vertically center carousel controls</h6>
-                                                                        <p class="text-muted mb-0">Try any carousel control and reduce the screen width below...</p>
+                                                                        <h6 class="mb-1">[#1249] Vertically center
+                                                                            carousel controls</h6>
+                                                                        <p class="text-muted mb-0">Try any carousel
+                                                                            control and reduce the screen width below...
+                                                                        </p>
                                                                     </div>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>
                                                                     <label class="custom-control custom-checkbox mb-0">
-                                                                        <input type="checkbox" class="custom-control-input">
-                                                                        <span class="custom-control-label"><strong>40</strong><br><span>hour</span></span>
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input">
+                                                                        <span
+                                                                            class="custom-control-label"><strong>40</strong><br><span>hour</span></span>
                                                                     </label>
                                                                 </td>
                                                                 <td>
                                                                     <div class="media mb-0">
-                                                                        <img src="assets/img/avatars/1-small.png" class="d-block ui-w-40 rounded-circle" alt="">
+                                                                        <img src="assets/img/avatars/1-small.png"
+                                                                            class="d-block ui-w-40 rounded-circle"
+                                                                            alt="">
                                                                         <div class="media-body align-self-center ml-3">
                                                                             <h6 class="mb-0">Jems Wiliiam</h6>
                                                                         </div>
@@ -804,21 +965,28 @@
                                                                 </td>
                                                                 <td>
                                                                     <div class="d-inline-block align-middle">
-                                                                        <h6 class="mb-1">[#1254] Inaccurate small pagination height</h6>
-                                                                        <p class="text-muted mb-0">The height of pagination elements is not consistent with...</p>
+                                                                        <h6 class="mb-1">[#1254] Inaccurate small
+                                                                            pagination height</h6>
+                                                                        <p class="text-muted mb-0">The height of
+                                                                            pagination elements is not consistent
+                                                                            with...</p>
                                                                     </div>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>
                                                                     <label class="custom-control custom-checkbox mb-0">
-                                                                        <input type="checkbox" class="custom-control-input">
-                                                                        <span class="custom-control-label"><strong>12</strong><br><span>hour</span></span>
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input">
+                                                                        <span
+                                                                            class="custom-control-label"><strong>12</strong><br><span>hour</span></span>
                                                                     </label>
                                                                 </td>
                                                                 <td>
                                                                     <div class="media mb-0">
-                                                                        <img src="assets/img/avatars/3-small.png" class="d-block ui-w-40 rounded-circle" alt="">
+                                                                        <img src="assets/img/avatars/3-small.png"
+                                                                            class="d-block ui-w-40 rounded-circle"
+                                                                            alt="">
                                                                         <div class="media-body align-self-center ml-3">
                                                                             <h6 class="mb-0">John Deo</h6>
                                                                         </div>
@@ -826,15 +994,20 @@
                                                                 </td>
                                                                 <td>
                                                                     <div class="d-inline-block align-middle">
-                                                                        <h6 class="mb-1">[#1183] Workaround for OS X selects printing bug</h6>
-                                                                        <p class="text-muted mb-0">Chrome fixed the bug several versions ago, thus rendering this...</p>
+                                                                        <h6 class="mb-1">[#1183] Workaround for OS X
+                                                                            selects printing bug</h6>
+                                                                        <p class="text-muted mb-0">Chrome fixed the bug
+                                                                            several versions ago, thus rendering this...
+                                                                        </p>
                                                                     </div>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                <a href="javascript:" class="card-footer d-block text-center text-dark small font-weight-semibold">SHOW MORE</a>
+                                                <a href="javascript:"
+                                                    class="card-footer d-block text-center text-dark small font-weight-semibold">SHOW
+                                                    MORE</a>
                                             </div>
                                             <div class="tab-pane fade" id="latest-sales">
                                                 <div style="height: 330px" id="tab-table-2">
@@ -849,28 +1022,32 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td class="align-middle">
-                                                                    <a href="javascript:" class="text-dark">PlayStation 4 1TB (Jet Black)</a>
+                                                                    <a href="javascript:" class="text-dark">PlayStation
+                                                                        4 1TB (Jet Black)</a>
                                                                 </td>
                                                                 <td class="align-middle">1</td>
                                                                 <td class="align-middle">$480.00</td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="align-middle">
-                                                                    <a href="javascript:" class="text-dark">Nike Men Black Liteforce III Sneakers</a>
+                                                                    <a href="javascript:" class="text-dark">Nike Men
+                                                                        Black Liteforce III Sneakers</a>
                                                                 </td>
                                                                 <td class="align-middle">2</td>
                                                                 <td class="align-middle">$115.1</td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="align-middle">
-                                                                    <a href="javascript:" class="text-dark">Wireless headphones</a>
+                                                                    <a href="javascript:" class="text-dark">Wireless
+                                                                        headphones</a>
                                                                 </td>
                                                                 <td class="align-middle">1</td>
                                                                 <td class="align-middle">$235.55</td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="align-middle">
-                                                                    <a href="javascript:" class="text-dark">HERO ATHLETES BAG</a>
+                                                                    <a href="javascript:" class="text-dark">HERO
+                                                                        ATHLETES BAG</a>
                                                                 </td>
                                                                 <td class="align-middle">1</td>
                                                                 <td class="align-middle">$160.00</td>
@@ -884,28 +1061,32 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="align-middle">
-                                                                    <a href="javascript:" class="text-dark">Apple iWatch (black)</a>
+                                                                    <a href="javascript:" class="text-dark">Apple iWatch
+                                                                        (black)</a>
                                                                 </td>
                                                                 <td class="align-middle">1</td>
                                                                 <td class="align-middle">$399.00</td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="align-middle">
-                                                                    <a href="javascript:" class="text-dark">WALKING 400 BLUE CAT3</a>
+                                                                    <a href="javascript:" class="text-dark">WALKING 400
+                                                                        BLUE CAT3</a>
                                                                 </td>
                                                                 <td class="align-middle">2</td>
                                                                 <td class="align-middle">$41.1</td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="align-middle">
-                                                                    <a href="javascript:" class="text-dark">Wireless headphones</a>
+                                                                    <a href="javascript:" class="text-dark">Wireless
+                                                                        headphones</a>
                                                                 </td>
                                                                 <td class="align-middle">1</td>
                                                                 <td class="align-middle">$235.55</td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="align-middle">
-                                                                    <a href="javascript:" class="text-dark">HERO ATHLETES BAG</a>
+                                                                    <a href="javascript:" class="text-dark">HERO
+                                                                        ATHLETES BAG</a>
                                                                 </td>
                                                                 <td class="align-middle">1</td>
                                                                 <td class="align-middle">$160.00</td>
@@ -920,7 +1101,9 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                <a href="javascript:" class="card-footer d-block text-center text-dark small font-weight-semibold">SHOW MORE</a>
+                                                <a href="javascript:"
+                                                    class="card-footer d-block text-center text-dark small font-weight-semibold">SHOW
+                                                    MORE</a>
                                             </div>
                                         </div>
                                     </div>
@@ -933,9 +1116,12 @@
 
                     <!-- [ Layout footer ] Start -->
                     <nav class="layout-footer footer bg-white">
-                        <div class="container-fluid d-flex flex-wrap justify-content-between text-center container-p-x pb-3">
+                        <div
+                            class="container-fluid d-flex flex-wrap justify-content-between text-center container-p-x pb-3">
                             <div class="pt-3">
-                                <span class="footer-text font-weight-semibold">&copy; <a href="https://srthemesvilla.com" class="footer-link" target="_blank">Srthemesvilla</a></span>
+                                <span class="footer-text font-weight-semibold">&copy; <a
+                                        href="https://srthemesvilla.com" class="footer-link"
+                                        target="_blank">Srthemesvilla</a></span>
                             </div>
                             <div>
                                 <a href="javascript:" class="footer-link pt-3">About Us</a>
@@ -975,8 +1161,73 @@
     <script src="assets/libs/chart-am4/animated.js"></script>
 
     <!-- Demo -->
-    <script src="assets/js/demo.js"></script><script src="assets/js/analytics.js"></script>
+    <script src="assets/js/demo.js"></script>
+    <script src="assets/js/analytics.js"></script>
     <script src="assets/js/pages/dashboards_index.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            class Pelicula {
+                id;
+                titulo;
+                descripcion;
+                año;
+                categoria;
+                link;
+                constructor(id, titulo, descripcion, año, categoria, link) {
+                    this.id = id;
+                    this.titulo = titulo;
+                    this.descripcion = descripcion;
+                    this.año = año;
+                    this.categoria = categoria;
+                    this.link = link;
+                }
+            }
+            function watchMovie() {
+                if (user[0] != '') {
+                    for (let pelicula of peliculas) {
+                        let clase = '#' + pelicula.id;
+                        $(clase).magnificPopup({
+                            items: {
+                                src: pelicula.link
+                            },
+                            type: 'iframe'
+                        });
+                    }
+                } else {
+                    $('.pelicula').magnificPopup({
+                        items: {
+                            src: $(`<div id="needLogin">
+                                <h2>Es necesario iniciar sesion.</h2>
+                                <p>Para disfrutar del contenido multimedia debes iniciar sesion con tus datos.</p>
+                                </div>`),
+                            type: 'inline'
+                        }
+                    });
+                }
+            }
+            let user = ['', ''];
+            const movie = new Pelicula('avatar', 'Avatar', 'https://www.youtube.com/watch?v=5PSNL1qE6VY');
+            const movie2 = new Pelicula('it2', 'It Chapter Two', 'https://www.youtube.com/watch?v=xhJ5P7Up3jA');
+            const movie3 = new Pelicula('ratatouille', 'Ratatouille', 'https://www.youtube.com/watch?v=-tNqfcZKn6k');
+            const movie4 = new Pelicula('avengers', 'Avengers', 'https://www.youtube.com/watch?v=hA6hldpSTF8');
+            const movie5 = new Pelicula('starwars', 'Star Wars: The Rise of Skywalker', 'https://www.youtube.com/watch?v=8Qn_spdM5Zg');
+            const movie6 = new Pelicula('antman', 'Ant-Man', 'https://www.youtube.com/watch?v=IEVE3KSKQ0o');
+            const movie7 = new Pelicula('harrypotter', 'Harry Potter y la Orden del Fénix', 'https://www.youtube.com/watch?v=WIj9DYJ5EKk');
+            const movie8 = new Pelicula('johnwick', 'John Wick: Chapter 2', 'https://www.youtube.com/watch?v=LZrX9mffH8Y');
+            const movie9 = new Pelicula('et', 'E.T. the Extra-Terrestrial', 'https://www.youtube.com/watch?v=DSx8Jobx-Gs');
+            const movie10 = new Pelicula('gladiator', 'Gladiator', 'https://www.youtube.com/watch?v=P5ieIbInFpg');
+            const movie11 = new Pelicula('lordofrings', 'El Señor de los Anillos: El Retorno del Rey', 'https://www.youtube.com/watch?v=zckJCxYxn1g');
+            const movie12 = new Pelicula('frozen2', 'Frozen 2', 'https://www.youtube.com/watch?v=Zi4LMpSDccc');
+            peliculas = [movie, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10, movie11, movie12];
+            for (let pelicula of peliculas) {
+                var div = $('<div>').html('<img src="img/' + pelicula.id + '.jpg" alt="' + pelicula.id + '" class="pelicula" id="' + pelicula.id + '" title="' + pelicula.titulo + '">');
+                $('figure').append(div);
+            };
+            //if para saber que reproducir al clicar en las peliculas
+            watchMovie();
+        }); 
+    </script>
 </body>
 
 </html>

@@ -2,7 +2,7 @@
 const express = require('express');
 const fs = require('fs');
 const app = express();
-const PORT = 3306;
+const PORT = 3334;
 const {Client} = require('pg'); 
 const path = require('path');
 
