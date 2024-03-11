@@ -433,6 +433,7 @@
                                     <th>active</th>
                                     <th>username</th>
                                     <th>password</th>
+                                    <th>Accion</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -447,12 +448,11 @@
                                         <td><%= staffMember.active %></td>
                                         <td><%= staffMember.username %></td>
                                         <td><%= staffMember.password %></td>
+                                        <td><a href="/eliminarStaff/<%= staffMember.staff_id %>" onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?')">Eliminar</a></td>
                                     </tr>
                                 <% }); %>
                             </tbody>
                         </table>
-                        
-                        
                     </div>
                 </div>
                 <!-- [ Layout container ] End -->

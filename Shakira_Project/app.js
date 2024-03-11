@@ -27,6 +27,15 @@ app.get('/home', (req, res) => {
     res.sendFile(path.join(__dirname + '/bhumlu-lite/index.html'));
 });
 
+
+let dbConnection = fs.readFileSync('dbConnection.json');
+const client = new Client(JSON.parse(dbConnection));
+
+client.connect()
+    .then(() => console.log('Connected to PostgreSQL'))
+    .catch(err => console.error('Error connecting to PostgreSQL', err));
+
+// COSAS PARA STAFF    
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'bhumlu-lite'));
 app.get('/staff', (req, res) => {
@@ -38,9 +47,11 @@ app.get('/staff', (req, res) => {
     });
 });
 
-let dbConnection = fs.readFileSync('dbConnection.json');
-const client = new Client(JSON.parse(dbConnection));
+app.get('/eliminarStaff/:id', (req, res) => {
+    const { id } = req.params;
+    const query = 'DELETE FROM staff WHERE staff_id = $1';
 
-client.connect()
-    .then(() => console.log('Connected to PostgreSQL'))
-    .catch(err => console.error('Error connecting to PostgreSQL', err));
+    client.query(query, [id])
+        .then(() => res.redirect('/staff'))
+        .catch(err => console.error('Error ejecutando la consulta', err));
+});
