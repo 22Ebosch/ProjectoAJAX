@@ -24,7 +24,18 @@ app.get('/', (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-    res.sendFile(path.join(__dirname + '/bhumlu-lite/index.html'));
+    res.sendFile(path.join(dirname + '/bhumlu-lite/index.html'));
+});
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(dirname, 'bhumlu-lite'));
+app.get('/staff', (req, res) => {
+    client.query('SELECT * FROM film')
+    .then(result => res.render('film', { staff: result.rows }))
+    .catch(error => {
+        console.error('Error ejecutando la consulta', error);
+        res.status(500).send('Error ejecutando la consulta');
+    });
 });
 
 let dbConnection = fs.readFileSync('dbConnection.json');

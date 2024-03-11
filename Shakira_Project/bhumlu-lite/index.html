@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<html lang="en" class="material-style layout-fixed"></html>
 
 <head>
     <title>Shakira</title>
@@ -62,7 +62,6 @@
             width: 20%;
             height: 500px;
             background-color: #1d1d1d;
-            border: 5px solid white;
             margin: 5px;
         }
 
@@ -167,16 +166,10 @@
                             </li>
                             
                             <li class="sidenav-item">
-                                <a href="forms_input-groups.html" class="sidenav-link">
+                                <a href="/films.html" class="sidenav-link">
                                     <div>Films</div>
                                 </a>
                             </li>
-                    </li>
-                    <li class="sidenav-item">
-                        <a href="tables_bootstrap.html" class="sidenav-link">
-                            <i class="sidenav-icon feather icon-grid"></i>
-                            <div>Tables</div>
-                        </a>
                     </li>
 
                     <!--  Icons -->
@@ -711,7 +704,7 @@
             const movie12 = new Pelicula('frozen2', 'Frozen 2', 'https://www.youtube.com/watch?v=Zi4LMpSDccc');
             peliculas = [movie, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10, movie11, movie12];
             for (let pelicula of peliculas) {
-                var div = $('<div>').html('<img src="img/' + pelicula.id + '.jpg" alt="' + pelicula.id + '" class="pelicula" id="' + pelicula.id + '" title="' + pelicula.titulo + '">');
+                var div = $('<div>').css('background-color', 'rgba(0,0,0,0.1)').html('<img src="img/' + pelicula.id + '.jpg" alt="' + pelicula.id + '" class="pelicula" id="' + pelicula.id + '" title="' + pelicula.titulo + '">');
                 $('figure').append(div);
             };
             //if para saber que reproducir al clicar en las peliculas
