@@ -38,6 +38,17 @@ app.get('/staff', (req, res) => {
     });
 });
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'bhumlu-lite'));
+app.get('/staff', (req, res) => {
+    client.query('SELECT * FROM staff')
+    .then(result => res.render('staff', { staff: result.rows }))
+    .catch(error => {
+        console.error('Error ejecutando la consulta', error);
+        res.status(500).send('Error ejecutando la consulta');
+    });
+});
+
 let dbConnection = fs.readFileSync('dbConnection.json');
 const client = new Client(JSON.parse(dbConnection));
 
