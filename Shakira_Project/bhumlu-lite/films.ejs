@@ -303,27 +303,37 @@
                                 <li class="breadcrumb-item" >Films</li>
                             </ol>
                         </div>
-                        <div class="table-responsive">
+                        <div class="table-responsive"  style="max-height: 400px; overflow-y: auto;">
                         <table class="table table-dark">
                             <thead>
                                 <tr>
-                                    <th></th>
                                     <th>FILM_ID</th>
                                     <th>TITLE</th>
-                                    <th>DESCRIPTION</th>
                                     <th>RELEASE_YEAR</th>
                                     <th>LANGUAGE_ID</th>
-                                    <th>ORIGINAL_LANGUAGE_ID</th>
-                                    <th>RENTAL_DURATION</th>
                                     <th>RENTAL_RATE</th>
                                     <th>LENGTH</th>
                                     <th>REPLACEMENT_COST</th>
                                     <th>RATING</th>
-                                    <th>SPECIAL_FEATURES</th>
+                                    <th>ACCIONES</th>
                                 </tr>
                             </thead>
                             <tbody id="filmsTableBody">
-                                
+                                <% film.forEach(film =>  { %>
+                                    <tr>
+                                        <td><%= film.film_id %></td>
+                                        <td><%= film.title %></td>
+                                        <td><%= film.release_year %></td>
+                                        <td><%= film.language_id %></td>
+                                        <td><%= film.rental_rate %></td>
+                                        <td><%= film.length %></td>
+                                        <td><%= film.replacement_cost %></td>
+                                        <td><%= film.rating %></td>
+                                        <td>
+                                            <a href="/eliminar/<%= film.film_id %>" onclick="return confirm('¿Estás seguro de que deseas eliminar esta película?')">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                <% }); %>
                             </tbody>
                         </table>
                         
@@ -375,29 +385,13 @@
     <!-- Demo -->
     <script src="assets/js/demo.js"></script><script src="assets/js/analytics.js"></script>
     <script>
-        fetch('/films').then(response => response.json())
-                   .then(films => {
-                       const filmsTableBody = document.getElementById('filmsTableBody');
-                       films.forEach(film => {
-                           const row = document.createElement('tr');
-                           row.innerHTML = `
-                               <td>${film.film_id}</td>
-                               <td>${film.title}</td>
-                               <td>${film.description}</td>
-                               <td>${film.release_year}</td>
-                               <td>${film.language_id}</td>
-                               <td>${film.original_language_id}</td>
-                               <td>${film.rental_duration}</td>
-                               <td>${film.rental_rate}</td>
-                               <td>${film.length}</td>
-                               <td>${film.replacement_cost}</td>
-                               <td>${film.rating}</td>
-                               <td>${film.special_features}</td>
-                           `;
-                           filmsTableBody.appendChild(row);
-                       });
-                   })
-                   .catch(error => console.error('Error fetching films', error));
+       document.addEventListener('DOMContentLoaded', function() {
+    const elements = document.querySelectorAll('.truncate-text');
+    elements.forEach(element => {
+        element.setAttribute('title', element.textContent);
+    });
+});
+
     </script>
 </body>
 
