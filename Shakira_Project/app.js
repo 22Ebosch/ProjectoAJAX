@@ -1,66 +1,3 @@
-// //import express from 'express';
-// const express = require('express');
-// const fs = require('fs');
-// const app = express();
-// const PORT = 3334;
-// const {Client} = require('pg'); 
-// const path = require('path');
-
-// // Configuración del motor de plantillas EJS
-// app.set('view engine', 'ejs');
-// app.use(express.static('bhumlu-lite')); // La carpeta donde se encuentran tus vistas
-
-// app.listen(PORT,()=>{
-//     console.log('listening on port ' + PORT);
-// });
-// app.disable('x-powered-by');
-
-// app.get('/', (req, res) => {
-//     client.query('SELECT * FROM film where film_id = 1')
-//     .then((result => res.json(result.rows)))
-//     .catch(error => {
-//         console.error('Error executing query', error);
-//         res.status(500).send('Error executing query');
-//     });
-// });
-
-// app.get('/home', (req, res) => {
-//     res.sendFile(path.join(__dirname + '/bhumlu-lite/index.html'));
-// });
-
-// app.get('/customers', (req, res) => {
-//     res.sendFile(path.join(__dirname + '/bhumlu-lite/customers.html'));
-// });
-// app.get('/customers', (req, res) => {
-//     client.query('SELECT * FROM customer') // Cambia 'customers' a 'customer' aquí
-//         .then(result => {
-//             const customers = result.rows;
-//             res.render('customers', { customers }); // Renderiza la plantilla 'customers.html' con los datos de los clientes
-//         })
-//         .catch(error => {
-//             console.error('Error executing query', error);
-//             res.status(500).send('Error executing query');
-//         });
-// });
-
-
-// let dbConnection = fs.readFileSync('dbConnection.json');
-// const client = new Client(JSON.parse(dbConnection));
-
-// client.connect()
-//     .then(() => console.log('Connected to PostgreSQL'))
-//     .catch(err => console.error('Error connecting to PostgreSQL', err));
-
-//     app.get('/customers', (req, res) => {
-//         client.query('SELECT * FROM customer')
-//         .then(result => res.render('customers', { customers: result.rows }))
-//         .catch(error => {
-//             console.error('Error ejecutando la consulta', error);
-//             res.status(500).send('Error ejecutando la consulta');
-//         });
-//     });
-
-//import express from 'express';
 const express = require('express');
 const fs = require('fs');
 const app = express();
@@ -78,17 +15,8 @@ app.listen(PORT, () => {
 app.disable('x-powered-by');
 
 app.get('/', (req, res) => {
-    client.query('SELECT * FROM film where film_id = 1')
-        .then((result => res.json(result.rows)))
-        .catch(error => {
-            console.error('Error executing query', error);
-            res.status(500).send('Error executing query');
-        });
+    res.sendFile(path.join(__dirname + '/bhumlu-lite/index.html'));
 });
-
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'bhumlu-lite'));
-app.use('/styles', express.static(path.join(__dirname, 'public/styles'), { type: 'text/css' }));
 
 app.get('/customer', (req, res) => {
     res.sendFile(path.join(__dirname + '/bhumlu-lite/customers.html'));
@@ -96,6 +24,16 @@ app.get('/customer', (req, res) => {
 app.get('/api/customer', (req, res) => {
     client.query('SELECT * FROM customer')
         .then((result => res.json(result.rows)))
+        .catch(error => {
+            console.error('Error executing query', error);
+            res.status(500).send('Error executing query');
+        });
+});
+app.get('/api/customer/:id', (req, res) => {
+    const { id } = req.params;
+    const query = 'SELECT * FROM customer WHERE customer_id = $1';
+    client.query(query, [id])
+        .then((result => res.json(result.rows[0])))
         .catch(error => {
             console.error('Error executing query', error);
             res.status(500).send('Error executing query');
@@ -120,6 +58,7 @@ app.get('/api/address', (req, res) => {
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 app.post('/api/customer', (req, res) => {
     const store_id = req.body.store_id;
     const firstname = req.body.first_name;
@@ -132,6 +71,25 @@ app.post('/api/customer', (req, res) => {
 
     client.query(query, values)
     .then((result => res.json({ message: 'Cliente añadido exitosamente.', status: 'succes' })))
+        .catch(error => {
+            console.error('Error executing query', error);
+            res.json({ error: 'Error al añadir.'});
+        });
+});
+
+app.put('/api/customer', (req, res) => {
+    const customer_id = req.body.customer_id;
+    const store_id = req.body.store_id;
+    const firstname = req.body.first_name;
+    const lastname = req.body.last_name;
+    const email = req.body.email;
+    const address_id = req.body.address_id;
+
+    const query = 'UPDATE customer SET customer_id = $1, store_id = $2, first_name = $3, last_name = $4, email = $5, address_id = $6 WHERE customer_id = $1';
+    const values = [customer_id, store_id, firstname, lastname, email, address_id];
+
+    client.query(query, values)
+    .then((result => res.json({ message: 'Cliente actualizado exitosamente.', status: 'succes' })))
         .catch(error => {
             console.error('Error executing query', error);
             res.json({ error: 'Error al añadir.'});
@@ -159,22 +117,6 @@ app.delete('/api/customer/:id', (req, res) => {
             console.error('Error ejecutando la consulta', err)
             res.json({ error: 'Error al eliminar.'})
         });
-});
-
-app.get('/updateC/:id', (req, res) => {
-    const { id } = req.params;
-    //const query = 'SELECT * FROM customer WHERE customer_id = $1'; // Agrega * para seleccionar todos los campos
-
-    client.query('SELECT * FROM customer WHERE customer_id = $1', [id])
-        //.then(() => res.redirect('/updateCustomer'))
-        .then(result => res.render('updateCustomer', { customers: result.rows }))
-        .catch(err => console.error('Error ejecutando la consulta', err));
-    // client.query(query, [id])
-    //     .then(result => {
-    //         const customer = result.rows[0]; // Como se espera solo un cliente, tomamos el primer resultado
-    //         res.render('updateCustomer', { customer }); // Renderiza la vista 'updateCustomer.ejs' con la información del cliente
-    //     })
-    //     .catch(err => console.error('Error ejecutando la consulta', err));
 });
 
 let dbConnection = fs.readFileSync('dbConnection.json');
