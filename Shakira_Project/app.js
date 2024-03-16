@@ -134,3 +134,42 @@ app.post('/api/staff', (req, res) => {
         }
     });
 });
+
+
+// --------- TRAE LOS DATOS PARA ACTUALIZAR -----------
+app.get('/api/staff/:id', (req, res) => {
+    const { id } = req.params;
+    const query = 'SELECT * FROM staff WHERE staff_id = $1';
+
+    client.query(query, [id])
+        .then(result => {
+            if (result.rows.length === 0) {
+                res.status(404).json({ error: 'Miembro del personal no encontrado' });
+            } else {
+                res.json(result.rows[0]);
+            }
+        })
+        .catch(error => {
+            console.error('Error al obtener el miembro del personal:', error);
+            res.status(500).json({ error: 'Error al obtener el miembro del personal' });
+        });
+});
+
+// app.put('/api/customer', (req, res) => {
+//     const customer_id = req.body.customer_id;
+//     const store_id = req.body.store_id;
+//     const firstname = req.body.first_name;
+//     const lastname = req.body.last_name;
+//     const email = req.body.email;
+//     const address_id = req.body.address_id;
+
+//     const query = 'UPDATE customer SET customer_id = $1, store_id = $2, first_name = $3, last_name = $4, email = $5, address_id = $6 WHERE customer_id = $1';
+//     const values = [customer_id, store_id, firstname, lastname, email, address_id];
+
+//     client.query(query, values)
+//     .then((result => res.json({ message: 'Cliente actualizado exitosamente.', status: 'succes' })))
+//         .catch(error => {
+//             console.error('Error executing query', error);
+//             res.json({ error: 'Error al añadir.'});
+//         });
+// });

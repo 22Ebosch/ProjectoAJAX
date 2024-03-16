@@ -450,8 +450,10 @@
                 </div>
                 <button class="" id="crear">Crear</button>
             </div>
-            <div id="formCrear" style="display:none; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); color: white; position: absolute; justify-content: center; align-items: center;">
-                <form action="/api/customer" method="post" id="formCrear2">
+            <div id="formCrear"
+                style="display:none; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); color: rgb(255, 255, 255); position: absolute; justify-content: center; align-items: center;">
+                <form action="/api/staff" method="post" id="formCrear2"
+                    style="background-color: rgb(61, 61, 61); color: white;">
                     <ul>
                         <li>Tienda: <select name="store_id" id="store_id"></select></li>
                         <li>Nombre: <input type="text" id="first_name" name="first_name"></li>
@@ -461,6 +463,22 @@
                         <li>Username: <input type="text" id="username" name="username"></li>
                         <li>Password: <input type="text" id="password" name="password"></li>
                         <li><input type="submit" id="crear2"></li>
+                    </ul>
+                </form>
+            </div>
+            <div id="formEditar"
+                style="display:none; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); color: rgb(255, 255, 255); position: absolute; justify-content: center; align-items: center;">
+                <form action="/api/staff" method="post" id="formEditar2"
+                    style="background-color: rgb(61, 61, 61); color: white;">
+                    <ul>
+                        <li>Tienda: <select name="store_id2" id="store_id2"></select></li>
+                        <li>Nombre: <input type="text" id="first_name2" name="first_name2"></li>
+                        <li>Apellido: <input type="text" id="last_name2" name="last_name2"></li>
+                        <li>Email: <input type="text" id="email2" name="email2"></li>
+                        <li>Direccion: <select name="address_id2" id="address_id2"></select></li>
+                        <li>Username: <input type="text" id="username2" name="username2"></li>
+                        <!-- <li>Password: <input type="text" id="password2" name="password2"></li> -->
+                        <li><input type="submit" id="Editar"></li>
                     </ul>
                 </form>
             </div>
@@ -495,7 +513,7 @@
     <script src="assets/js/pages/dashboards_index.js"></script>
 
     <script>
-        function eliminarCliente(id) {
+        function eliminarStaff(id) {
             if (confirm("¿Estás seguro de que quieres eliminar este staff?")) {
                 fetch(`/api/staff/${id}`, {
                     method: 'DELETE'
@@ -525,9 +543,9 @@
         let boton = document.getElementById('crear');
         let form = document.getElementById('formCrear2');
         boton.addEventListener('click', mostrarForm);
-        form.addEventListener('submit', añadirCliente);
+        form.addEventListener('submit', añadirStaff);
 
-        function añadirCliente() {
+        function añadirStaff() {
             event.preventDefault(); // Evitar que el formulario se envíe automáticamente
 
             // Realizar una solicitud POST al servidor
@@ -577,7 +595,7 @@
                     tr.innerHTML += '<td class="text-center align-middle" >' + staff.active + '</td>';
                     tr.innerHTML += '<td class="text-center align-middle" >' + staff.username + '</td>';
                     tr.innerHTML += '<td class="text-center align-middle" >' + staff.password + '</td>';
-                    tr.innerHTML += '<td class="text-center align-middle" ><img src="img/borrar.png" alt="Borrar" style="width:20px;" onclick="eliminarCliente(' + staff.staff_id + ')" class="cursor-pointer"></td>';
+                    tr.innerHTML += '<td class="text-center align-middle" ><img src="img/borrar.png" alt="Borrar" style="width:20px;" onclick="eliminarStaff(' + staff.staff_id + ')" class="cursor-pointer"></td>';
                     tr.innerHTML += '<td class="text-center align-middle" ><img src="img/actualizar.png" alt="Actualizar" style="width:20px;" onclick="actualizarCliente(' + staff.staff_id + ')" class="cursor-pointer"></td>';
                     document.getElementById('tbody').appendChild(tr);
                 });
@@ -586,7 +604,7 @@
                 console.error('Error al cargar los clientes:', error);
             });
 
-            // ------------ TRAER TODAS LAS TIENDAS -------------
+        // ------------ TRAER TODAS LAS TIENDAS -------------
         fetch('/api/store')
             .then(response => {
                 if (!response.ok) {
@@ -596,17 +614,24 @@
             })
             .then(stores => {
                 stores.forEach(store => {
-                    let option = document.createElement("option");
-                    option.value = store.store_id;
-                    option.innerHTML = store.store_id;
-                    document.getElementById('store_id').appendChild(option);
+                    let option1 = document.createElement("option");
+                    let option2 = document.createElement("option");
+
+                    option1.value = store.store_id;
+                    option1.innerHTML = store.store_id;
+
+                    option2.value = store.store_id;
+                    option2.innerHTML = store.store_id;
+
+                    document.getElementById('store_id').appendChild(option1);
+                    document.getElementById('store_id2').appendChild(option2);
                 });
             })
             .catch(error => {
                 console.error('Error al cargar los clientes:', error);
             });
 
-            // ---------- TRAER TODAS LAS DIRECCIONES ------------------
+        // ---------- TRAER TODAS LAS DIRECCIONES ------------------
         fetch('/api/address')
             .then(response => {
                 if (!response.ok) {
@@ -616,15 +641,55 @@
             })
             .then(addresses => {
                 addresses.forEach(address => {
-                    let option = document.createElement("option");
-                    option.value = address.address_id;
-                    option.innerHTML = address.address;
-                    document.getElementById('address_id').appendChild(option);
+                    let option1 = document.createElement("option");
+                    let option2 = document.createElement("option");
+
+                    option1.value = address.address_id;
+                    option1.innerHTML = address.address_id;
+
+                    option2.value = address.address_id;
+                    option2.innerHTML = address.address;
+
+                    document.getElementById('address_id').appendChild(option1);
+                    document.getElementById('address_id2').appendChild(option2);
                 });
             })
             .catch(error => {
                 console.error('Error al cargar los clientes:', error);
             });
+
+
+
+        function cargarDatosEmpleado(id) {
+            fetch(`/api/staff/${id}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al cargar los datos del miembro del personal');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Rellenar los campos del formulario con los datos obtenidos
+                    document.getElementById('store_id2').value = data.store_id;
+                    document.getElementById('first_name2').value = data.first_name;
+                    document.getElementById('last_name2').value = data.last_name;
+                    document.getElementById('email2').value = data.email;
+                    document.getElementById('address_id2').value = data.address_id;
+                    document.getElementById('username2').value = data.username;
+                    //document.getElementById('password2').value = data.password; 
+                })
+                .catch(error => {
+                    console.error('Error al cargar los datos del miembro del personal:', error);
+                    alert('Hubo un error al cargar los datos del miembro del personal.');
+                });
+        }
+
+        function actualizarCliente(id) {
+            cargarDatosEmpleado(id);
+            // Mostrar el formulario de edición
+            document.getElementById('formEditar').style.display = 'flex';
+        }
+
     </script>
 </body>
 
