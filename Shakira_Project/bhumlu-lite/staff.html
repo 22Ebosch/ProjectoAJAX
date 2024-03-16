@@ -468,16 +468,17 @@
             </div>
             <div id="formEditar"
                 style="display:none; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); color: rgb(255, 255, 255); position: absolute; justify-content: center; align-items: center;">
-                <form action="/api/staff" method="post" id="formEditar2"
+                <form action="/api/staff" method="put" id="formEditar2"
                     style="background-color: rgb(61, 61, 61); color: white;">
                     <ul>
+                        <li>ID: <input disabled type="text" id="staff_id2" name="staff_id2"></li>
                         <li>Tienda: <select name="store_id2" id="store_id2"></select></li>
                         <li>Nombre: <input type="text" id="first_name2" name="first_name2"></li>
                         <li>Apellido: <input type="text" id="last_name2" name="last_name2"></li>
                         <li>Email: <input type="text" id="email2" name="email2"></li>
                         <li>Direccion: <select name="address_id2" id="address_id2"></select></li>
                         <li>Username: <input type="text" id="username2" name="username2"></li>
-                        <!-- <li>Password: <input type="text" id="password2" name="password2"></li> -->
+                        <input type="hidden" id="password2" name="password2" value="ValorDeLaContraseña">
                         <li><input type="submit" id="Editar"></li>
                     </ul>
                 </form>
@@ -544,6 +545,8 @@
         let form = document.getElementById('formCrear2');
         boton.addEventListener('click', mostrarForm);
         form.addEventListener('submit', añadirStaff);
+        let form2 = document.getElementById('formEditar');
+        form2.addEventListener('submit', actualizarStaff);
 
         function añadirStaff() {
             event.preventDefault(); // Evitar que el formulario se envíe automáticamente
@@ -659,7 +662,6 @@
             });
 
 
-
         function cargarDatosEmpleado(id) {
             fetch(`/api/staff/${id}`)
                 .then(response => {
@@ -670,13 +672,14 @@
                 })
                 .then(data => {
                     // Rellenar los campos del formulario con los datos obtenidos
+                    document.getElementById('staff_id2').value = data.staff_id;
                     document.getElementById('store_id2').value = data.store_id;
                     document.getElementById('first_name2').value = data.first_name;
                     document.getElementById('last_name2').value = data.last_name;
                     document.getElementById('email2').value = data.email;
                     document.getElementById('address_id2').value = data.address_id;
                     document.getElementById('username2').value = data.username;
-                    //document.getElementById('password2').value = data.password; 
+                    document.getElementById('password2').value = data.password;
                 })
                 .catch(error => {
                     console.error('Error al cargar los datos del miembro del personal:', error);
@@ -690,6 +693,37 @@
             document.getElementById('formEditar').style.display = 'flex';
         }
 
+
+        function actualizarStaff() {
+            event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+
+            // Realizar una solicitud POST al servidor
+            fetch('/api/staff', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    staff_id: document.getElementById('staff_id2').value,
+                    store_id: document.getElementById('store_id2').value,
+                    first_name: document.getElementById('first_name2').value,
+                    last_name: document.getElementById('last_name2').value,
+                    email: document.getElementById('email2').value,
+                    address_id: document.getElementById('address_id2').value,
+                    username: document.getElementById('username2').value,
+                    password: document.getElementById('password2').value
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Hubo un error al procesar la solicitud.');
+                });
+        };
     </script>
 </body>
 

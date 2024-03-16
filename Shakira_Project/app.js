@@ -110,30 +110,20 @@ app.post('/api/staff', (req, res) => {
     const email = req.body.email;
     const store_id = req.body.store_id;
     const username = req.body.username;
-    const password = req.body.password;
+    const password = req.body.password; // La contraseña sin hash
 
-    // Hashear la contraseña
-    bcrypt.hash(password, saltRounds, (err, hash) => {
-        if (err) {
-            console.error('Error al hashear la contraseña', err);
-            res.json({ error: 'Error al añadir.'});
-        } else {
-            // Recortar el hash a 40 caracteres
-            const contraseñaRecortada = hash.substring(0, 40);
+    // Resto del código para insertar en la base de datos
+    const query = 'INSERT INTO staff (first_name, last_name, address_id, email, store_id, active, username, password) VALUES ($1, $2, $3, $4, $5, true, $6, $7)';
+    const values = [firstname, lastname, address_id, email, store_id, username, password]; // Utiliza la contraseña sin hash directamente
 
-            // Resto del código para insertar en la base de datos
-            const query = 'INSERT INTO staff (first_name, last_name, address_id, email, store_id, active, username, password) VALUES ($1, $2, $3, $4, $5, true, $6, $7)';
-            const values = [firstname, lastname, address_id, email, store_id, username, contraseñaRecortada]; 
-
-            client.query(query, values)
-                .then((result => res.json({ message: 'staff añadido exitosamente.', status: 'success' })))
-                .catch(error => {
-                    console.error('Error ejecutando la consulta', error);
-                    res.json({ error: 'Error al añadir.'});
-                });
-        }
-    });
+    client.query(query, values)
+        .then((result => res.json({ message: 'staff añadido exitosamente.', status: 'success' })))
+        .catch(error => {
+            console.error('Error ejecutando la consulta', error);
+            res.json({ error: 'Error al añadir 2.'});
+        });
 });
+
 
 
 // --------- TRAE LOS DATOS PARA ACTUALIZAR -----------
@@ -155,21 +145,30 @@ app.get('/api/staff/:id', (req, res) => {
         });
 });
 
-// app.put('/api/customer', (req, res) => {
-//     const customer_id = req.body.customer_id;
-//     const store_id = req.body.store_id;
-//     const firstname = req.body.first_name;
-//     const lastname = req.body.last_name;
-//     const email = req.body.email;
-//     const address_id = req.body.address_id;
 
-//     const query = 'UPDATE customer SET customer_id = $1, store_id = $2, first_name = $3, last_name = $4, email = $5, address_id = $6 WHERE customer_id = $1';
-//     const values = [customer_id, store_id, firstname, lastname, email, address_id];
+app.put('/api/staff/', (req, res) => {
+    const staff_id = req.body.staff_id;
+    const firstname = req.body.first_name;
+    const lastname = req.body.last_name;
+    const address_id = req.body.address_id;
+    const email = req.body.email;
+    const store_id = req.body.store_id;
+    const username = req.body.username;
+    // const password = req.body.password;
+    // const customer_id = req.body.customer_id;
+    // const store_id = req.body.store_id;
+    // const firstname = req.body.first_name;
+    // const lastname = req.body.last_name;
+    // const email = req.body.email;
+    // const address_id = req.body.address_id;
 
-//     client.query(query, values)
-//     .then((result => res.json({ message: 'Cliente actualizado exitosamente.', status: 'succes' })))
-//         .catch(error => {
-//             console.error('Error executing query', error);
-//             res.json({ error: 'Error al añadir.'});
-//         });
-// });
+    const query = 'UPDATE staff SET staff_id = $1, first_name = $2, last_name = $3, address_id = $4, email = $5, store_id = $6, username = $7 WHERE staff_id = $1';
+    const values = [staff_id, firstname, lastname, address_id, email, store_id, username];
+
+    client.query(query, values)
+    .then((result => res.json({ message: 'Cliente actualizado exitosamente.', status: 'succes' })))
+        .catch(error => {
+            console.error('Error executing query', error);
+            res.json({ error: 'Error al añadir.'});
+        });
+});
