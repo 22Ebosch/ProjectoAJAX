@@ -478,7 +478,7 @@
                         <li>Email: <input type="text" id="email2" name="email2"></li>
                         <li>Direccion: <select name="address_id2" id="address_id2"></select></li>
                         <li>Username: <input type="text" id="username2" name="username2"></li>
-                        <input type="hidden" id="password2" name="password2" value="ValorDeLaContraseña">
+                        <!-- <li>Contraseña:<input id="password2" name="password2" value="ValorDeLaContraseña"></li> -->
                         <li><input type="submit" id="Editar"></li>
                     </ul>
                 </form>
@@ -679,7 +679,7 @@
                     document.getElementById('email2').value = data.email;
                     document.getElementById('address_id2').value = data.address_id;
                     document.getElementById('username2').value = data.username;
-                    document.getElementById('password2').value = data.password;
+                    // document.getElementById('password2').value = data.password;
                 })
                 .catch(error => {
                     console.error('Error al cargar los datos del miembro del personal:', error);
@@ -711,7 +711,7 @@
                     email: document.getElementById('email2').value,
                     address_id: document.getElementById('address_id2').value,
                     username: document.getElementById('username2').value,
-                    password: document.getElementById('password2').value
+                    // password: document.getElementById('password2').value
                 })
             })
                 .then(response => response.json())

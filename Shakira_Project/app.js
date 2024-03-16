@@ -112,18 +112,28 @@ app.post('/api/staff', (req, res) => {
     const username = req.body.username;
     const password = req.body.password; // La contraseña sin hash
 
-    // Resto del código para insertar en la base de datos
-    const query = 'INSERT INTO staff (first_name, last_name, address_id, email, store_id, active, username, password) VALUES ($1, $2, $3, $4, $5, true, $6, $7)';
-    const values = [firstname, lastname, address_id, email, store_id, username, password]; // Utiliza la contraseña sin hash directamente
+    // Hashear la contraseña antes de insertarla en la base de datos
+    bcrypt.hash(password, saltRounds, (err, hash) => {
+        if (err) {
+            console.error('Error al hashear la contraseña', err);
+            res.json({ error: 'Error al añadir 1.'});
+        } else {
+            // Recortar el hash a 40 caracteres (como máximo permitido por la base de datos)
+            const trimmedHash = hash.substring(0, 40);
 
-    client.query(query, values)
-        .then((result => res.json({ message: 'staff añadido exitosamente.', status: 'success' })))
-        .catch(error => {
-            console.error('Error ejecutando la consulta', error);
-            res.json({ error: 'Error al añadir 2.'});
-        });
+            // Resto del código para insertar en la base de datos
+            const query = 'INSERT INTO staff (first_name, last_name, address_id, email, store_id, active, username, password) VALUES ($1, $2, $3, $4, $5, true, $6, $7)';
+            const values = [firstname, lastname, address_id, email, store_id, username, trimmedHash]; // Utiliza el hash recortado
+
+            client.query(query, values)
+                .then((result => res.json({ message: 'staff añadido exitosamente.', status: 'success' })))
+                .catch(error => {
+                    console.error('Error ejecutando la consulta', error);
+                    res.json({ error: 'Error al añadir 2.'});
+                });
+        }
+    });
 });
-
 
 
 // --------- TRAE LOS DATOS PARA ACTUALIZAR -----------
@@ -154,13 +164,6 @@ app.put('/api/staff/', (req, res) => {
     const email = req.body.email;
     const store_id = req.body.store_id;
     const username = req.body.username;
-    // const password = req.body.password;
-    // const customer_id = req.body.customer_id;
-    // const store_id = req.body.store_id;
-    // const firstname = req.body.first_name;
-    // const lastname = req.body.last_name;
-    // const email = req.body.email;
-    // const address_id = req.body.address_id;
 
     const query = 'UPDATE staff SET staff_id = $1, first_name = $2, last_name = $3, address_id = $4, email = $5, store_id = $6, username = $7 WHERE staff_id = $1';
     const values = [staff_id, firstname, lastname, address_id, email, store_id, username];
