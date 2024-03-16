@@ -33,9 +33,14 @@
 
     <!-- Libs -->
     <link rel="stylesheet" href="assets/libs/perfect-scrollbar/perfect-scrollbar.css">
+    <style>
+        .borde {
+            border-bottom: 1px solid white;
+        }
+    </style>
 </head>
 
-<body>
+<body class="mr-1">
     <!-- [ Preloader ] Start -->
     <div class="page-loader">
         <div class="bg-primary"></div>
@@ -425,7 +430,7 @@
                 <!-- [ Layout navbar ( Header ) ] End -->
 
                 <!-- INICIO CONTENIDO PAGINA -->
-                <div>
+                <div style="max-height: 500px; overflow-y:auto;" class="table-responsive m-2">
                     <table class="table table-dark">
                         <thead>
                             <p id="mensaje"></p>
@@ -448,41 +453,90 @@
                         </tbody>
                     </table>
                 </div>
-                <button class="" id="crear">Crear</button>
+                <button class="btn btn-primary px-2 py-1 mx-auto d-block m-2 p-2" id="crear">Crear</button>
             </div>
             <div id="formCrear"
-                style="display:none; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); color: rgb(255, 255, 255); position: absolute; justify-content: center; align-items: center;">
-                <form action="/api/staff" method="post" id="formCrear2"
-                    style="background-color: rgb(61, 61, 61); color: white;">
-                    <ul>
-                        <li>Tienda: <select name="store_id" id="store_id"></select></li>
-                        <li>Nombre: <input type="text" id="first_name" name="first_name"></li>
-                        <li>Apellido: <input type="text" id="last_name" name="last_name"></li>
-                        <li>Email: <input type="text" id="email" name="email"></li>
-                        <li>Direccion: <select name="address_id" id="address_id"></select></li>
-                        <li>Username: <input type="text" id="username" name="username"></li>
-                        <li>Password: <input type="text" id="password" name="password"></li>
-                        <li><input type="submit" id="crear2"></li>
-                    </ul>
+                style="display:none; margin-top: 100px; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); color: rgb(255, 255, 255); position: absolute; justify-content: center; align-items: center;">
+                <form action="/api/staff" method="post" id="formCrear2" class="bg-dark text-white p-4 rounded w-25">
+                    <button type="button" class="cerrar cursor-pointer" onclick="closeFormEditar()">X</button>
+                    <div class="mb-3">
+                        <label for="store_id" class="form-label">Tienda:</label>
+                        <select name="store_id" id="store_id" class="form-select"></select>
+                    </div>
+                    <div class="mb-3 borde">
+                        <label for="first_name" class="form-label">Nombre:</label>
+                        <input type="text" id="first_name" name="first_name" class="form-control text-white">
+                    </div>
+                    <div class="mb-3 borde">
+                        <label for="last_name" class="form-label">Apellido:</label>
+                        <input type="text" id="last_name" name="last_name" class="form-control text-white">
+                    </div>
+                    <div class="mb-3 borde">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="text" id="email" name="email" class="form-control border-dark text-white">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address_id" class="form-label">Dirección:</label>
+                        <select name="address_id" id="address_id" class="form-select border-dark"></select>
+                    </div>
+                    <div class="mb-3 borde">
+                        <label for="username" class="form-label">Username:</label>
+                        <input type="text" id="username" name="username" class="form-control border-dark text-white">
+                    </div>
+                    <div class="mb-3 borde">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" id="password" name="password"
+                            class="form-control border-dark text-white">
+                    </div>
+                    <button type="submit" id="crear2" class="btn btn-primary">Enviar</button>
                 </form>
             </div>
+
             <div id="formEditar"
                 style="display:none; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); color: rgb(255, 255, 255); position: absolute; justify-content: center; align-items: center;">
-                <form action="/api/staff" method="put" id="formEditar2"
-                    style="background-color: rgb(61, 61, 61); color: white;">
-                    <ul>
-                        <li>ID: <input disabled type="text" id="staff_id2" name="staff_id2"></li>
-                        <li>Tienda: <select name="store_id2" id="store_id2"></select></li>
-                        <li>Nombre: <input type="text" id="first_name2" name="first_name2"></li>
-                        <li>Apellido: <input type="text" id="last_name2" name="last_name2"></li>
-                        <li>Email: <input type="text" id="email2" name="email2"></li>
-                        <li>Direccion: <select name="address_id2" id="address_id2"></select></li>
-                        <li>Username: <input type="text" id="username2" name="username2"></li>
-                        <!-- <li>Contraseña:<input id="password2" name="password2" value="ValorDeLaContraseña"></li> -->
-                        <li><input type="submit" id="Editar"></li>
-                    </ul>
+                <form action="/api/staff" method="put" id="formEditar2" class="bg-dark text-white p-4 rounded w-25">
+                    <button type="button" class="cerrar cursor-pointer" onclick="closeFormEditar()">X</button>
+                    <div class="mb-3">
+                        <label for="staff_id2" class="form-label">ID:</label>
+                        <input disabled type="text" id="staff_id2" name="staff_id2"
+                            class="form-control border border-white text-white">
+                    </div>
+                    <div class="mb-3">
+                        <label for="store_id2" class="form-label">Tienda:</label>
+                        <select name="store_id2" id="store_id2" class="form-select border border-white"></select>
+                    </div>
+                    <div class="mb-3 borde">
+                        <label for="first_name2" class="form-label">Nombre:</label>
+                        <input type="text" id="first_name2" name="first_name2"
+                            class="form-control border border-white text-white">
+                    </div>
+                    <div class="mb-3 borde">
+                        <label for="last_name2" class="form-label">Apellido:</label>
+                        <input type="text" id="last_name2" name="last_name2"
+                            class="form-control border border-white text-white">
+                    </div>
+                    <div class="mb-3 borde">
+                        <label for="email2" class="form-label">Email:</label>
+                        <input type="text" id="email2" name="email2"
+                            class="form-control border border-white text-white">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address_id2" class="form-label">Dirección:</label>
+                        <select name="address_id2" id="address_id2" class="form-select border border-white"></select>
+                    </div>
+                    <div class="mb-3 borde">
+                        <label for="username2" class="form-label">Username:</label>
+                        <input type="text" id="username2" name="username2"
+                            class="form-control border border-white text-white">
+                    </div>
+                    <!-- <div class="mb-3">
+                        <label for="password2" class="form-label">Contraseña:</label>
+                        <input type="password" id="password2" name="password2" class="form-control border border-white text-white">
+                    </div> -->
+                    <button type="submit" id="Editar" class="btn btn-primary">Enviar</button>
                 </form>
             </div>
+
             <!-- [ Layout container ] End -->
         </div>
         <!-- Overlay -->
@@ -547,6 +601,17 @@
         form.addEventListener('submit', añadirStaff);
         let form2 = document.getElementById('formEditar');
         form2.addEventListener('submit', actualizarStaff);
+
+        function closeFormEditar() {
+            // Ocultar el div del pop-up
+            var formEditar = document.getElementById('formEditar');
+            formEditar.style.display = 'none';
+            var formCrear = document.getElementById('formCrear');
+            formCrear.style.display = 'none';
+        }
+
+
+
 
         function añadirStaff() {
             event.preventDefault(); // Evitar que el formulario se envíe automáticamente
