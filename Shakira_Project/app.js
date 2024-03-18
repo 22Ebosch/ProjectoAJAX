@@ -46,15 +46,44 @@ app.get('/staff', (req, res) => {
     res.sendFile(path.join(__dirname + '/bhumlu-lite/staff.html'));
 });
 
-// --------- MOSTRAR STAFF -----------
+// --------- BUSCAR EN LA BBDD STAFF -----------
+// Número de elementos por página
+const itemsPerPage = 15;
+
+// Ruta para obtener los datos del personal con paginación
 app.get('/api/staff', (req, res) => {
-    client.query('SELECT * FROM staff')
-        .then((result => res.json(result.rows)))
+    const page = req.query.page || 1; // Página actual (por defecto 1)
+    const offset = (page - 1) * itemsPerPage; // Calcular el desplazamiento
+
+    // Consulta SQL para obtener los datos del personal con LIMIT y OFFSET
+    const query = {
+        text: 'SELECT * FROM staff OFFSET $1 LIMIT $2',
+        values: [offset, itemsPerPage]
+    };
+
+    // Ejecutar la consulta SQL
+    client.query(query)
+        .then(result => res.json(result.rows)) // Devolver los resultados en formato JSON
         .catch(error => {
-            console.error('Error executing query', error);
-            res.status(500).send('Error executing query');
+            console.error('Error executing query', error); // Manejar errores de consulta
+            res.status(500).send('Error executing query'); // Devolver un error HTTP 500 si hay un problema
         });
 });
+
+// Ruta para obtener el número total de registros en la tabla de personal
+app.get('/api/staff/count', (req, res) => {
+    // Consulta SQL para contar el número total de registros
+    client.query('SELECT COUNT(*) FROM staff')
+        .then(result => {
+            const count = parseInt(result.rows[0].count); // Obtener el recuento de la respuesta y convertirlo a entero
+            res.json({ count }); // Devolver el recuento en formato JSON
+        })
+        .catch(error => {
+            console.error('Error executing query', error); // Manejar errores de consulta
+            res.status(500).send('Error executing query'); // Devolver un error HTTP 500 si hay un problema
+        });
+});
+
 
 // -------- MOSTRAR TIENDAS -----------
 app.get('/api/store', (req, res) => {
@@ -84,19 +113,19 @@ app.delete('/api/staff/:id', (req, res) => {
 
     client.query(query1, [id])
         .then(result => {
-            if(result.rows.length > 0){
-                res.json({message: 'No se puede eliminar porque tiene ventas registradas', status: 'error'});
+            if (result.rows.length > 0) {
+                res.json({ message: 'No se puede eliminar porque tiene ventas registradas', status: 'error' });
             } else {
                 client.query(query4, [id])
                     .catch(err => console.error('Error ejecutando la consulta', err))
                     .finally(() => {
-                        res.json({message: 'El miembro del personal ha sido eliminado correctamente', status: 'success'});
+                        res.json({ message: 'El miembro del personal ha sido eliminado correctamente', status: 'success' });
                     });
             }
         })
         .catch(err => {
             console.error('Error ejecutando la consulta', err)
-            res.json({ error: 'Error al eliminar.'})
+            res.json({ error: 'Error al eliminar.' })
         });
 });
 
@@ -116,7 +145,7 @@ app.post('/api/staff', (req, res) => {
     bcrypt.hash(password, saltRounds, (err, hash) => {
         if (err) {
             console.error('Error al hashear la contraseña', err);
-            res.json({ error: 'Error al añadir 1.'});
+            res.json({ error: 'Error al añadir 1.' });
         } else {
             // Recortar el hash a 40 caracteres (como máximo permitido por la base de datos)
             const trimmedHash = hash.substring(0, 40);
@@ -129,7 +158,7 @@ app.post('/api/staff', (req, res) => {
                 .then((result => res.json({ message: 'staff añadido exitosamente.', status: 'success' })))
                 .catch(error => {
                     console.error('Error ejecutando la consulta', error);
-                    res.json({ error: 'Error al añadir 2.'});
+                    res.json({ error: 'Error al añadir 2.' });
                 });
         }
     });
@@ -169,9 +198,9 @@ app.put('/api/staff/', (req, res) => {
     const values = [staff_id, firstname, lastname, address_id, email, store_id, username];
 
     client.query(query, values)
-    .then((result => res.json({ message: 'Cliente actualizado exitosamente.', status: 'succes' })))
+        .then((result => res.json({ message: 'Cliente actualizado exitosamente.', status: 'succes' })))
         .catch(error => {
             console.error('Error executing query', error);
-            res.json({ error: 'Error al añadir.'});
+            res.json({ error: 'Error al añadir.' });
         });
 });
