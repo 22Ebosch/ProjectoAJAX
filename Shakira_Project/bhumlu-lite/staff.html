@@ -80,12 +80,12 @@
                     <li class="sidenav-divider mb-1"></li>
                     <li class="sidenav-item">
                     <li class="sidenav-item">
-                        <a href="forms_layouts.html" class="sidenav-link">
+                        <a href="/customer" class="sidenav-link">
                             <div>Customers</div>
                         </a>
                     </li>
                     <li class="sidenav-item">
-                        <a href="staff.html" class="sidenav-link">
+                        <a href="/staff" class="sidenav-link">
                             <div>Staff</div>
                         </a>
                     </li>
@@ -377,7 +377,7 @@
                     </div>
                     <div class="mb-3 borde">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="text" id="email" name="email" class="form-control border-dark text-white">
+                        <input type="email" id="email" name="email" class="form-control border-dark text-white">
                     </div>
                     <div class="mb-3">
                         <label for="address_id" class="form-label">Dirección:</label>
@@ -421,7 +421,7 @@
                     </div>
                     <div class="mb-3 borde">
                         <label for="email2" class="form-label">Email:</label>
-                        <input type="text" id="email2" name="email2"
+                        <input type="email" id="email2" name="email2"
                             class="form-control border border-white text-white">
                     </div>
                     <div class="mb-3">
@@ -479,7 +479,7 @@
                 })
                     .then(response => {
                         if (!response.ok) {
-                            throw new Error('Error al eliminar el staff');
+                            throw new Error('Error al eliminar el miembro del Staff');
                         }
                         return response.json();
                     })
@@ -585,7 +585,7 @@
                     mostrarPaginacion(page);
                 })
                 .catch(error => {
-                    console.error('Error al cargar los clientes:', error); // Manejar cualquier error que ocurra durante la carga de datos
+                    console.error('Error al cargar los miemros del Staff:', error); // Manejar cualquier error que ocurra durante la carga de datos
                 });
         }
 

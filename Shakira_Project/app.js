@@ -8,17 +8,27 @@ const app = express();
 const PORT = 3334;
 const { Client } = require('pg');
 const path = require('path');
+const itemsPerPage = 15;
+
+let dbConnection = fs.readFileSync('dbConnection.json');
+const client = new Client(JSON.parse(dbConnection));
+client.connect()
+    .then(() => console.log('Connected to PostgreSQL'))
+    .catch(err => console.error('Error connecting to PostgreSQL', err));
 
 // Configuración del motor de plantillas EJS
 app.use(express.static('bhumlu-lite')); // La carpeta donde se encuentran tus vistas
-
 app.listen(PORT, () => {
     console.log('listening on port ' + PORT);
 });
 app.disable('x-powered-by');
-
 app.get('/', (req, res) => {
-    client.query('SELECT * FROM film where film_id = 1')
+    res.sendFile(path.join(__dirname + '/bhumlu-lite/index.html'));
+});
+
+// -------- MOSTRAR TIENDAS -----------
+app.get('/api/store', (req, res) => {
+    client.query('SELECT * FROM store')
         .then((result => res.json(result.rows)))
         .catch(error => {
             console.error('Error executing query', error);
@@ -26,29 +36,20 @@ app.get('/', (req, res) => {
         });
 });
 
-app.get('/home', (req, res) => {
-    res.sendFile(path.join(__dirname + '/bhumlu-lite/index.html'));
+// ----------- MOSTRAR DIRECCIONES ----------------
+app.get('/api/address', (req, res) => {
+    client.query('SELECT * FROM address')
+        .then((result => res.json(result.rows)))
+        .catch(error => {
+            console.error('Error executing query', error);
+            res.status(500).send('Error executing query');
+        });
 });
 
-
-let dbConnection = fs.readFileSync('dbConnection.json');
-const client = new Client(JSON.parse(dbConnection));
-
-client.connect()
-    .then(() => console.log('Connected to PostgreSQL'))
-    .catch(err => console.error('Error connecting to PostgreSQL', err));
-
-// --------COSAS PARA STAFF -------   
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'bhumlu-lite'));
-app.use('/styles', express.static(path.join(__dirname, 'public/styles'), { type: 'text/css' }));
+// -------- RUTAS PARA STAFF ---------
 app.get('/staff', (req, res) => {
     res.sendFile(path.join(__dirname + '/bhumlu-lite/staff.html'));
 });
-
-// --------- BUSCAR EN LA BBDD STAFF -----------
-// Número de elementos por página
-const itemsPerPage = 15;
 
 // Ruta para obtener los datos del personal con paginación
 app.get('/api/staff', (req, res) => {
@@ -57,7 +58,7 @@ app.get('/api/staff', (req, res) => {
 
     // Consulta SQL para obtener los datos del personal con LIMIT y OFFSET
     const query = {
-        text: 'SELECT * FROM staff OFFSET $1 LIMIT $2',
+        text: 'SELECT * FROM staff ORDER BY staff_id OFFSET $1 LIMIT $2',
         values: [offset, itemsPerPage]
     };
 
@@ -84,28 +85,7 @@ app.get('/api/staff/count', (req, res) => {
         });
 });
 
-
-// -------- MOSTRAR TIENDAS -----------
-app.get('/api/store', (req, res) => {
-    client.query('SELECT * FROM store')
-        .then((result => res.json(result.rows)))
-        .catch(error => {
-            console.error('Error executing query', error);
-            res.status(500).send('Error executing query');
-        });
-});
-
-// ----------- MOSTRAR DIRECCIONES ----------------
-app.get('/api/address', (req, res) => {
-    client.query('SELECT * FROM address')
-        .then((result => res.json(result.rows)))
-        .catch(error => {
-            console.error('Error executing query', error);
-            res.status(500).send('Error executing query');
-        });
-});
-
-// ------- ELIMINAR STAFF ----------
+// ------- eliminar staff ----------
 app.delete('/api/staff/:id', (req, res) => {
     const { id } = req.params;
     const query1 = 'SELECT * FROM rental WHERE staff_id = $1';
@@ -129,7 +109,7 @@ app.delete('/api/staff/:id', (req, res) => {
         });
 });
 
-// ------------ AÑADIR STAFF -------------
+// ------------ añadir staff -------------
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.post('/api/staff', (req, res) => {
@@ -155,7 +135,7 @@ app.post('/api/staff', (req, res) => {
             const values = [firstname, lastname, address_id, email, store_id, username, trimmedHash]; // Utiliza el hash recortado
 
             client.query(query, values)
-                .then((result => res.json({ message: 'staff añadido exitosamente.', status: 'success' })))
+                .then((result => res.json({ message: 'El mimro del Staff se ha añadido exitosamente.', status: 'success' })))
                 .catch(error => {
                     console.error('Error ejecutando la consulta', error);
                     res.json({ error: 'Error al añadir 2.' });
@@ -165,7 +145,7 @@ app.post('/api/staff', (req, res) => {
 });
 
 
-// --------- TRAE LOS DATOS PARA ACTUALIZAR -----------
+// --------- trae datos del miembro staff -----------
 app.get('/api/staff/:id', (req, res) => {
     const { id } = req.params;
     const query = 'SELECT * FROM staff WHERE staff_id = $1';
@@ -184,7 +164,7 @@ app.get('/api/staff/:id', (req, res) => {
         });
 });
 
-
+// -------- actualiza los datos para staff ------------
 app.put('/api/staff/', (req, res) => {
     const staff_id = req.body.staff_id;
     const firstname = req.body.first_name;
@@ -198,9 +178,115 @@ app.put('/api/staff/', (req, res) => {
     const values = [staff_id, firstname, lastname, address_id, email, store_id, username];
 
     client.query(query, values)
-        .then((result => res.json({ message: 'Cliente actualizado exitosamente.', status: 'succes' })))
+        .then((result => res.json({ message: 'Miembro del Staff actualizado exitosamente.', status: 'succes' })))
         .catch(error => {
             console.error('Error executing query', error);
             res.json({ error: 'Error al añadir.' });
+        });
+});
+
+// ---------- RUTAS CUSTOMERS -----------
+
+//vista de clientes
+app.get('/customer', (req, res) => {
+    res.sendFile(path.join(__dirname + '/bhumlu-lite/customers.html'));
+});
+
+app.get('/api/customer', (req, res) => {
+    const page = req.query.page || 1;
+    const offset = (page - 1) * itemsPerPage;
+    const query = {
+        text: 'SELECT * FROM customer OFFSET $1 LIMIT $2',
+        values: [offset, itemsPerPage]
+    };
+
+    client.query(query)
+        .then((result => res.json(result.rows)))
+        .catch(error => {
+            console.error('Error executing query', error);
+            res.status(500).send('Error executing query');
+        });
+});
+app.get('/api/customer/count', (req, res) => {
+    // Consulta SQL para contar el número total de registros
+    client.query('SELECT COUNT(*) FROM customer')
+        .then(result => {
+            const count = parseInt(result.rows[0].count); // Obtener el recuento de la respuesta y convertirlo a entero
+            res.json({ count }); // Devolver el recuento en formato JSON
+        })
+        .catch(error => {
+            console.error('Error executing query', error); // Manejar errores de consulta
+            res.status(500).send('Error executing query'); // Devolver un error HTTP 500 si hay un problema
+        });
+});
+//obtener datos de cliente
+app.get('/api/customer/:id', (req, res) => {
+    const { id } = req.params;
+    const query = 'SELECT * FROM customer WHERE customer_id = $1';
+    client.query(query, [id])
+        .then((result => res.json(result.rows[0])))
+        .catch(error => {
+            console.error('Error executing query', error);
+            res.status(500).send('Error executing query');
+        });
+});
+
+app.post('/api/customer', (req, res) => {
+    const store_id = req.body.store_id;
+    const firstname = req.body.first_name;
+    const lastname = req.body.last_name;
+    const email = req.body.email;
+    const address_id = req.body.address_id;
+
+    const query = 'INSERT INTO customer (store_id, first_name, last_name, email, address_id, active) VALUES ($1, $2, $3, $4, $5, 1)';
+    const values = [store_id, firstname, lastname, email, address_id];
+
+    client.query(query, values)
+    .then((result => res.json({ message: 'Cliente añadido exitosamente.', status: 'succes' })))
+        .catch(error => {
+            console.error('Error executing query', error);
+            res.json({ error: 'Error al añadir.'});
+        });
+});
+//actualizar cliente
+app.put('/api/customer', (req, res) => {
+    const customer_id = req.body.customer_id;
+    const store_id = req.body.store_id;
+    const firstname = req.body.first_name;
+    const lastname = req.body.last_name;
+    const email = req.body.email;
+    const address_id = req.body.address_id;
+
+    const query = 'UPDATE customer SET customer_id = $1, store_id = $2, first_name = $3, last_name = $4, email = $5, address_id = $6 WHERE customer_id = $1';
+    const values = [customer_id, store_id, firstname, lastname, email, address_id];
+
+    client.query(query, values)
+    .then((result => res.json({ message: 'Cliente actualizado exitosamente.', status: 'succes' })))
+        .catch(error => {
+            console.error('Error executing query', error);
+            res.json({ error: 'Error al añadir.'});
+        });
+});
+//eliminar cliente
+app.delete('/api/customer/:id', (req, res) => {
+    const { id } = req.params;
+    const query = 'SELECT FROM rental WHERE customer_id = $1';
+    const query2 = 'DELETE FROM customer WHERE customer_id = $1';
+
+    client.query(query, [id])
+        .then(result => {
+            if (result.rows.length > 0) {
+                res.json({ message: 'No se puede eliminar porque tiene compras registradas.', status: 'error' });
+            } else {
+                client.query(query2, [id])
+                    .catch(err => console.error('Error ejecutando la consulta.', err))
+                    .finally(() => {
+                        res.json({ message: 'El cliente ha sido eliminado correctamente.', status: 'success' });
+                    });
+            }
+        })
+        .catch(err => {
+            console.error('Error ejecutando la consulta', err)
+            res.json({ error: 'Error al eliminar.'})
         });
 });

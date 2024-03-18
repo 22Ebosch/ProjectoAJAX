@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+<html lang="en" class="material-style layout-fixed">
+
+<head>
+    <title>Customers</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="description"
+        content="Bhumlu Bootstrap admin template made using Bootstrap 4, it has tons of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+    <meta name="keywords"
+        content="Bhumlu, bootstrap admin template, bootstrap admin panel, bootstrap 4 admin template, admin template">
+    <meta name="author" content="Srthemesvilla" />
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+
+    <!-- Icon fonts -->
+    <link rel="stylesheet" href="assets/fonts/fontawesome.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.css">
+    <link rel="stylesheet" href="assets/fonts/linearicons.css">
+    <link rel="stylesheet" href="assets/fonts/open-iconic.css">
+    <link rel="stylesheet" href="assets/fonts/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="assets/fonts/feather.css">
+
+    <!-- Core stylesheets -->
+    <link rel="stylesheet" href="assets/css/bootstrap-material.css">
+    <link rel="stylesheet" href="assets/css/shreerang-material.css">
+    <link rel="stylesheet" href="assets/css/uikit.css">
+
+    <!-- Libs -->
+    <link rel="stylesheet" href="assets/libs/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/libs/flot/flot.css">
+
+    <style>
+        .borde {
+            border-bottom: 1px solid white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- [ Preloader ] Start -->
+    <div class="page-loader">
+        <div class="bg-primary"></div>
+    </div>
+    <!-- [ Preloader ] End -->
+
+    <!-- [ Layout wrapper ] Start -->
+    <div class="layout-wrapper layout-2">
+        <div class="layout-inner">
+            <!-- [ Layout sidenav ] Start -->
+            <div id="layout-sidenav" class="layout-sidenav sidenav sidenav-vertical bg-dark">
+                <!-- Brand demo (see assets/css/demo/demo.css) -->
+                <div class="app-brand demo">
+                    <span class="app-brand-logo demo">
+                        <img src="assets/img/logo.png" alt="Brand Logo" class="img-fluid">
+                    </span>
+                    <a href="index.html" class="app-brand-text demo sidenav-text font-weight-normal ml-2">Bhumlu</a>
+                    <a href="javascript:" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
+                        <i class="ion ion-md-menu align-middle"></i>
+                    </a>
+                </div>
+                <div class="sidenav-divider mt-0"></div>
+
+                <!-- Links -->
+                <ul class="sidenav-inner py-1">
+
+                    <!-- Dashboards -->
+                    <li class="sidenav-item active">
+                        <a href="index.html" class="sidenav-link">
+                            <i class="sidenav-icon feather icon-home"></i>
+                            <div>Dashboards</div>
+                            <div class="pl-1 ml-auto">
+                                <div class="badge badge-danger">Hot</div>
+                            </div>
+                        </a>
+                    </li>
+
+                    <!-- Layouts -->
+                    <li class="sidenav-divider mb-1"></li>
+                    <li class="sidenav-header small font-weight-semibold">UI Components</li>
+                    <li class="sidenav-item">
+                        <a href="typography.html" class="sidenav-link">
+                            <i class="sidenav-icon feather icon-type"></i>
+                            <div>Typography</div>
+                        </a>
+                    </li>
+
+                    <!-- UI elements -->
+                    <li class="sidenav-item">
+                        <a href="javascript:" class="sidenav-link sidenav-toggle">
+                            <i class="sidenav-icon feather icon-box"></i>
+                            <div>UI components</div>
+                        </a>
+                        <ul class="sidenav-menu">
+                            <li class="sidenav-item">
+                                <a href="bui_alert.html" class="sidenav-link">
+                                    <div>Alerts</div>
+                                </a>
+                            </li>
+                            <li class="sidenav-item">
+                                <a href="bui_badges.html" class="sidenav-link">
+                                    <div>Badges</div>
+                                </a>
+                            </li>
+                            <li class="sidenav-item">
+                                <a href="bui_button.html" class="sidenav-link">
+                                    <div>Buttons</div>
+                                </a>
+                            </li>
+                            <li class="sidenav-item">
+                                <a href="charts_morrisjs.html" class="sidenav-link">
+                                    <div>Charts</div>
+                                </a>
+                            </li>
+                            <li class="sidenav-item">
+                                <a href="bui_dropdowns.html" class="sidenav-link">
+                                    <div>Dropdowns</div>
+                                </a>
+                            </li>
+                            <li class="sidenav-item">
+                                <a href="bui_pagination.html" class="sidenav-link">
+                                    <div>Pagination and breadcrumbs</div>
+                                </a>
+                            </li>
+                            <li class="sidenav-item">
+                                <a href="bui_progress.html" class="sidenav-link">
+                                    <div>Progress bars</div>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <!-- Forms & Tables -->
+                    <li class="sidenav-divider mb-1"></li>
+                    <li class="sidenav-header small font-weight-semibold">Forms & Tables</li>
+                    <li class="sidenav-item">
+                        <a href="javascript:" class="sidenav-link sidenav-toggle">
+                            <i class="sidenav-icon feather icon-clipboard"></i>
+                            <div>Forms</div>
+                        </a>
+                        <ul class="sidenav-menu">
+                            <li class="sidenav-item">
+                                <a href="forms_layouts.html" class="sidenav-link">
+                                    <div>Layouts and elements</div>
+                                </a>
+                            </li>
+                            <li class="sidenav-item">
+                                <a href="forms_input-groups.html" class="sidenav-link">
+                                    <div>Input groups</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidenav-item">
+                        <a href="tables_bootstrap.html" class="sidenav-link">
+                            <i class="sidenav-icon feather icon-grid"></i>
+                            <div>Tables</div>
+                        </a>
+                    </li>
+
+                    <!--  Icons -->
+                    <li class="sidenav-divider mb-1"></li>
+                    <li class="sidenav-header small font-weight-semibold">Icons</li>
+                    <li class="sidenav-item">
+                        <a href="javascript:" class="sidenav-link sidenav-toggle">
+                            <i class="sidenav-icon feather icon-feather"></i>
+                            <div>Icons</div>
+                        </a>
+                        <ul class="sidenav-menu">
+                            <li class="sidenav-item">
+                                <a href="icons_feather.html" class="sidenav-link">
+                                    <div>Feather</div>
+                                </a>
+                            </li>
+                            <li class="sidenav-item">
+                                <a href="icons_linearicons.html" class="sidenav-link">
+                                    <div>Linearicons</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Pages -->
+                    <li class="sidenav-divider mb-1"></li>
+                    <li class="sidenav-header small font-weight-semibold">Pages</li>
+                    <li class="sidenav-item">
+                        <a href="pages_authentication_login-v1.html" class="sidenav-link">
+                            <i class="sidenav-icon feather icon-lock"></i>
+                            <div>Login</div>
+                        </a>
+                    </li>
+                    <li class="sidenav-item">
+                        <a href="pages_authentication_register-v1.html" class="sidenav-link">
+                            <i class="sidenav-icon feather icon-user"></i>
+                            <div>Signup</div>
+                        </a>
+                    </li>
+                    <li class="sidenav-item">
+                        <a href="pages_faq.html" class="sidenav-link">
+                            <i class="sidenav-icon feather icon-anchor"></i>
+                            <div>FAQ</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- [ Layout sidenav ] End -->
+            <!-- [ Layout container ] Start -->
+            <div class="layout-container">
+                <!-- [ Layout navbar ( Header ) ] Start -->
+                <div id="layout-sidenav" class="layout-sidenav sidenav sidenav-vertical bg-dark">
+                    <!-- Brand demo (see assets/css/demo/demo.css) -->
+                    <div class="app-brand demo">
+                        <span class="app-brand-logo demo">
+                            <img src="assets/img/logo.png" alt="Brand Logo" class="img-fluid">
+                        </span>
+                        <a href="index.html" class="app-brand-text demo sidenav-text font-weight-normal ml-2">Films</a>
+                        <a href="javascript:" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
+                            <i class="ion ion-md-menu align-middle"></i>
+                        </a>
+                    </div>
+                    <div class="sidenav-divider mt-0"></div>
+    
+                    <!-- Links -->
+                    <ul class="sidenav-inner py-1">
+    
+                        <!-- Dashboards -->
+                        <li class="sidenav-item">
+                            <a href="index.html" class="sidenav-link">
+                                <i class="sidenav-icon feather icon-home"></i>
+                                <div>Home</div>
+                            </a>
+                        </li>
+    
+    
+                        <!-- Forms & Tables -->
+                        <li class="sidenav-divider mb-1"></li>
+                        <li class="sidenav-item">
+                        <li class="sidenav-item">
+                            <a href="/customer" class="sidenav-link">
+                                <div>Customers</div>
+                            </a>
+                        </li>
+                        <li class="sidenav-item">
+                            <a href="/staff" class="sidenav-link">
+                                <div>Staff</div>
+                            </a>
+                        </li>
+    
+                        <li class="sidenav-item">
+                            <a href="films.html" class="sidenav-link">
+                                <div>Films</div>
+                            </a>
+                        </li>
+                        </li>
+    
+    
+    
+                        <!-- Pages -->
+                        <li class="sidenav-divider mb-1"></li>
+                        <li class="sidenav-item">
+                            <a href="pages_authentication_login-v1.html" class="sidenav-link">
+                                <i class="sidenav-icon feather icon-lock"></i>
+                                <div>Login</div>
+                            </a>
+                        </li>
+                        <li class="sidenav-item">
+                            <a href="pages_authentication_register-v1.html" class="sidenav-link">
+                                <i class="sidenav-icon feather icon-user"></i>
+                                <div>Signup</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- [ Layout navbar ( Header ) ] End -->
+
+                <!-- [ Layout content ] Start -->
+                <div class="layout-content">
+
+                    <!-- [ content ] Start -->
+                    <div class="container-fluid flex-grow-1 container-p-y">
+                        <h4 class="font-weight-bold py-3 mb-0">Customers</h4>
+                        <div class="table-responsive" >
+                            <table class="table table-dark">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>TIENDA</th>
+                                        <th>NOMBRE</th>
+                                        <th>APELLIDO</th>
+                                        <th>EMAIL</th>
+                                        <th>ACCION</th>
+                                        <!-- Agrega más columnas según los campos de tu tabla de clientes -->
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div id="pagination" class="text-center bg-black">Algo</div>
+                        <!-- Aquí mostraremos la paginación -->
+                        <button class="" id="crear">Crear</button>
+                    </div>
+                    <div id="formCrear"
+                        style="display:none; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); color: white; position: absolute; justify-content: center; align-items: center;">
+                        <form action="/api/customer" method="post" id="formCrear2"
+                            style="background-color: black; padding: 30px;" class="bg-dark text-white p-4 rounded w-30">
+                            <h2>Añadir cliente</h2>
+                            <ul style="list-style: none;">
+                                <li>Tienda: <select name="store_id" id="store_id" class="form-select"></select></li>
+                                <li>Nombre: <input type="text" id="first_name" name="first_name"
+                                        class="form-control text-white borde"></li>
+                                <li>Apellido: <input type="text" id="last_name" name="last_name"
+                                        class="form-control text-white borde"></li>
+                                <li>Email: <input type="text" id="email" name="email"
+                                        class="form-control text-white borde"></li>
+                                <li>Direccion: <select name="address_id" id="address_id" class="form-select"></select>
+                                </li>
+                                <li><input type="submit" id="crear2"></li>
+                            </ul>
+                        </form>
+                        <button id="cancelar2" style="position: relative; bottom: 20%;">X</button>
+                    </div>
+                    <div id="formAct"
+                        style="display:none; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); color: white; position: absolute; justify-content: center; align-items: center;">
+                        <form action="/api/customer" method="put" id="formAct2"
+                            style="background-color: black; padding: 30px;" class="bg-dark text-white p-4 rounded w-30">
+                            <h2>Actualizar cliente</h2>
+                            <ul style="list-style: none;">
+                                <li>ID: <input type="text" id="customer_idA" name="customer_idA"
+                                        class="form-control text-white borde" disabled></li>
+                                <li>Tienda: <select name="store_id" id="store_idA" class="form-select"></select></li>
+                                <li>Nombre: <input type="text" id="first_nameA" name="first_name"
+                                        class="form-control text-white borde"></li>
+                                <li>Apellido: <input type="text" id="last_nameA" name="last_name"
+                                        class="form-control text-white borde"></li>
+                                <li>Email: <input type="text" id="emailA" name="email"
+                                        class="form-control text-white borde"></li>
+                                <li>Direccion: <select name="address_id" id="address_idA" class="form-select"></select>
+                                </li>
+                                <li><input type="submit" id="act2"></li>
+                            </ul>
+                        </form>
+                        <button id="cancelar3" style="position: relative; bottom: 20%;">X</button>
+                    </div>
+                    <!-- [ content ] End -->
+
+                    <!-- [ Layout footer ] Start -->
+                    <nav class="layout-footer footer bg-white">
+                        <div
+                            class="container-fluid d-flex flex-wrap justify-content-between text-center container-p-x pb-3">
+                            <div class="pt-3">
+                                <span class="footer-text font-weight-semibold">&copy; <a
+                                        href="https://srthemesvilla.com" class="footer-link"
+                                        target="_blank">Srthemesvilla</a></span>
+                            </div>
+                            <div>
+                                <a href="javascript:" class="footer-link pt-3">About Us</a>
+                                <a href="javascript:" class="footer-link pt-3 ml-4">Help</a>
+                                <a href="javascript:" class="footer-link pt-3 ml-4">Contact</a>
+                                <a href="javascript:" class="footer-link pt-3 ml-4">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </nav>
+                    <!-- [ Layout footer ] End -->
+                </div>
+                <!-- [ Layout content ] Start -->
+            </div>
+            <!-- [ Layout container ] End -->
+        </div>
+        <!-- Overlay -->
+        <div class="layout-overlay layout-sidenav-toggle"></div>
+    </div>
+    <!-- [ Layout wrapper] End -->
+    <!-- Core scripts -->
+    <script src="assets/js/pace.js"></script>
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/libs/popper/popper.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+    <script src="assets/js/sidenav.js"></script>
+    <script src="assets/js/layout-helpers.js"></script>
+    <script src="assets/js/material-ripple.js"></script>
+
+    <!-- Libs -->
+    <script src="assets/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="assets/libs/eve/eve.js"></script>
+    <script src="assets/libs/flot/flot.js"></script>
+    <script src="assets/libs/flot/curvedLines.js"></script>
+    <script src="assets/libs/chart-am4/core.js"></script>
+    <script src="assets/libs/chart-am4/charts.js"></script>
+    <script src="assets/libs/chart-am4/animated.js"></script>
+
+    <!-- Demo -->
+    <script src="assets/js/demo.js"></script>
+    <script src="assets/js/analytics.js"></script>
+    <script src="assets/js/pages/dashboards_index.js"></script>
+</body>
+<script>
+    function eliminarCliente(id) {
+        if (confirm("¿Estás seguro de que quieres eliminar este cliente?")) {
+            fetch(`/api/customer/${id}`, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al eliminar el cliente');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert(data.message); // Manejar la respuesta del servidor
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('Error al eliminar el cliente:', error);
+                    // Manejar el error de eliminación del cliente
+                });
+        }
+    }
+    function añadirCliente() {
+        event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+
+        // Realizar una solicitud POST al servidor
+        fetch('/api/customer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                store_id: document.getElementById('store_id').value,
+                first_name: document.getElementById('first_name').value,
+                last_name: document.getElementById('last_name').value,
+                email: document.getElementById('email').value,
+                address_id: document.getElementById('address_id').value
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un error al procesar la solicitud.');
+            });
+    };
+    function actualizarCliente() {
+        event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+
+        // Realizar una solicitud PUT al servidor
+        fetch('/api/customer', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                customer_id: document.getElementById('customer_idA').value,
+                store_id: document.getElementById('store_idA').value,
+                first_name: document.getElementById('first_nameA').value,
+                last_name: document.getElementById('last_nameA').value,
+                email: document.getElementById('emailA').value,
+                address_id: document.getElementById('address_idA').value
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un error al procesar la solicitud.');
+            });
+    };
+    function mostrarForm() {
+        form.style.display = 'flex';
+    }
+    function mostrarForm2(id) {
+        formAct.style.display = 'flex';
+        fetch(`/api/customer/${id}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al cargar los datos del miembro del personal');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Rellenar los campos del formulario con los datos obtenidos
+                document.getElementById('customer_idA').value = data.customer_id;
+                document.getElementById('store_idA').value = data.store_id;
+                document.getElementById('first_nameA').value = data.first_name;
+                document.getElementById('last_nameA').value = data.last_name;
+                document.getElementById('emailA').value = data.email;
+                document.getElementById('address_idA').value = data.address_id;
+            })
+            .catch(error => {
+                console.error('Error al cargar los datos del cliente.', error);
+                alert('Error al cargar los datos del cliente.');
+            });
+    }
+    function cancelarForm() {
+        let form = document.getElementById('formCrear');
+        form.style.display = 'none';
+    }
+    function cancelarForm2() {
+        let form = document.getElementById('formAct');
+        form.style.display = 'none';
+    }
+
+    let boton = document.getElementById('crear');
+    let cancelar2 = document.getElementById('cancelar2');
+    let cancelar3 = document.getElementById('cancelar3');
+    let form = document.getElementById('formCrear');
+    let form2 = document.getElementById('formCrear2');
+    let formAct = document.getElementById('formAct');
+    let formAct2 = document.getElementById('formAct2');
+    boton.addEventListener('click', mostrarForm);
+    cancelar2.addEventListener('click', cancelarForm);
+    cancelar3.addEventListener('click', cancelarForm2);
+    form2.addEventListener('submit', añadirCliente);
+    formAct2.addEventListener('submit', actualizarCliente);
+
+    function cargarDatos(page = 1) {
+        fetch(`/api/customer?page=${page}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error de conexion.');
+                }
+                return response.json();
+            })
+            .then(customers => {
+                document.getElementById('tbody').innerHTML = '';
+                customers.forEach(customer => {
+                    let tr = document.createElement("tr");
+                    tr.id = customer.customer_id;
+                    tr.innerHTML = '<td>' + customer.customer_id + '</td>';
+                    tr.innerHTML += '<td>' + customer.store_id + '</td>';
+                    tr.innerHTML += '<td>' + customer.first_name + '</td>';
+                    tr.innerHTML += '<td>' + customer.last_name + '</td>';
+                    tr.innerHTML += '<td>' + customer.email + '</td>';
+                    tr.innerHTML += '<td><img src="img/borrar.png" alt="Borrar" style="width:20px;" onclick="eliminarCliente(' + customer.customer_id + ')"><img src="img/actualizar.png" alt="Actualizar" style="width:20px;" onclick="mostrarForm2(' + customer.customer_id + ')"></td>';
+                    document.getElementById('tbody').appendChild(tr);
+                });
+                mostrarPaginacion(page);
+            })
+            .catch(error => {
+                console.error('Error al cargar los clientes:', error);
+            });
+    }
+    // Función para mostrar la paginación
+    function mostrarPaginacion(page) {
+        // Calcular el número total de páginas consultando al servidor
+        fetch('/api/customer/count')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error de conexión.'); // Lanzar un error si la respuesta no es exitosa
+                }
+                return response.json(); // Devolver los datos en formato JSON
+            })
+            .then(data => {
+                const totalPages = Math.ceil(data.count / 15); // Calcular el número total de páginas
+                const paginationDiv = document.getElementById('pagination');
+                paginationDiv.innerHTML = ''; // Limpiar el contenido anterior de la paginación
+
+                // Crear botones para cada página y asignarles un listener para cargar los datos de esa página
+                for (let i = 1; i <= totalPages; i++) {
+                    const button = document.createElement('button');
+                    button.textContent = i;
+                    button.classList.add('btn', 'btn-primary', 'mx-1'); // Clases de Bootstrap para el estilo
+                    button.addEventListener('click', () => {
+                        cargarDatos(i); // Llamar a cargarDatos() con el número de página correspondiente cuando se haga clic en el botón
+                    });
+                    paginationDiv.appendChild(button); // Agregar el botón de paginación al contenedor
+                }
+            })
+            .catch(error => {
+                console.error('Error al obtener el número total de registros:', error); // Manejar cualquier error que ocurra al obtener el número total de registros
+            });
+    }
+
+    fetch('/api/store')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error de conexion.');
+            }
+            return response.json();
+        })
+        .then(stores => {
+            stores.forEach(store => {
+                let option1 = document.createElement("option");
+                let option2 = document.createElement("option");
+
+                option1.value = store.store_id;
+                option1.innerHTML = store.store_id;
+
+                option2.value = store.store_id;
+                option2.innerHTML = store.store_id;
+
+                document.getElementById('store_id').appendChild(option1);
+                document.getElementById('store_idA').appendChild(option2);
+            });
+        })
+        .catch(error => {
+            console.error('Error al cargar los clientes:', error);
+        });
+
+    fetch('/api/address')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error de conexion.');
+            }
+            return response.json();
+        })
+        .then(addresses => {
+            addresses.forEach(address => {
+                let option1 = document.createElement("option");
+                let option2 = document.createElement("option");
+
+                // Establecer los atributos value e innerHTML para cada opción
+                option1.value = address.address_id;
+                option1.innerHTML = address.address;
+
+                option2.value = address.address_id;
+                option2.innerHTML = address.address;
+
+                // Agregar las opciones a los elementos select correspondientes
+                document.getElementById('address_id').appendChild(option1);
+                document.getElementById('address_idA').appendChild(option2);
+            });
+        })
+        .catch(error => {
+            console.error('Error al cargar los clientes:', error);
+        });
+
+    function validarEmail(email) {
+        // Patrón para validar el formato de correo electrónico
+        const patron = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return patron.test(email);
+    }
+    function inputEmail(e) {
+        const emailInput = e.target;
+        const email = emailInput.value;
+
+        // Verificar si el correo electrónico es válido
+        if (!validarEmail(email)) {
+            emailInput.setCustomValidity('Por favor, introduce una dirección de correo electrónico válida.');
+        } else {
+            emailInput.setCustomValidity('');
+        }
+    }
+    document.getElementById('email').addEventListener('input', inputEmail);
+    document.getElementById('emailA').addEventListener('input', inputEmail);
+    cargarDatos();
+</script>
+
+</html>
