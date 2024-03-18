@@ -13,22 +13,44 @@ app.listen(PORT, () => {
     console.log('listening on port ' + PORT);
 });
 app.disable('x-powered-by');
-
+//vista del inidex
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/bhumlu-lite/index.html'));
 });
-
+//vista de clientes
 app.get('/customer', (req, res) => {
     res.sendFile(path.join(__dirname + '/bhumlu-lite/customers.html'));
 });
+//obtener todos los clientes
+const itemsPerPage = 15;
 app.get('/api/customer', (req, res) => {
-    client.query('SELECT * FROM customer')
+    const page = req.query.page || 1;
+    const offset = (page - 1) * itemsPerPage;
+    const query = {
+        text: 'SELECT * FROM customer OFFSET $1 LIMIT $2',
+        values: [offset, itemsPerPage]
+    };
+
+    client.query(query)
         .then((result => res.json(result.rows)))
         .catch(error => {
             console.error('Error executing query', error);
             res.status(500).send('Error executing query');
         });
 });
+app.get('/api/customer/count', (req, res) => {
+    // Consulta SQL para contar el número total de registros
+    client.query('SELECT COUNT(*) FROM customer')
+        .then(result => {
+            const count = parseInt(result.rows[0].count); // Obtener el recuento de la respuesta y convertirlo a entero
+            res.json({ count }); // Devolver el recuento en formato JSON
+        })
+        .catch(error => {
+            console.error('Error executing query', error); // Manejar errores de consulta
+            res.status(500).send('Error executing query'); // Devolver un error HTTP 500 si hay un problema
+        });
+});
+//obtener datos de cliente
 app.get('/api/customer/:id', (req, res) => {
     const { id } = req.params;
     const query = 'SELECT * FROM customer WHERE customer_id = $1';
@@ -39,6 +61,7 @@ app.get('/api/customer/:id', (req, res) => {
             res.status(500).send('Error executing query');
         });
 });
+//obtener tiendas
 app.get('/api/store', (req, res) => {
     client.query('SELECT * FROM store')
         .then((result => res.json(result.rows)))
@@ -47,6 +70,7 @@ app.get('/api/store', (req, res) => {
             res.status(500).send('Error executing query');
         });
 });
+//obtener direcciones
 app.get('/api/address', (req, res) => {
     client.query('SELECT * FROM address')
         .then((result => res.json(result.rows)))
@@ -58,7 +82,7 @@ app.get('/api/address', (req, res) => {
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+//crear cliente
 app.post('/api/customer', (req, res) => {
     const store_id = req.body.store_id;
     const firstname = req.body.first_name;
@@ -76,7 +100,7 @@ app.post('/api/customer', (req, res) => {
             res.json({ error: 'Error al añadir.'});
         });
 });
-
+//actualizar cliente
 app.put('/api/customer', (req, res) => {
     const customer_id = req.body.customer_id;
     const store_id = req.body.store_id;
@@ -95,7 +119,7 @@ app.put('/api/customer', (req, res) => {
             res.json({ error: 'Error al añadir.'});
         });
 });
-
+//eliminar cliente
 app.delete('/api/customer/:id', (req, res) => {
     const { id } = req.params;
     const query = 'SELECT FROM rental WHERE customer_id = $1';
@@ -118,7 +142,7 @@ app.delete('/api/customer/:id', (req, res) => {
             res.json({ error: 'Error al eliminar.'})
         });
 });
-
+//conexion BBDD
 let dbConnection = fs.readFileSync('dbConnection.json');
 const client = new Client(JSON.parse(dbConnection));
 
