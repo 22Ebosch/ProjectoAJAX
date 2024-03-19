@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en" class="material-style layout-fixed">
 
 <head>
-    <title>STAFF</title>
+    <title>Films</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -33,6 +34,7 @@
 
     <!-- Libs -->
     <link rel="stylesheet" href="assets/libs/perfect-scrollbar/perfect-scrollbar.css">
+
     <style>
         .borde {
             border-bottom: 1px solid white;
@@ -64,12 +66,12 @@
     </style>
 </head>
 
-<body class="mr-1">
+<body>
     <!-- [ Preloader ] Start -->
     <div class="page-loader">
         <div class="bg-primary"></div>
     </div>
-    <!-- [ Preloader ] End -->
+    <!-- [ Preloader ] Ebd -->
 
     <!-- [ Layout wrapper ] Start -->
     <div class="layout-wrapper layout-2">
@@ -145,8 +147,6 @@
                 <!-- [ Layout navbar ( Header ) ] Start -->
                 <nav class="layout-navbar navbar navbar-expand-lg align-items-lg-center bg-white container-p-x"
                     id="layout-navbar">
-
-
 
                     <!-- Brand demo (see assets/css/demo/demo.css) -->
                     <a href="index.html" class="navbar-brand app-brand demo d-lg-none py-0 mr-4">
@@ -354,124 +354,117 @@
                     </div>
                 </nav>
                 <!-- [ Layout navbar ( Header ) ] End -->
-                <!-- INICIO CONTENIDO PAGINA -->
-                <div class="table-responsive m-2">
-                    <div id="loading" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                        <div class="loader"></div> <!-- Clase para la animación -->
+
+                <!-- [ Layout content ] Start -->
+                <div class="layout-content">
+
+                    <!-- [ content ] Start -->
+                    <div class="container-fluid flex-grow-1 container-p-y">
+                        <h4 class="font-weight-bold py-3 mb-0">Films</h4>
+                        <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#"><i class="feather icon-home"></i></a></li>
+                                <li class="breadcrumb-item">Films</li>
+                            </ol>
+                        </div>
+                        <div class="table-responsive m-2">
+                            <div id="loading" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                <div class="loader"></div> <!-- Clase para la animación -->
+                            </div>
+                            <table class="table table-dark">
+                                <thead>
+                                    <tr>
+                                        <th>FILM_ID</th>
+                                        <th>TITLE</th>
+                                        <th>RELEASE_YEAR</th>
+                                        <th>LANGUAGE_ID</th>
+                                        <th>RENTAL_RATE</th>
+                                        <th>LENGTH</th>
+                                        <th>REPLACEMENT_COST</th>
+                                        <th>RATING</th>
+                                        <th>ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyFilms">
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div id="pagination" class="text-center bg-black"></div>
+                        <button class="" id="crear">Crear</button>
                     </div>
-                    <table class="table table-dark">
-                        <thead>
-                            <tr>
-                                <th class="text-center align-middle">ID_Staff</th>
-                                <th class="text-center align-middle">Nombre</th>
-                                <th class="text-center align-middle">Apellido</th>
-                                <th class="text-center align-middle">Direccion</th>
-                                <th class="text-center align-middle">Email</th>
-                                <th class="text-center align-middle">ID_Tienda</th>
-                                <th class="text-center align-middle">Activo</th>
-                                <th class="text-center align-middle">Usuario</th>
-                                <th class="text-center align-middle">Contraseña</th>
-                                <th class="text-center align-middle">Eliminar</th>
-                                <th class="text-center align-middle">Actualizar</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody">
-                            <!-- AQUÍ INSERTARÁS LOS DATOS DE LA TABLA -->
-                        </tbody>
-                    </table>
+                    <div id="formCrear"
+                    style="display:none; margin-top: 100px; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); color: rgb(255, 255, 255); position: absolute; justify-content: center; align-items: center;">
+                        <form action="/api/films" method="post" id="formCrear2" class="bg-dark text-white p-4 rounded w-25">
+                            <ul>
+                                <li>Título: <input type="text" id="title" name="title"></li>
+                                <li>Descripción: <input type="text" id="description" name="description"></li>
+                                <li>Año de lanzamiento: <input type="text" id="release_year" name="release_year"></li>
+                                <li>ID de idioma: <input type="text" id="language_id" name="language_id"></li>
+                                <li>Tasa de alquiler: <input type="text" id="rental_rate" name="rental_rate"></li>
+                                <li>Duración: <input type="text" id="length" name="length"></li>
+                                <li>Costo de reemplazo: <input type="text" id="replacement_cost"
+                                        name="replacement_cost"></li>
+                                <li>Clasificación: <input type="text" id="rating" name="rating"></li>
+                                <li>Características especiales: <input type="text" id="special_features"
+                                        name="special_features"></li>
+                                <li><input type="submit" id="crear2"></li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div id="formAct"
+                    style="display:none; margin-top: 100px; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); color: rgb(255, 255, 255); position: absolute; justify-content: center; align-items: center;">
+                        <form action="/api/films" method="put" id="formAct2" class="bg-dark text-white p-4 rounded w-25">
+                            <ul>
+                                <li>Film ID: <input type="text" id="film_id2" name="film_id" disabled></li>
+                                <li>Título: <input type="text" id="title2" name="title"></li>
+                                <li>Descripción: <input type="text" id="description2" name="description"></li>
+                                <li>Año de lanzamiento: <input type="text" id="release_year2" name="release_year"></li>
+                                <li>ID de idioma: <input type="text" id="language_id2" name="language_id"></li>
+                                <li>Tasa de alquiler: <input type="text" id="rental_rate2" name="rental_rate"></li>
+                                <li>Duración: <input type="text" id="length2" name="length"></li>
+                                <li>Costo de reemplazo: <input type="text" id="replacement_cost2"
+                                        name="replacement_cost"></li>
+                                <li>Clasificación: <input type="text" id="rating2" name="rating"></li>
+                                <li><input type="submit" id="crear2"></li>
+                            </ul>
+                        </form>
+                    </div>
+
+                    <!-- [ content ] End -->
+
+                    <!-- [ Layout footer ] Start -->
+                    <nav class="layout-footer footer bg-white">
+                        <div
+                            class="container-fluid d-flex flex-wrap justify-content-between text-center container-p-x pb-3">
+                            <div class="pt-3">
+                                <span class="footer-text font-weight-semibold">&copy; <a
+                                        href="https://srthemesvilla.com" class="footer-link"
+                                        target="_blank">Shakira</a></span>
+                            </div>
+                            <div>
+                                <a href="javascript:" class="footer-link pt-3">About Us</a>
+                                <a href="javascript:" class="footer-link pt-3 ml-4">Help</a>
+                                <a href="javascript:" class="footer-link pt-3 ml-4">Contact</a>
+                                <a href="javascript:" class="footer-link pt-3 ml-4">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </nav>
+                    <!-- [ Layout footer ] End -->
+
                 </div>
-                <div id="pagination" class="text-center bg-black"></div> <!-- Aquí mostraremos la paginación -->
+                <!-- [ Layout content ] Start -->
 
-                <button class="btn btn-primary px-2 py-1 mx-auto d-block m-2 p-2" id="crear">Crear</button>
             </div>
-            <div id="formCrear"
-                style="display:none; margin-top: 100px; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); color: rgb(255, 255, 255); position: absolute; justify-content: center; align-items: center;">
-                <form action="/api/staff" method="post" id="formCrear2" class="bg-dark text-white p-4 rounded w-25">
-                    <button type="button" class="cerrar cursor-pointer" onclick="closeFormEditar()">X</button>
-                    <div class="mb-3">
-                        <label for="store_id" class="form-label">Tienda:</label>
-                        <select name="store_id" id="store_id" class="form-select"></select>
-                    </div>
-                    <div class="mb-3 borde">
-                        <label for="first_name" class="form-label">Nombre:</label>
-                        <input type="text" id="first_name" name="first_name" class="form-control text-white">
-                    </div>
-                    <div class="mb-3 borde">
-                        <label for="last_name" class="form-label">Apellido:</label>
-                        <input type="text" id="last_name" name="last_name" class="form-control text-white">
-                    </div>
-                    <div class="mb-3 borde">
-                        <label for="email" class="form-label">Email:</label>
-                        <input type="email" id="email" name="email" class="form-control border-dark text-white">
-                    </div>
-                    <div class="mb-3">
-                        <label for="address_id" class="form-label">Dirección:</label>
-                        <select name="address_id" id="address_id" class="form-select border-dark"></select>
-                    </div>
-                    <div class="mb-3 borde">
-                        <label for="username" class="form-label">Username:</label>
-                        <input type="text" id="username" name="username" class="form-control border-dark text-white">
-                    </div>
-                    <div class="mb-3 borde">
-                        <label for="password" class="form-label">Password:</label>
-                        <input type="password" id="password" name="password"
-                            class="form-control border-dark text-white">
-                    </div>
-                    <button type="submit" id="crear2" class="btn btn-primary">Enviar</button>
-                </form>
-            </div>
-
-            <div id="formEditar"
-                style="display:none; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); color: rgb(255, 255, 255); position: absolute; justify-content: center; align-items: center;">
-                <form action="/api/staff" method="put" id="formEditar2" class="bg-dark text-white p-4 rounded w-25">
-                    <button type="button" class="cerrar cursor-pointer" onclick="closeFormEditar()">X</button>
-                    <div class="mb-3">
-                        <label for="staff_id2" class="form-label">ID:</label>
-                        <input disabled type="text" id="staff_id2" name="staff_id2"
-                            class="form-control border border-white text-white">
-                    </div>
-                    <div class="mb-3">
-                        <label for="store_id2" class="form-label">Tienda:</label>
-                        <select name="store_id2" id="store_id2" class="form-select border border-white"></select>
-                    </div>
-                    <div class="mb-3 borde">
-                        <label for="first_name2" class="form-label">Nombre:</label>
-                        <input type="text" id="first_name2" name="first_name2"
-                            class="form-control border border-white text-white">
-                    </div>
-                    <div class="mb-3 borde">
-                        <label for="last_name2" class="form-label">Apellido:</label>
-                        <input type="text" id="last_name2" name="last_name2"
-                            class="form-control border border-white text-white">
-                    </div>
-                    <div class="mb-3 borde">
-                        <label for="email2" class="form-label">Email:</label>
-                        <input type="email" id="email2" name="email2"
-                            class="form-control border border-white text-white">
-                    </div>
-                    <div class="mb-3">
-                        <label for="address_id2" class="form-label">Dirección:</label>
-                        <select name="address_id2" id="address_id2" class="form-select border border-white"></select>
-                    </div>
-                    <div class="mb-3 borde">
-                        <label for="username2" class="form-label">Username:</label>
-                        <input type="text" id="username2" name="username2"
-                            class="form-control border border-white text-white">
-                    </div>
-                    <!-- <div class="mb-3">
-                        <label for="password2" class="form-label">Contraseña:</label>
-                        <input type="password" id="password2" name="password2" class="form-control border border-white text-white">
-                    </div> -->
-                    <button type="submit" id="Editar" class="btn btn-primary">Enviar</button>
-                </form>
-            </div>
-
             <!-- [ Layout container ] End -->
+
         </div>
+
         <!-- Overlay -->
         <div class="layout-overlay layout-sidenav-toggle"></div>
     </div>
-    <!-- [ Layout wrapper] End -->
+    <!-- [ Layout wrapper ] end -->
 
     <!-- Core scripts -->
     <script src="assets/js/pace.js"></script>
@@ -484,143 +477,212 @@
 
     <!-- Libs -->
     <script src="assets/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="assets/libs/eve/eve.js"></script>
-    <script src="assets/libs/flot/flot.js"></script>
-    <script src="assets/libs/flot/curvedLines.js"></script>
-    <script src="assets/libs/chart-am4/core.js"></script>
-    <script src="assets/libs/chart-am4/charts.js"></script>
-    <script src="assets/libs/chart-am4/animated.js"></script>
 
     <!-- Demo -->
     <script src="assets/js/demo.js"></script>
     <script src="assets/js/analytics.js"></script>
-    <script src="assets/js/pages/dashboards_index.js"></script>
 
-    <script>
-        function eliminarStaff(id) {
-            if (confirm("¿Estás seguro de que quieres eliminar este staff?")) {
-                fetch(`/api/staff/${id}`, {
-                    method: 'DELETE'
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Error al eliminar el miembro del Staff');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        alert(data.message); // Manejar la respuesta del servidor
-                        location.reload();
-                    })
-                    .catch(error => {
-                        console.error('Error al eliminar el staff:', error);
-                        // Manejar el error de eliminación del cliente
-                    });
-            }
-        }
-
-        function mostrarForm() {
-            let form = document.getElementById('formCrear');
-            form.style.display = 'flex';
-        }
-
-        let boton = document.getElementById('crear');
-        let form = document.getElementById('formCrear2');
-        boton.addEventListener('click', mostrarForm);
-        form.addEventListener('submit', añadirStaff);
-        let form2 = document.getElementById('formEditar');
-        form2.addEventListener('submit', actualizarStaff);
-
-        function closeFormEditar() {
-            // Ocultar el div del pop-up
-            var formEditar = document.getElementById('formEditar');
-            formEditar.style.display = 'none';
-            var formCrear = document.getElementById('formCrear');
-            formCrear.style.display = 'none';
-        }
-
-
-
-
-        function añadirStaff() {
-            event.preventDefault(); // Evitar que el formulario se envíe automáticamente
-
-            // Realizar una solicitud POST al servidor
-            fetch('/api/staff', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    store_id: document.getElementById('store_id').value,
-                    first_name: document.getElementById('first_name').value,
-                    last_name: document.getElementById('last_name').value,
-                    email: document.getElementById('email').value,
-                    address_id: document.getElementById('address_id').value,
-                    username: document.getElementById('username').value,
-                    password: document.getElementById('password').value
-                })
+</body>
+<script>
+    function fetchFilms(page = 1) {
+        fetch(`/api/films?page=${page}`)
+            .then(response => {
+                document.getElementById('loading').style.display = 'none';
+                if (!response.ok) {
+                    throw new Error('Error al obtener las películas.');
+                }
+                return response.json();
             })
-                .then(response => response.json())
+            .then(films => {
+                document.getElementById('tbodyFilms').innerHTML = '';
+                films.forEach(film => {
+                    let tr = document.createElement("tr");
+                    tr.innerHTML = '<td>' + film.film_id + '</td>';
+                    tr.innerHTML += '<td>' + film.title + '</td>';
+                    tr.innerHTML += '<td>' + film.release_year + '</td>';
+                    tr.innerHTML += '<td>' + film.language_id + '</td>';
+                    tr.innerHTML += '<td>' + film.rental_rate + '</td>';
+                    tr.innerHTML += '<td>' + film.length + '</td>';
+                    tr.innerHTML += '<td>' + film.replacement_cost + '</td>';
+                    tr.innerHTML += '<td>' + film.rating + '</td>';
+                    tr.innerHTML += '<td>' +
+                        '<img src="img/borrar.png" alt="Eliminar" style="width:20px; margin-right:20px;" onclick="eliminarPelicula(' + film.film_id + ')">' +
+                        '<img src="img/actualizar.png" alt="Modificar" style="width:20px; cursor: pointer;" onclick="mostrarForm2(' + film.film_id + ')">' +
+                        '</td>';
+
+
+
+                    document.getElementById('tbodyFilms').appendChild(tr);
+                });
+                mostrarPaginacion(page);
+            })
+            .catch(error => {
+                console.error('Error al cargar las películas:', error);
+            });
+    }
+
+    fetchFilms();
+
+    function eliminarPelicula(id) {
+        if (confirm("¿Estás seguro de que quieres eliminar esta película?")) {
+            fetch(`/api/films/${id}`, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al eliminar la película');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     alert(data.message);
                     location.reload();
                 })
                 .catch(error => {
-                    console.error('Error:', error);
-                    alert('Hubo un error al procesar la solicitud.');
-                });
-        };
-
-        document.getElementById('loading').style.display = 'block';
-        // ---------- INSERTAR DATOS EN TABLA -----------
-        // Función para cargar los datos de la página especificada
-        
-        function cargarDatos(page = 1) {
-            // Realizar una solicitud GET al servidor para obtener los datos de la página especificada
-            fetch(`/api/staff?page=${page}`)
-                .then(response => {
-                    document.getElementById('loading').style.display = 'none';
-                    // Verificar si la respuesta fue exitosa
-                    if (!response.ok) {
-                        throw new Error('Error de conexión.'); // Lanzar un error si la respuesta no es exitosa
-                    }
-                    return response.json(); // Devolver los datos en formato JSON
-                })
-                .then(staffs => {
-                    // Limpiar la tabla antes de agregar nuevos datos
-                    document.getElementById('tbody').innerHTML = '';
-
-                    // Iterar sobre los datos obtenidos y agregar cada registro a la tabla
-                    staffs.forEach(staff => {
-                        let tr = document.createElement("tr");
-                        // Crear las celdas de la fila con los datos del personal
-                        tr.innerHTML = '<td class="text-center align-middle" >' + staff.staff_id + '</td>';
-                        tr.innerHTML += '<td class="text-center align-middle" >' + staff.first_name + '</td>';
-                        tr.innerHTML += '<td class="text-center align-middle" >' + staff.last_name + '</td>';
-                        tr.innerHTML += '<td class="text-center align-middle" >' + staff.address_id + '</td>';
-                        tr.innerHTML += '<td class="text-center align-middle" >' + staff.email + '</td>';
-                        tr.innerHTML += '<td class="text-center align-middle" >' + staff.store_id + '</td>';
-                        tr.innerHTML += '<td class="text-center align-middle" >' + staff.active + '</td>';
-                        tr.innerHTML += '<td class="text-center align-middle" >' + staff.username + '</td>';
-                        tr.innerHTML += '<td class="text-center align-middle" >' + staff.password + '</td>';
-                        tr.innerHTML += '<td class="text-center align-middle" ><img src="img/borrar.png" alt="Borrar" style="width:20px;" onclick="eliminarStaff(' + staff.staff_id + ')" class="cursor-pointer"></td>';
-                        tr.innerHTML += '<td class="text-center align-middle" ><img src="img/actualizar.png" alt="Actualizar" style="width:20px;" onclick="actualizarCliente(' + staff.staff_id + ')" class="cursor-pointer"></td>';
-                        document.getElementById('tbody').appendChild(tr); // Agregar la fila a la tabla
-                    });
-
-                    // Mostrar la paginación
-                    mostrarPaginacion(page);
-                })
-                .catch(error => {
-                    console.error('Error al cargar los miemros del Staff:', error); // Manejar cualquier error que ocurra durante la carga de datos
+                    console.error('Error al eliminar la película:', error);
                 });
         }
+    }
+    function añadirPelicula(event) {
+        event.preventDefault();
 
-        // Función para mostrar la paginación
-        function mostrarPaginacion(page) {
+
+        fetch('/api/films', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                release_year: document.getElementById('release_year').value,
+                language_id: document.getElementById('language_id').value,
+                rental_rate: document.getElementById('rental_rate').value,
+                length: document.getElementById('length').value,
+                replacement_cost: document.getElementById('replacement_cost').value,
+                rating: document.getElementById('rating').value,
+                special_features: document.getElementById('special_features').value
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un error al procesar la solicitud.');
+            });
+    }
+
+    function mostrarForm() {
+        let form = document.getElementById('formCrear');
+        form.style.display = 'flex';
+    }
+
+    document.getElementById('loading').style.display = 'block';
+    let boton = document.getElementById('crear');
+    let form = document.getElementById('formCrear2');
+    boton.addEventListener('click', mostrarForm);
+    form.addEventListener('submit', añadirPelicula);
+
+    function modificarPelicula() {
+        event.preventDefault();
+        fetch(`/api/films`, {
+            method: 'PUT'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al obtener los datos de la película.');
+                }
+                return response.json();
+            })
+            .then(pelicula => {
+                document.getElementById('title').value = pelicula.title;
+                document.getElementById('release_year').value = pelicula.release_year;
+                document.getElementById('language_id').value = pelicula.language_id;
+                document.getElementById('rental_rate').value = pelicula.rental_rate;
+                document.getElementById('length').value = pelicula.length;
+                document.getElementById('replacement_cost').value = pelicula.replacement_cost;
+                document.getElementById('rating').value = pelicula.rating;
+                document.getElementById('special_features').value = pelicula.special_features;
+            })
+            .catch(error => {
+                console.error('Error al cargar los datos de la película:', error);
+                alert('Error al cargar los datos de la película.');
+            });
+    }
+
+    function actualizarPelicula() {
+        event.preventDefault();
+
+        fetch('/api/films/', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                film_id: document.getElementById('film_id2').value,
+                title: document.getElementById('title2').value,
+                description: document.getElementById('description2').value,
+                release_year: document.getElementById('release_year2').value,
+                language_id: document.getElementById('language_id2').value,
+                rental_rate: document.getElementById('rental_rate2').value,
+                length: document.getElementById('length2').value,
+                replacement_cost: document.getElementById('replacement_cost2').value,
+                rating: document.getElementById('rating2').value,
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un error al procesar la solicitud.');
+            });
+    };
+
+    function mostrarForm2(id) {
+        formAct.style.display = 'flex';
+        fetch(`/api/film/${id}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al cargar los datos del miembro del personal');
+                }
+                return response.json();
+            })
+            .then(data => {
+
+                document.getElementById('film_id2').value = data.film_id;
+                document.getElementById('title2').value = data.title;
+                document.getElementById('description2').value = data.description;
+                document.getElementById('release_year2').value = data.release_year;
+                document.getElementById('language_id2').value = data.language_id;
+                document.getElementById('rental_rate2').value = data.rental_rate;
+                document.getElementById('length2').value = data.length;
+                document.getElementById('replacement_cost2').value = data.replacement_cost;
+                document.getElementById('rating2').value = data.rating;
+            })
+            .catch(error => {
+                console.error('Error al cargar los datos de la pelicula.', error);
+                alert('Error al cargar los datos de la pelicula.');
+            });
+    }
+
+    let cancelar2 = document.getElementById('cancelar2');
+    let cancelar3 = document.getElementById('cancelar3');
+    let form2 = document.getElementById('formCrear2');
+    let formAct = document.getElementById('formAct');
+    let formAct2 = document.getElementById('formAct2');
+    boton.addEventListener('click', mostrarForm);
+    formAct2.addEventListener('submit', actualizarPelicula);
+    fetchFilms();
+
+    function mostrarPaginacion(page) {
             // Calcular el número total de páginas consultando al servidor
-            fetch('/api/staff/count')
+            fetch('/api/film/count')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Error de conexión.'); // Lanzar un error si la respuesta no es exitosa
@@ -638,7 +700,7 @@
                         button.textContent = i;
                         button.classList.add('btn', 'btn-primary', 'mx-1'); // Clases de Bootstrap para el estilo
                         button.addEventListener('click', () => {
-                            cargarDatos(i); // Llamar a cargarDatos() con el número de página correspondiente cuando se haga clic en el botón
+                            fetchFilms(i); // Llamar a cargarDatos() con el número de página correspondiente cuando se haga clic en el botón
                         });
                         paginationDiv.appendChild(button); // Agregar el botón de paginación al contenedor
                     }
@@ -649,127 +711,8 @@
         }
 
         // Llamar a cargarDatos() cuando se cargue la página inicialmente o cuando se navegue a la siguiente página
-        cargarDatos();
+        fetchFilms();
+</script>
 
-
-        // ------------ TRAER TODAS LAS TIENDAS -------------
-        fetch('/api/store')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error de conexion.');
-                }
-                return response.json();
-            })
-            .then(stores => {
-                stores.forEach(store => {
-                    let option1 = document.createElement("option");
-                    let option2 = document.createElement("option");
-
-                    option1.value = store.store_id;
-                    option1.innerHTML = store.store_id;
-
-                    option2.value = store.store_id;
-                    option2.innerHTML = store.store_id;
-
-                    document.getElementById('store_id').appendChild(option1);
-                    document.getElementById('store_id2').appendChild(option2);
-                });
-            })
-            .catch(error => {
-                console.error('Error al cargar los clientes:', error);
-            });
-
-        // ---------- TRAER TODAS LAS DIRECCIONES ------------------
-        fetch('/api/address')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error de conexion.');
-                }
-                return response.json();
-            })
-            .then(addresses => {
-                addresses.forEach(address => {
-                    let option1 = document.createElement("option");
-                    let option2 = document.createElement("option");
-
-                    option1.value = address.address_id;
-                    option1.innerHTML = address.address_id;
-
-                    option2.value = address.address_id;
-                    option2.innerHTML = address.address;
-
-                    document.getElementById('address_id').appendChild(option1);
-                    document.getElementById('address_id2').appendChild(option2);
-                });
-            })
-            .catch(error => {
-                console.error('Error al cargar los clientes:', error);
-            });
-
-
-        function cargarDatosEmpleado(id) {
-            fetch(`/api/staff/${id}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error al cargar los datos del miembro del personal');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Rellenar los campos del formulario con los datos obtenidos
-                    document.getElementById('staff_id2').value = data.staff_id;
-                    document.getElementById('store_id2').value = data.store_id;
-                    document.getElementById('first_name2').value = data.first_name;
-                    document.getElementById('last_name2').value = data.last_name;
-                    document.getElementById('email2').value = data.email;
-                    document.getElementById('address_id2').value = data.address_id;
-                    document.getElementById('username2').value = data.username;
-                    // document.getElementById('password2').value = data.password;
-                })
-                .catch(error => {
-                    console.error('Error al cargar los datos del miembro del personal:', error);
-                    alert('Hubo un error al cargar los datos del miembro del personal.');
-                });
-        }
-
-        function actualizarCliente(id) {
-            cargarDatosEmpleado(id);
-            // Mostrar el formulario de edición
-            document.getElementById('formEditar').style.display = 'flex';
-        }
-
-
-        function actualizarStaff() {
-            event.preventDefault(); // Evitar que el formulario se envíe automáticamente
-
-            // Realizar una solicitud POST al servidor
-            fetch('/api/staff', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    staff_id: document.getElementById('staff_id2').value,
-                    store_id: document.getElementById('store_id2').value,
-                    first_name: document.getElementById('first_name2').value,
-                    last_name: document.getElementById('last_name2').value,
-                    email: document.getElementById('email2').value,
-                    address_id: document.getElementById('address_id2').value,
-                    username: document.getElementById('username2').value,
-                    // password: document.getElementById('password2').value
-                })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    alert(data.message);
-                    location.reload();
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Hubo un error al procesar la solicitud.');
-                });
-        };
-    </script>
-</body>
 
 </html>

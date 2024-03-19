@@ -16,6 +16,9 @@ client.connect()
     .then(() => console.log('Connected to PostgreSQL'))
     .catch(err => console.error('Error connecting to PostgreSQL', err));
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 // Configuración del motor de plantillas EJS
 app.use(express.static('bhumlu-lite')); // La carpeta donde se encuentran tus vistas
 app.listen(PORT, () => {
@@ -110,8 +113,6 @@ app.delete('/api/staff/:id', (req, res) => {
 });
 
 // ------------ añadir staff -------------
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 app.post('/api/staff', (req, res) => {
     const firstname = req.body.first_name;
     const lastname = req.body.last_name;
@@ -135,7 +136,7 @@ app.post('/api/staff', (req, res) => {
             const values = [firstname, lastname, address_id, email, store_id, username, trimmedHash]; // Utiliza el hash recortado
 
             client.query(query, values)
-                .then((result => res.json({ message: 'El mimro del Staff se ha añadido exitosamente.', status: 'success' })))
+                .then((result => res.json({ message: 'El miembro del Staff se ha añadido exitosamente.', status: 'success' })))
                 .catch(error => {
                     console.error('Error ejecutando la consulta', error);
                     res.json({ error: 'Error al añadir 2.' });
@@ -186,17 +187,17 @@ app.put('/api/staff/', (req, res) => {
 });
 
 // ---------- RUTAS CUSTOMERS -----------
-
 //vista de clientes
 app.get('/customer', (req, res) => {
     res.sendFile(path.join(__dirname + '/bhumlu-lite/customers.html'));
 });
 
+// establece cuantos registros aparecen en cada pagina
 app.get('/api/customer', (req, res) => {
     const page = req.query.page || 1;
     const offset = (page - 1) * itemsPerPage;
     const query = {
-        text: 'SELECT * FROM customer OFFSET $1 LIMIT $2',
+        text: 'SELECT * FROM customer ORDER BY customer_id OFFSET $1 LIMIT $2',
         values: [offset, itemsPerPage]
     };
 
@@ -207,6 +208,7 @@ app.get('/api/customer', (req, res) => {
             res.status(500).send('Error executing query');
         });
 });
+// cuenta los registros totales
 app.get('/api/customer/count', (req, res) => {
     // Consulta SQL para contar el número total de registros
     client.query('SELECT COUNT(*) FROM customer')
@@ -242,10 +244,10 @@ app.post('/api/customer', (req, res) => {
     const values = [store_id, firstname, lastname, email, address_id];
 
     client.query(query, values)
-    .then((result => res.json({ message: 'Cliente añadido exitosamente.', status: 'succes' })))
+        .then((result => res.json({ message: 'Cliente añadido exitosamente.', status: 'succes' })))
         .catch(error => {
             console.error('Error executing query', error);
-            res.json({ error: 'Error al añadir.'});
+            res.json({ error: 'Error al añadir.' });
         });
 });
 //actualizar cliente
@@ -261,10 +263,10 @@ app.put('/api/customer', (req, res) => {
     const values = [customer_id, store_id, firstname, lastname, email, address_id];
 
     client.query(query, values)
-    .then((result => res.json({ message: 'Cliente actualizado exitosamente.', status: 'succes' })))
+        .then((result => res.json({ message: 'Cliente actualizado exitosamente.', status: 'succes' })))
         .catch(error => {
             console.error('Error executing query', error);
-            res.json({ error: 'Error al añadir.'});
+            res.json({ error: 'Error al añadir.' });
         });
 });
 //eliminar cliente
@@ -287,6 +289,113 @@ app.delete('/api/customer/:id', (req, res) => {
         })
         .catch(err => {
             console.error('Error ejecutando la consulta', err)
-            res.json({ error: 'Error al eliminar.'})
+            res.json({ error: 'Error al eliminar.' })
+        });
+});
+
+// -------- RUTAS FILMS ---------
+app.get('/films', (req, res) => {
+    res.sendFile(path.join(__dirname, '/bhumlu-lite/films.html'));
+});
+
+// establece cuantos registros aparecen en cada pagina
+app.get('/api/films', (req, res) => {
+    const page = req.query.page || 1;
+    const offset = (page - 1) * itemsPerPage;
+    const query = {
+        text: 'SELECT * FROM film ORDER BY film_id OFFSET $1 LIMIT $2',
+        values: [offset, itemsPerPage]
+    };
+
+    client.query(query)
+        .then((result => res.json(result.rows)))
+        .catch(error => {
+            console.error('Error executing query', error);
+            res.status(500).send('Error executing query');
+        });
+});
+
+// cuenta los registros totales
+app.get('/api/film/count', (req, res) => {
+    // Consulta SQL para contar el número total de registros
+    client.query('SELECT COUNT(*) FROM film')
+        .then(result => {
+            const count = parseInt(result.rows[0].count); // Obtener el recuento de la respuesta y convertirlo a entero
+            res.json({ count }); // Devolver el recuento en formato JSON
+        })
+        .catch(error => {
+            console.error('Error executing query', error); // Manejar errores de consulta
+            res.status(500).send('Error executing query'); // Devolver un error HTTP 500 si hay un problema
+        });
+});
+
+//obtener datos de pelicula
+app.get('/api/film/:id', (req, res) => {
+    const { id } = req.params;
+    const query = 'SELECT * FROM film WHERE film_id = $1';
+    client.query(query, [id])
+        .then((result => res.json(result.rows[0])))
+        .catch(error => {
+            console.error('Error executing query', error);
+            res.status(500).send('Error executing query');
+        });
+});
+
+// añadir pelicula
+app.post('/api/films', (req, res) => {
+    const { title, description, release_year, language_id, rental_rate, length, replacement_cost, rating, special_features } = req.body;
+
+    const query = `
+        INSERT INTO film (title, description, release_year, language_id, rental_rate, length, replacement_cost, rating, special_features)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    `;
+    const values = [title, description, release_year, language_id, rental_rate, length, replacement_cost, rating, special_features];
+
+    client.query(query, values)
+        .then(() => res.json({ message: 'Película añadida exitosamente.', status: 'success' }))
+        .catch(error => {
+            console.error('Error executing query', error);
+            res.json({ error: 'Error al añadir la película.' });
+        });
+});
+
+app.put('/api/films', (req, res) => {
+    const film_id = req.body.film_id;
+    const title = req.body.title;
+    const description = req.body.description;
+    const release_year = req.body.release_year;
+    const language_id = req.body.language_id;
+    const rental_rate = req.body.rental_rate;
+    const length = req.body.length;
+    const replacement_cost = req.body.replacement_cost;
+    const rating = req.body.rating;
+
+
+    const query = 'UPDATE film SET title = $1, description = $2, release_year = $3, language_id = $4, rental_rate = $5, length = $6, replacement_cost = $7, rating = $8 WHERE film_id = $9';
+    const values = [title, description, release_year, language_id, rental_rate, length, replacement_cost, rating, film_id];
+
+    client.query(query, values)
+        .then(result => {
+            res.json({ message: 'Película actualizada exitosamente.', status: 'success' });
+        })
+        .catch(error => {
+            console.error('Error executing query', error);
+            res.status(500).json({ error: 'Error al actualizar la película.' });
+        });
+});
+
+app.delete('/api/films/:id', (req, res) => {
+    const { id } = req.params;
+    const query = 'DELETE FROM film WHERE film_id = $1';
+
+    client.query(query, [id])
+        .then(() => {
+            res.json({ message: 'Película eliminada correctamente.', status: 'success' });
+            
+        })
+        .catch(err => {
+            console.error('Error executing query', err);
+            res.json({ error: 'Error al eliminar la película.' });
+            
         });
 });
