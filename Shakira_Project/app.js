@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Configuración del motor de plantillas EJS
-app.use(express.static('bhumlu-lite')); // La carpeta donde se encuentran tus vistas
+app.use(express.static('bhumlu-lite'));
 app.listen(PORT, () => {
     console.log('listening on port ' + PORT);
 });
@@ -59,32 +59,30 @@ app.get('/api/staff', (req, res) => {
     const page = req.query.page || 1; // Página actual (por defecto 1)
     const offset = (page - 1) * itemsPerPage; // Calcular el desplazamiento
 
-    // Consulta SQL para obtener los datos del personal con LIMIT y OFFSET
+    // Consulta SQL para obtener los datos del personal con LIMIT(cuantos se muestran) y OFFSET(calcula desde que id se muestra)
     const query = {
         text: 'SELECT * FROM staff ORDER BY staff_id OFFSET $1 LIMIT $2',
         values: [offset, itemsPerPage]
     };
 
-    // Ejecutar la consulta SQL
     client.query(query)
-        .then(result => res.json(result.rows)) // Devolver los resultados en formato JSON
+        .then(result => res.json(result.rows))
         .catch(error => {
-            console.error('Error executing query', error); // Manejar errores de consulta
-            res.status(500).send('Error executing query'); // Devolver un error HTTP 500 si hay un problema
+            console.error('Error executing query', error);
+            res.status(500).send('Error executing query');
         });
 });
 
 // Ruta para obtener el número total de registros en la tabla de personal
 app.get('/api/staff/count', (req, res) => {
-    // Consulta SQL para contar el número total de registros
     client.query('SELECT COUNT(*) FROM staff')
         .then(result => {
-            const count = parseInt(result.rows[0].count); // Obtener el recuento de la respuesta y convertirlo a entero
-            res.json({ count }); // Devolver el recuento en formato JSON
+            const count = parseInt(result.rows[0].count);
+            res.json({ count });
         })
         .catch(error => {
-            console.error('Error executing query', error); // Manejar errores de consulta
-            res.status(500).send('Error executing query'); // Devolver un error HTTP 500 si hay un problema
+            console.error('Error executing query', error); 
+            res.status(500).send('Error executing query');
         });
 });
 
@@ -120,7 +118,7 @@ app.post('/api/staff', (req, res) => {
     const email = req.body.email;
     const store_id = req.body.store_id;
     const username = req.body.username;
-    const password = req.body.password; // La contraseña sin hash
+    const password = req.body.password; // contraseña sin hash
 
     // Hashear la contraseña antes de insertarla en la base de datos
     bcrypt.hash(password, saltRounds, (err, hash) => {
